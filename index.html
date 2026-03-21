@@ -9,367 +9,297 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,600;1,700&family=Jost:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
-
   <style>
-    /* TOKENS */
-    :root {
-      --black:    #080808;
-      --black-b:  #0D0D0D;
-      --black-c:  #131313;
-      --black-l:  #1B1B1B;
-      --gold:     #C9A84C;
-      --gold-lt:  #E0C16A;
-      --gold-dk:  #8A6B28;
-      --gold-gl:  rgba(201,168,76,.14);
-      --gold-gl2: rgba(201,168,76,.06);
-      --white:    #F4EFE6;
-      --white-s:  #C4BAA8;
-      --gray:     #6A6358;
-      --gray-l:   #8A8070;
-      --border:   rgba(201,168,76,.13);
-      --border-s: rgba(255,255,255,.06);
-      --r:        12px;
-      --rsm:      7px;
-      --ease:     cubic-bezier(.25,.46,.45,.94);
+    :root{
+      --black:#080808;--black-b:#0D0D0D;--black-c:#131313;--black-l:#1B1B1B;
+      --gold:#C9A84C;--gold-lt:#E0C16A;--gold-dk:#8A6B28;
+      --gold-gl:rgba(201,168,76,.14);--gold-gl2:rgba(201,168,76,.06);
+      --white:#F4EFE6;--white-s:#C4BAA8;--gray:#6A6358;--gray-l:#8A8070;
+      --border:rgba(201,168,76,.13);--border-s:rgba(255,255,255,.06);
+      --r:12px;--rsm:7px;--ease:cubic-bezier(.25,.46,.45,.94);
     }
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    html { scroll-behavior: smooth; }
-    body { background: var(--black); color: var(--white); font-family: 'Jost', sans-serif; font-weight: 400; line-height: 1.7; overflow-x: hidden; }
-    img  { display: block; max-width: 100%; }
-    a    { color: inherit; text-decoration: none; }
-    ::-webkit-scrollbar { width: 3px; }
-    ::-webkit-scrollbar-track { background: var(--black); }
-    ::-webkit-scrollbar-thumb { background: var(--gold-dk); border-radius: 2px; }
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    html{scroll-behavior:smooth}
+    body{background:var(--black);color:var(--white);font-family:'Jost',sans-serif;font-weight:400;line-height:1.7;overflow-x:hidden}
+    img{display:block;max-width:100%}
+    a{color:inherit;text-decoration:none}
+    ::-webkit-scrollbar{width:3px}
+    ::-webkit-scrollbar-track{background:var(--black)}
+    ::-webkit-scrollbar-thumb{background:var(--gold-dk);border-radius:2px}
 
-    /* NAV */
-    nav {
-      position: fixed; top: 0; left: 0; right: 0; z-index: 200;
-      display: flex; align-items: center; justify-content: space-between;
-      padding: 1.6rem 4rem;
-      transition: background .5s var(--ease), padding .4s var(--ease), border-bottom-color .4s;
-      border-bottom: 1px solid transparent;
+    /* ── NAV ── */
+    nav{position:fixed;top:0;left:0;right:0;z-index:200;display:flex;align-items:center;justify-content:space-between;padding:1.6rem 4rem;transition:background .5s var(--ease),padding .4s var(--ease),border-bottom-color .4s;border-bottom:1px solid transparent}
+    nav.scrolled{background:rgba(8,8,8,.93);backdrop-filter:blur(22px);-webkit-backdrop-filter:blur(22px);padding:1.1rem 4rem;border-bottom-color:var(--border)}
+    .nav-logo{font-family:'Cormorant Garamond',serif;font-size:1.4rem;font-weight:600;letter-spacing:.06em}
+    .nav-logo span{color:var(--gold)}
+    .nav-links{display:flex;gap:2.4rem;list-style:none;font-size:.76rem;font-weight:500;letter-spacing:.14em;text-transform:uppercase}
+    .nav-links a{color:var(--white-s);position:relative;transition:color .25s}
+    .nav-links a::after{content:'';position:absolute;bottom:-4px;left:0;width:0;height:1px;background:var(--gold);transition:width .3s var(--ease)}
+    .nav-links a:hover{color:var(--white)}
+    .nav-links a:hover::after{width:100%}
+    .nav-cta{padding:.55rem 1.6rem;border:1px solid var(--gold);border-radius:50px;color:var(--gold);font-size:.74rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;box-shadow:0 0 12px rgba(201,168,76,.2);transition:background .25s,color .25s,transform .2s cubic-bezier(.34,1.56,.64,1),box-shadow .25s}
+    .nav-cta:hover{background:var(--gold);color:var(--black);transform:translateY(-2px) scale(1.04);box-shadow:0 0 28px rgba(201,168,76,.55)}
+    .burger{display:none;flex-direction:column;gap:5px;background:none;border:none;cursor:pointer;padding:4px}
+    .burger span{display:block;width:24px;height:1.5px;background:var(--white);border-radius:2px;transition:.3s var(--ease)}
+    .burger.open span:nth-child(1){transform:rotate(45deg) translate(5px,5px)}
+    .burger.open span:nth-child(2){opacity:0}
+    .burger.open span:nth-child(3){transform:rotate(-45deg) translate(5px,-5px)}
+    .mmenu{display:none;position:fixed;inset:0;z-index:199;background:rgba(8,8,8,.97);backdrop-filter:blur(24px);flex-direction:column;align-items:center;justify-content:center;gap:2.2rem}
+    .mmenu.open{display:flex}
+    .mmenu a{font-family:'Cormorant Garamond',serif;font-size:2.5rem;font-weight:600;color:var(--white);transition:color .2s}
+    .mmenu a:hover{color:var(--gold)}
+    .mmenu-cta{font-family:'Jost',sans-serif!important;font-size:.88rem!important;padding:.8rem 2.4rem;background:var(--gold);color:var(--black)!important;border-radius:50px;font-weight:700!important;letter-spacing:.1em;text-transform:uppercase;margin-top:.5rem}
+
+    /* ── HERO ── */
+    #hero{position:relative;height:100vh;min-height:700px;display:flex;align-items:flex-end;overflow:hidden}
+    /* waterarmscrossed.JPG — arms crossed, confident. 55% vertical shows chest+arms, not just face */
+    .hero-bg{position:absolute;inset:0;background:url('https://raw.githubusercontent.com/presidentsuarez/chad/main/waterarmscrossed.JPG') center 55%/cover no-repeat}
+    .hero-bg::after{content:'';position:absolute;inset:0;background:linear-gradient(to top,rgba(8,8,8,.97) 0%,rgba(8,8,8,.62) 38%,rgba(8,8,8,.14) 72%,transparent 100%),linear-gradient(to right,rgba(8,8,8,.78) 0%,rgba(8,8,8,.32) 52%,rgba(8,8,8,.04) 100%)}
+    .hero-bg::before{content:'';position:absolute;inset:0;z-index:1;background:radial-gradient(ellipse 110% 80% at 65% 40%,rgba(180,120,30,.06),transparent 70%)}
+    .hero-content{position:relative;z-index:2;padding:0 5rem 6rem;max-width:860px}
+    .hero-eyebrow{display:inline-flex;align-items:center;gap:.7rem;font-size:.72rem;font-weight:600;letter-spacing:.22em;text-transform:uppercase;color:var(--gold);margin-bottom:1.5rem;opacity:0;animation:fadeUp .8s .3s forwards}
+    .hero-eyebrow::before{content:'';display:block;width:28px;height:1px;background:var(--gold)}
+    h1.hero-h1{font-family:'Cormorant Garamond',serif;font-size:clamp(3.8rem,7.5vw,7.2rem);font-weight:600;line-height:1.0;letter-spacing:-.01em;margin-bottom:1.6rem;opacity:0;animation:fadeUp .9s .5s forwards}
+    h1.hero-h1 em{font-style:italic;color:var(--gold)}
+    .hero-sub{font-size:1.05rem;color:var(--white-s);font-weight:300;max-width:480px;line-height:1.85;margin-bottom:2.4rem;opacity:0;animation:fadeUp .9s .7s forwards}
+    .hero-ctas{display:flex;gap:1rem;flex-wrap:wrap;opacity:0;animation:fadeUp .9s .9s forwards}
+    .hero-scroll{position:absolute;bottom:2.5rem;right:4.5rem;z-index:2;display:flex;flex-direction:column;align-items:center;gap:.6rem;font-size:.64rem;letter-spacing:.2em;text-transform:uppercase;color:var(--gray);opacity:0;animation:fadeIn 1s 1.5s forwards}
+    .hero-scroll-line{width:1px;height:44px;background:linear-gradient(to bottom,var(--gold),transparent);animation:scrollPulse 2.2s ease-in-out infinite}
+    @keyframes scrollPulse{0%,100%{opacity:.3}50%{opacity:1}}
+
+    /* ── BUTTONS ── */
+    .btn-gold{display:inline-flex;align-items:center;gap:.5rem;padding:.9rem 2.2rem;background:var(--gold);color:var(--black);font-family:'Jost',sans-serif;font-size:.82rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;border-radius:50px;border:none;cursor:pointer;position:relative;overflow:hidden;transition:transform .2s cubic-bezier(.34,1.56,.64,1),box-shadow .3s,background .25s;box-shadow:0 0 28px rgba(201,168,76,.45),0 0 60px rgba(201,168,76,.18),0 4px 16px rgba(0,0,0,.4);animation:btnPulse 3s ease-in-out infinite}
+    .btn-gold::before{content:'';position:absolute;inset:0;background:linear-gradient(105deg,transparent 40%,rgba(255,255,255,.22) 50%,transparent 60%);transform:translateX(-100%);transition:transform .55s ease}
+    .btn-gold:hover::before{transform:translateX(100%)}
+    .btn-gold:hover{background:var(--gold-lt);transform:translateY(-3px) scale(1.03);box-shadow:0 0 48px rgba(201,168,76,.7),0 0 90px rgba(201,168,76,.25),0 8px 24px rgba(0,0,0,.5);animation:none}
+    .btn-gold:active{transform:translateY(-1px) scale(.98)}
+    .btn-gold svg{transition:transform .25s cubic-bezier(.34,1.56,.64,1)}
+    .btn-gold:hover svg{transform:translateX(4px)}
+    @keyframes btnPulse{0%,100%{box-shadow:0 0 28px rgba(201,168,76,.45),0 0 60px rgba(201,168,76,.18),0 4px 16px rgba(0,0,0,.4)}50%{box-shadow:0 0 42px rgba(201,168,76,.65),0 0 90px rgba(201,168,76,.28),0 4px 20px rgba(0,0,0,.5)}}
+    .btn-outline{display:inline-flex;align-items:center;gap:.5rem;padding:.9rem 2.2rem;background:transparent;border:1px solid rgba(255,255,255,.28);color:var(--white);font-size:.82rem;font-weight:500;letter-spacing:.06em;border-radius:50px;transition:border-color .25s,background .25s,transform .2s cubic-bezier(.34,1.56,.64,1),box-shadow .25s}
+    .btn-outline:hover{border-color:rgba(255,255,255,.55);background:rgba(255,255,255,.07);transform:translateY(-3px) scale(1.02);box-shadow:0 4px 20px rgba(0,0,0,.4)}
+
+    /* ── SHARED ── */
+    @keyframes fadeUp{from{opacity:0;transform:translateY(22px)}to{opacity:1;transform:translateY(0)}}
+    @keyframes fadeIn{from{opacity:0}to{opacity:1}}
+    section{position:relative;z-index:1}
+    .wrap{max-width:1180px;margin:0 auto;padding:7rem 4rem}
+    .divider{width:100%;height:1px;background:linear-gradient(90deg,transparent,var(--border),transparent)}
+    .lbl{display:inline-flex;align-items:center;gap:.65rem;font-size:.7rem;font-weight:600;letter-spacing:.22em;text-transform:uppercase;color:var(--gold);margin-bottom:1.1rem}
+    .lbl::before{content:'';display:block;width:22px;height:1px;background:var(--gold)}
+    h2.sh{font-family:'Cormorant Garamond',serif;font-size:clamp(2.3rem,4.5vw,3.7rem);font-weight:600;line-height:1.08;margin-bottom:1.3rem}
+    h2.sh em{font-style:italic;color:var(--gold)}
+    .slead{font-size:1rem;color:var(--white-s);line-height:1.9;max-width:620px}
+    .reveal{opacity:0;transform:translateY(26px);transition:opacity .7s var(--ease),transform .7s var(--ease)}
+    .reveal.in{opacity:1;transform:translateY(0)}
+    .d1{transition-delay:.1s}.d2{transition-delay:.2s}.d3{transition-delay:.3s}.d4{transition-delay:.4s}
+
+    /* ── ABOUT — Sittingopen.jpg ── */
+    #about{background:var(--black-b)}
+    .about-grid{display:grid;grid-template-columns:400px 1fr;gap:6rem;align-items:center}
+    .about-img-wrap{position:relative}
+    .about-img{width:100%;aspect-ratio:3/4;border-radius:var(--r);object-fit:cover;object-position:center 15%;border:1px solid var(--border)}
+    .about-accent{position:absolute;top:2.5rem;left:-1.6rem;width:3px;height:52%;background:linear-gradient(to bottom,var(--gold),var(--gold-dk),transparent);border-radius:2px}
+    .about-badge{position:absolute;bottom:-1.6rem;right:-1.6rem;background:var(--gold);color:var(--black);padding:1.1rem 1.5rem;border-radius:var(--r);font-weight:700;font-size:.82rem;line-height:1.4;text-align:center;box-shadow:0 8px 32px rgba(201,168,76,.38)}
+    .about-badge strong{display:block;font-family:'Cormorant Garamond',serif;font-size:1.7rem;font-weight:700;line-height:1}
+    .about-text p{color:var(--white-s);line-height:1.95;margin-bottom:1.2rem;font-size:.97rem}
+    .about-text strong{color:var(--white);font-weight:600}
+    .about-text em{color:var(--gold-lt);font-style:italic}
+    .stats{display:grid;grid-template-columns:repeat(3,1fr);gap:.8rem;margin-top:2.2rem}
+    .stat{padding:1.1rem;text-align:center;background:var(--black-c);border:1px solid var(--border-s);border-radius:var(--rsm);transition:border-color .3s,transform .25s cubic-bezier(.34,1.56,.64,1),box-shadow .3s;cursor:default}
+    .stat:hover{border-color:var(--gold);transform:translateY(-5px) scale(1.04);box-shadow:0 8px 32px rgba(201,168,76,.2),0 0 24px rgba(201,168,76,.1)}
+    .stat-n{font-family:'Cormorant Garamond',serif;font-size:2.2rem;font-weight:700;color:var(--gold);line-height:1}
+    .stat-l{font-size:.7rem;color:var(--gray);letter-spacing:.08em;text-transform:uppercase;margin-top:.3rem}
+
+    /* ── MINISTRY — lookingoff.JPG ── */
+    #ministry{background:var(--black)}
+    .min-grid{display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:start}
+    .min-img{width:100%;aspect-ratio:2/3;object-fit:cover;object-position:center 25%;border-radius:var(--r);border:1px solid var(--border);margin-bottom:1.8rem}
+    .mquote{padding:2rem;background:var(--black-c);border:1px solid var(--border);border-left:3px solid var(--gold);border-radius:var(--r)}
+    .mqmark{font-family:'Cormorant Garamond',serif;font-size:5rem;line-height:.65;color:var(--gold);opacity:.22;margin-bottom:.5rem}
+    .mqtext{font-family:'Cormorant Garamond',serif;font-size:1.35rem;font-style:italic;line-height:1.6;color:var(--white);margin-bottom:1rem}
+    .mqattr{font-size:.7rem;letter-spacing:.14em;text-transform:uppercase;color:var(--gold)}
+    .pillar{display:flex;gap:1.1rem;align-items:flex-start;padding:1.1rem 1.3rem;margin-bottom:.75rem;background:var(--black-c);border:1px solid var(--border-s);border-radius:var(--rsm);transition:border-color .3s,background .3s,transform .25s cubic-bezier(.34,1.56,.64,1),box-shadow .3s}
+    .pillar:last-child{margin-bottom:0}
+    .pillar:hover{border-color:rgba(201,168,76,.25);background:var(--black-l);transform:translateX(6px);box-shadow:-4px 0 20px rgba(201,168,76,.1)}
+    .pillar-ico{width:36px;height:36px;flex-shrink:0;border-radius:50%;background:var(--gold-gl);border:1px solid rgba(201,168,76,.22);display:flex;align-items:center;justify-content:center;font-size:.9rem}
+    .pillar h4{font-size:.9rem;font-weight:600;color:var(--white);margin-bottom:.2rem}
+    .pillar p{font-size:.82rem;color:var(--gray);line-height:1.6}
+
+    /* ── VENTURES — sittingtophalf.JPG ── */
+    #ventures{background:var(--black-b)}
+    .vent-intro{display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:center;margin-bottom:4rem}
+    .vent-intro img{width:100%;aspect-ratio:4/3;object-fit:cover;object-position:center 20%;border-radius:var(--r);border:1px solid var(--border)}
+    .vgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.2rem}
+    .vc{padding:1.8rem;background:var(--black-c);border:1px solid var(--border-s);border-radius:var(--r);transition:border-color .3s,transform .25s cubic-bezier(.34,1.56,.64,1),box-shadow .35s;position:relative;overflow:hidden}
+    .vc::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--gold),var(--gold-lt),var(--gold));transform:scaleX(0);transform-origin:left;transition:transform .4s var(--ease)}
+    .vc:hover{border-color:rgba(201,168,76,.3);transform:translateY(-6px) scale(1.01);box-shadow:0 16px 48px rgba(0,0,0,.55),0 0 30px rgba(201,168,76,.08)}
+    .vc:hover::before{transform:scaleX(1)}
+    .vc.s2{grid-column:span 2}
+    .vc.s3{grid-column:span 3}
+    .vtag{display:inline-block;font-size:.64rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;padding:.22rem .8rem;border-radius:50px;margin-bottom:1rem}
+    .t-exit{background:rgba(201,168,76,.15);color:var(--gold)}
+    .t-active{background:rgba(255,255,255,.07);color:var(--white-s)}
+    .t-intl{background:rgba(255,255,255,.05);color:var(--gray-l)}
+    .t-form{background:rgba(201,168,76,.07);color:var(--gold-dk)}
+    .vico{font-size:1.8rem;margin-bottom:.8rem}
+    .vtitle{font-family:'Cormorant Garamond',serif;font-size:1.45rem;font-weight:600;color:var(--white);margin-bottom:.5rem;line-height:1.2}
+    .vdesc{font-size:.84rem;color:var(--gray);line-height:1.78}
+    .vdesc strong{color:var(--white-s)}
+    .vdesc em{color:var(--gold-lt);font-style:italic}
+
+    /* ── INVESTING — walking.JPG banner ── */
+    #investing{background:var(--black)}
+    .inv-banner{width:100%;aspect-ratio:21/7;object-fit:cover;object-position:center 35%;border-radius:var(--r);border:1px solid var(--border);margin-bottom:4rem}
+    .igrid{display:grid;grid-template-columns:1fr 1fr;gap:1.5rem}
+    .icard{padding:2rem;background:var(--black-c);border:1px solid var(--border-s);border-radius:var(--r)}
+    .icard-head{display:flex;align-items:center;gap:.9rem;margin-bottom:1.4rem;padding-bottom:1.2rem;border-bottom:1px solid var(--border-s)}
+    .icard-ico{width:42px;height:42px;border-radius:var(--rsm);background:var(--gold-gl);border:1px solid rgba(201,168,76,.2);display:flex;align-items:center;justify-content:center;font-size:1.2rem}
+    .icard-title{font-size:.95rem;font-weight:600;color:var(--white)}
+    .icard-sub{font-size:.75rem;color:var(--gray)}
+    .irow{display:flex;align-items:flex-start;gap:.75rem;padding:.6rem 0;border-bottom:1px solid rgba(255,255,255,.03)}
+    .irow:last-child{border-bottom:none}
+    .idot{width:6px;height:6px;border-radius:50%;background:var(--gold);margin-top:.55rem;flex-shrink:0}
+    .iname{font-size:.88rem;font-weight:500;color:var(--white-s)}
+    .inote{font-size:.76rem;color:var(--gray);line-height:1.5}
+    .iphil{margin-top:2rem;padding:2rem;background:var(--gold-gl2);border:1px solid var(--border);border-radius:var(--r)}
+    .iphil p{font-family:'Cormorant Garamond',serif;font-size:1.3rem;font-style:italic;color:var(--white);line-height:1.7}
+    .iphil span{color:var(--gold)}
+
+    /* ── PROOF ── */
+    #proof{background:var(--black-b)}
+    .prow{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--border-s);border:1px solid var(--border-s);border-radius:var(--r);overflow:hidden;margin-top:3rem}
+    .pcell{padding:2.8rem 1.5rem;background:var(--black-c);text-align:center;transition:background .3s,transform .25s cubic-bezier(.34,1.56,.64,1),box-shadow .3s}
+    .pcell:hover{background:var(--black-l);transform:translateY(-5px) scale(1.03);box-shadow:0 8px 28px rgba(201,168,76,.15)}
+    .pnum{font-family:'Cormorant Garamond',serif;font-size:3.4rem;font-weight:700;color:var(--gold);line-height:1;margin-bottom:.5rem}
+    .plbl{font-size:.72rem;color:var(--gray);letter-spacing:.08em;text-transform:uppercase;line-height:1.5}
+
+    /* ── PAM — slideshow of pam photos ── */
+    #pam{background:var(--black)}
+    .pam-grid{display:grid;grid-template-columns:1fr 1.5fr;gap:5rem;align-items:center}
+    .pam-show{position:relative;width:100%;aspect-ratio:3/4;border-radius:var(--r);overflow:hidden;border:1px solid rgba(201,168,76,.15)}
+    .pam-slide{position:absolute;inset:0;opacity:0;transition:opacity 1.2s ease}
+    .pam-slide.active{opacity:1}
+    .pam-slide img{width:100%;height:100%;object-fit:cover;object-position:center top;filter:sepia(.08) contrast(1.04) brightness(.9)}
+    .pam-slide::after{content:'';position:absolute;inset:0;background:linear-gradient(to top,rgba(8,8,8,.45) 0%,transparent 55%)}
+    .pam-glow{position:absolute;bottom:-40px;left:50%;transform:translateX(-50%);width:280px;height:180px;background:radial-gradient(ellipse,rgba(201,168,76,.16),transparent 70%);filter:blur(30px);pointer-events:none}
+    .pam-dots{position:absolute;bottom:1.1rem;left:50%;transform:translateX(-50%);display:flex;gap:.5rem;z-index:5}
+    .pam-dot{width:7px;height:7px;border-radius:50%;background:rgba(255,255,255,.28);border:none;cursor:pointer;transition:background .3s,transform .3s;padding:0}
+    .pam-dot.active{background:var(--gold);transform:scale(1.3)}
+    .pam-name{font-family:'Cormorant Garamond',serif;font-size:3.5rem;font-weight:300;font-style:italic;color:var(--gold-lt);line-height:1;margin-bottom:.8rem}
+    .pam-text p{color:var(--white-s);line-height:1.95;margin-bottom:1.1rem;font-size:.97rem}
+    .pam-text em{color:#F0DCA0;font-style:italic}
+    .pam-text strong{color:var(--white)}
+    .pam-npo{margin-top:1.8rem;padding:1.4rem 1.7rem;background:rgba(201,168,76,.06);border:1px solid rgba(201,168,76,.18);border-radius:var(--rsm)}
+    .pam-npo h4{color:var(--gold);font-size:.9rem;font-weight:600;margin-bottom:.4rem}
+    .pam-npo p{color:var(--gray);font-size:.84rem;margin:0;line-height:1.65}
+
+    /* ── HEALING — chadbw.JPG ── */
+    #healing{background:var(--black-b)}
+    .hgrid{display:grid;grid-template-columns:1.3fr 1fr;gap:5rem;align-items:start}
+    .htext p{color:var(--white-s);line-height:1.95;margin-bottom:1.1rem;font-size:.97rem}
+    .htext strong{color:var(--white)}
+    .hamen{margin-top:1.8rem;padding:1.4rem 1.7rem;background:var(--black-c);border-left:3px solid var(--gold);border-radius:var(--rsm);font-size:.86rem;color:var(--white-s);line-height:1.75}
+    .hamen strong{color:var(--gold);display:block;margin-bottom:.3rem;font-size:.72rem;letter-spacing:.08em;text-transform:uppercase}
+    .himg{width:100%;aspect-ratio:3/4;object-fit:cover;object-position:center 20%;border-radius:var(--r);border:1px solid var(--border);margin-bottom:1.5rem}
+    .conds{display:flex;flex-direction:column;gap:.55rem}
+    .citem{display:flex;align-items:center;gap:.75rem;padding:.7rem 1rem;background:var(--black-c);border:1px solid var(--border-s);border-radius:var(--rsm);font-size:.84rem;color:var(--white-s);transition:border-color .25s,transform .2s cubic-bezier(.34,1.56,.64,1)}
+    .citem:hover{border-color:var(--border);transform:translateX(4px)}
+
+    /* ── CTA ── */
+    #cta{background:var(--black);position:relative;overflow:hidden}
+    .cta-bg{position:absolute;inset:0;background:url('https://raw.githubusercontent.com/presidentsuarez/chad/main/walking.JPG') center 30%/cover no-repeat;opacity:.09}
+    .cta-i{position:relative;z-index:2;text-align:center;max-width:740px;margin:0 auto}
+    .ctah{font-family:'Cormorant Garamond',serif;font-size:clamp(2.8rem,5vw,4.6rem);font-weight:600;line-height:1.06;margin-bottom:1.2rem}
+    .ctah em{color:var(--gold);font-style:italic}
+    .cta-sub{font-size:1rem;color:var(--white-s);line-height:1.85;margin-bottom:2.5rem}
+    .cta-tags{display:flex;flex-wrap:wrap;gap:.75rem;justify-content:center;margin-bottom:2.8rem}
+    .ctag{padding:.45rem 1.2rem;border:1px solid var(--border);border-radius:50px;font-size:.76rem;color:var(--gray);transition:border-color .25s,color .25s,transform .2s cubic-bezier(.34,1.56,.64,1),background .25s}
+    .ctag:hover{border-color:var(--gold);color:var(--white);transform:translateY(-3px) scale(1.05);background:var(--gold-gl2)}
+
+    /* ── CONTACT — funSitting.JPG ── */
+    #contact{background:var(--black-b)}
+    .cgrid{display:grid;grid-template-columns:1fr 1.5fr;gap:5rem;align-items:start}
+    .cimg{width:100%;aspect-ratio:2/3;object-fit:cover;object-position:center 20%;border-radius:var(--r);border:1px solid var(--border);margin-bottom:2rem}
+    .cl h3{font-family:'Cormorant Garamond',serif;font-size:2.2rem;font-weight:600;line-height:1.1;margin-bottom:.8rem}
+    .cl h3 em{color:var(--gold);font-style:italic}
+    .cl p{color:var(--white-s);font-size:.92rem;line-height:1.85;margin-bottom:1.8rem}
+    .cdet{display:flex;align-items:center;gap:.8rem;color:var(--white-s);font-size:.88rem;margin-bottom:.7rem}
+    .cdico{width:34px;height:34px;border-radius:50%;background:var(--gold-gl);border:1px solid rgba(201,168,76,.2);display:flex;align-items:center;justify-content:center;font-size:.85rem;flex-shrink:0}
+    .socials{display:flex;gap:.6rem;margin-top:2rem;flex-wrap:wrap}
+    .sbtn{display:flex;align-items:center;gap:.5rem;padding:.52rem 1.1rem;border:1px solid var(--border-s);border-radius:50px;color:var(--gray);font-size:.74rem;font-weight:500;letter-spacing:.06em;transition:border-color .25s,color .25s,background .25s,transform .2s cubic-bezier(.34,1.56,.64,1),box-shadow .25s}
+    .sbtn svg{width:14px;height:14px;flex-shrink:0}
+    .sbtn:hover{border-color:var(--gold);color:var(--gold);background:var(--gold-gl2);transform:translateY(-3px) scale(1.05);box-shadow:0 4px 20px rgba(201,168,76,.2)}
+    .fwrap{padding:2.4rem;background:var(--black-c);border:1px solid var(--border-s);border-radius:var(--r)}
+    .frow{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
+    .fg{margin-bottom:1.1rem}
+    .fg label{display:block;font-size:.72rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--gray);margin-bottom:.45rem}
+    .fg input,.fg textarea,.fg select{width:100%;padding:.82rem 1rem;background:var(--black-l);border:1px solid var(--border-s);border-radius:var(--rsm);color:var(--white);font-family:'Jost',sans-serif;font-size:.92rem;outline:none;transition:border-color .25s,box-shadow .25s;-webkit-appearance:none}
+    .fg input::placeholder,.fg textarea::placeholder{color:var(--gray)}
+    .fg input:focus,.fg textarea:focus,.fg select:focus{border-color:var(--gold);box-shadow:0 0 0 3px rgba(201,168,76,.1)}
+    .fg textarea{height:120px;resize:vertical}
+    .fg select option{background:var(--black-c)}
+    .fsub{width:100%;padding:1rem;background:var(--gold);color:var(--black);font-family:'Jost',sans-serif;font-size:.88rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;border:none;border-radius:50px;cursor:pointer;position:relative;overflow:hidden;transition:transform .2s cubic-bezier(.34,1.56,.64,1),box-shadow .3s,background .25s;box-shadow:0 0 28px rgba(201,168,76,.4),0 4px 16px rgba(0,0,0,.3)}
+    .fsub::before{content:'';position:absolute;inset:0;background:linear-gradient(105deg,transparent 40%,rgba(255,255,255,.2) 50%,transparent 60%);transform:translateX(-100%);transition:transform .5s ease}
+    .fsub:hover::before{transform:translateX(100%)}
+    .fsub:hover{background:var(--gold-lt);transform:translateY(-3px) scale(1.02);box-shadow:0 0 52px rgba(201,168,76,.65),0 8px 24px rgba(0,0,0,.45)}
+    .fsub:active{transform:translateY(-1px) scale(.99)}
+    .fok{display:none;text-align:center;padding:3rem 2rem}
+    .fok h4{font-family:'Cormorant Garamond',serif;font-size:1.8rem;margin-bottom:.6rem}
+    .fok p{color:var(--gray);font-size:.9rem}
+
+    /* ── FOOTER ── */
+    footer{background:var(--black);border-top:1px solid var(--border-s);padding:3rem 4rem}
+    .ftr{max-width:1180px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1.5rem}
+    .fbrand{font-family:'Cormorant Garamond',serif;font-size:1.25rem;font-weight:600}
+    .fbrand span{color:var(--gold)}
+    .fverse{font-size:.78rem;color:var(--gray);font-style:italic;text-align:center;max-width:340px;line-height:1.6}
+    .fcopy{font-size:.74rem;color:var(--gray)}
+
+    /* ── RESPONSIVE ── */
+    @media(max-width:1060px){
+      .about-grid{grid-template-columns:1fr;gap:3rem}.about-img-wrap{max-width:380px}
+      .min-grid{grid-template-columns:1fr;gap:3rem}
+      .vent-intro{grid-template-columns:1fr;gap:2rem}
+      .vgrid{grid-template-columns:1fr 1fr}.vc.s2,.vc.s3{grid-column:span 2}
+      .igrid{grid-template-columns:1fr}
+      .prow{grid-template-columns:repeat(2,1fr)}
+      .pam-grid{grid-template-columns:1fr;gap:3rem}.pam-show{max-width:380px;aspect-ratio:4/3}
+      .hgrid{grid-template-columns:1fr;gap:3rem}
+      .cgrid{grid-template-columns:1fr;gap:3rem}
+      .inv-banner{aspect-ratio:4/2}
     }
-    nav.scrolled { background: rgba(8,8,8,.93); backdrop-filter: blur(22px); -webkit-backdrop-filter: blur(22px); padding: 1.1rem 4rem; border-bottom-color: var(--border); }
-    .nav-logo { font-family: 'Cormorant Garamond', serif; font-size: 1.4rem; font-weight: 600; letter-spacing: .06em; }
-    .nav-logo span { color: var(--gold); }
-    .nav-links { display: flex; gap: 2.4rem; list-style: none; font-size: .76rem; font-weight: 500; letter-spacing: .14em; text-transform: uppercase; }
-    .nav-links a { color: var(--white-s); position: relative; transition: color .25s; }
-    .nav-links a::after { content: ''; position: absolute; bottom: -4px; left: 0; width: 0; height: 1px; background: var(--gold); transition: width .3s var(--ease); }
-    .nav-links a:hover { color: var(--white); }
-    .nav-links a:hover::after { width: 100%; }
-    .nav-cta { padding: .55rem 1.6rem; border: 1px solid var(--gold); border-radius: 50px; color: var(--gold); font-size: .74rem; font-weight: 600; letter-spacing: .12em; text-transform: uppercase; transition: background .25s, color .25s, transform .2s cubic-bezier(.34,1.56,.64,1), box-shadow .25s; box-shadow: 0 0 12px rgba(201,168,76,.2); }
-    .nav-cta:hover { background: var(--gold); color: var(--black); transform: translateY(-2px) scale(1.04); box-shadow: 0 0 28px rgba(201,168,76,.55); }
-    .burger { display: none; flex-direction: column; gap: 5px; background: none; border: none; cursor: pointer; padding: 4px; }
-    .burger span { display: block; width: 24px; height: 1.5px; background: var(--white); border-radius: 2px; transition: .3s var(--ease); }
-    .burger.open span:nth-child(1) { transform: rotate(45deg) translate(5px,5px); }
-    .burger.open span:nth-child(2) { opacity: 0; }
-    .burger.open span:nth-child(3) { transform: rotate(-45deg) translate(5px,-5px); }
-
-    /* MOBILE MENU */
-    .mmenu { display: none; position: fixed; inset: 0; z-index: 199; background: rgba(8,8,8,.97); backdrop-filter: blur(24px); flex-direction: column; align-items: center; justify-content: center; gap: 2.2rem; }
-    .mmenu.open { display: flex; }
-    .mmenu a { font-family: 'Cormorant Garamond', serif; font-size: 2.5rem; font-weight: 600; color: var(--white); transition: color .2s; }
-    .mmenu a:hover { color: var(--gold); }
-    .mmenu-cta { font-family: 'Jost', sans-serif !important; font-size: .88rem !important; padding: .8rem 2.4rem; background: var(--gold); color: var(--black) !important; border-radius: 50px; font-weight: 700 !important; letter-spacing: .1em; text-transform: uppercase; margin-top: .5rem; }
-
-    /* HERO */
-    #hero { position: relative; height: 100vh; min-height: 700px; display: flex; align-items: flex-end; overflow: hidden; }
-    .hero-bg {
-      position: absolute; inset: 0;
-      /* waterarmscrossed.JPG: arms crossed, confident, professional portrait.
-         position: center 62% pulls framing DOWN to show chest/arms/full presence, not just face. */
-      background: url('https://raw.githubusercontent.com/presidentsuarez/chad/main/waterarmscrossed.JPG')
-                  center 62% / cover no-repeat;
+    @media(max-width:768px){
+      nav{padding:1.2rem 1.5rem}nav.scrolled{padding:.9rem 1.5rem}
+      .nav-links,.nav-cta{display:none}.burger{display:flex}
+      .wrap{padding:4.5rem 1.5rem}
+      #hero{min-height:100svh}.hero-content{padding:0 1.5rem 5rem}.hero-scroll{right:1.5rem;bottom:1.8rem}
+      .vgrid{grid-template-columns:1fr}.vc.s2,.vc.s3{grid-column:span 1}
+      .prow{grid-template-columns:repeat(2,1fr)}
+      .frow{grid-template-columns:1fr}
+      footer{padding:2rem 1.5rem}.ftr{flex-direction:column;text-align:center}.fverse{max-width:100%}
+      .inv-banner{aspect-ratio:4/3;object-position:center 20%}
+      .about-badge{bottom:-.8rem;right:-.5rem}
     }
-    /* Warm cinematic overlay: text-readable left, softly reveals photo right */
-    .hero-bg::after {
-      content: ''; position: absolute; inset: 0;
-      background:
-        linear-gradient(to top,  rgba(8,8,8,.97) 0%, rgba(8,8,8,.62) 38%, rgba(8,8,8,.15) 75%, transparent 100%),
-        linear-gradient(to right, rgba(8,8,8,.75) 0%, rgba(8,8,8,.30) 55%, rgba(8,8,8,.04) 100%);
-    }
-    .hero-bg::before { content: ''; position: absolute; inset: 0; z-index: 1; background: radial-gradient(ellipse 110% 80% at 65% 40%, rgba(180,120,30,.05), transparent 70%); }
-    .hero-content { position: relative; z-index: 2; padding: 0 5rem 6rem; max-width: 860px; }
-    .hero-eyebrow { display: inline-flex; align-items: center; gap: .7rem; font-size: .72rem; font-weight: 600; letter-spacing: .22em; text-transform: uppercase; color: var(--gold); margin-bottom: 1.5rem; opacity: 0; animation: fadeUp .8s .3s forwards; }
-    .hero-eyebrow::before { content: ''; display: block; width: 28px; height: 1px; background: var(--gold); }
-    h1.hero-h1 { font-family: 'Cormorant Garamond', serif; font-size: clamp(3.8rem, 7.5vw, 7.2rem); font-weight: 600; line-height: 1.0; letter-spacing: -.01em; margin-bottom: 1.6rem; opacity: 0; animation: fadeUp .9s .5s forwards; }
-    h1.hero-h1 em { font-style: italic; color: var(--gold); }
-    .hero-sub { font-size: 1.05rem; color: var(--white-s); font-weight: 300; max-width: 480px; line-height: 1.85; margin-bottom: 2.4rem; opacity: 0; animation: fadeUp .9s .7s forwards; }
-    .hero-ctas { display: flex; gap: 1rem; flex-wrap: wrap; opacity: 0; animation: fadeUp .9s .9s forwards; }
-    .btn-gold {
-      display: inline-flex; align-items: center; gap: .5rem;
-      padding: .9rem 2.2rem; background: var(--gold); color: var(--black);
-      font-family: 'Jost', sans-serif; font-size: .82rem; font-weight: 700;
-      letter-spacing: .1em; text-transform: uppercase; border-radius: 50px; border: none; cursor: pointer;
-      position: relative; overflow: hidden;
-      transition: transform .2s cubic-bezier(.34,1.56,.64,1), box-shadow .3s;
-      box-shadow: 0 0 28px rgba(201,168,76,.45), 0 0 60px rgba(201,168,76,.18), 0 4px 16px rgba(0,0,0,.4);
-      animation: btnPulse 3s ease-in-out infinite;
-    }
-    .btn-gold::before {
-      content: ''; position: absolute; inset: 0;
-      background: linear-gradient(105deg, transparent 40%, rgba(255,255,255,.22) 50%, transparent 60%);
-      transform: translateX(-100%);
-      transition: transform .55s ease;
-    }
-    .btn-gold:hover::before { transform: translateX(100%); }
-    .btn-gold:hover { background: var(--gold-lt); transform: translateY(-3px) scale(1.03); box-shadow: 0 0 48px rgba(201,168,76,.7), 0 0 90px rgba(201,168,76,.25), 0 8px 24px rgba(0,0,0,.5); animation: none; }
-    .btn-gold:active { transform: translateY(-1px) scale(.98); }
-    .btn-gold svg { transition: transform .25s cubic-bezier(.34,1.56,.64,1); }
-    .btn-gold:hover svg { transform: translateX(4px); }
-    @keyframes btnPulse {
-      0%,100% { box-shadow: 0 0 28px rgba(201,168,76,.45), 0 0 60px rgba(201,168,76,.18), 0 4px 16px rgba(0,0,0,.4); }
-      50%      { box-shadow: 0 0 42px rgba(201,168,76,.65), 0 0 90px rgba(201,168,76,.28), 0 4px 20px rgba(0,0,0,.5); }
-    }
-    .btn-outline {
-      display: inline-flex; align-items: center; gap: .5rem;
-      padding: .9rem 2.2rem; background: transparent;
-      border: 1px solid rgba(255,255,255,.28); color: var(--white);
-      font-size: .82rem; font-weight: 500; letter-spacing: .06em;
-      border-radius: 50px;
-      transition: border-color .25s, background .25s, transform .2s cubic-bezier(.34,1.56,.64,1), box-shadow .25s;
-    }
-    .btn-outline:hover { border-color: rgba(255,255,255,.55); background: rgba(255,255,255,.07); transform: translateY(-3px) scale(1.02); box-shadow: 0 4px 20px rgba(0,0,0,.4); }
-    .hero-scroll { position: absolute; bottom: 2.5rem; right: 4.5rem; z-index: 2; display: flex; flex-direction: column; align-items: center; gap: .6rem; font-size: .64rem; letter-spacing: .2em; text-transform: uppercase; color: var(--gray); opacity: 0; animation: fadeIn 1s 1.5s forwards; }
-    .hero-scroll-line { width: 1px; height: 44px; background: linear-gradient(to bottom, var(--gold), transparent); animation: pulse 2.2s ease-in-out infinite; }
-    /* CTA section button bounce */
-    .cta-i .btn-gold { animation: btnPulse 3s ease-in-out infinite; }
-    /* Proof cell bounce */
-    .pcell { padding: 2.8rem 1.5rem; background: var(--black-c); text-align: center; transition: background .3s, transform .25s cubic-bezier(.34,1.56,.64,1), box-shadow .3s; }
-    .pcell:hover { background: var(--black-l); transform: translateY(-5px) scale(1.03); box-shadow: 0 8px 28px rgba(201,168,76,.15); }
-    @keyframes pulse  { 0%,100%{opacity:.3} 50%{opacity:1} }
-    @keyframes fadeUp { from{opacity:0;transform:translateY(22px)} to{opacity:1;transform:translateY(0)} }
-    @keyframes fadeIn { from{opacity:0} to{opacity:1} }
-
-    /* SHARED */
-    section { position: relative; z-index: 1; }
-    .wrap { max-width: 1180px; margin: 0 auto; padding: 7rem 4rem; }
-    .divider { width: 100%; height: 1px; background: linear-gradient(90deg, transparent, var(--border), transparent); }
-    .lbl { display: inline-flex; align-items: center; gap: .65rem; font-size: .7rem; font-weight: 600; letter-spacing: .22em; text-transform: uppercase; color: var(--gold); margin-bottom: 1.1rem; }
-    .lbl::before { content: ''; display: block; width: 22px; height: 1px; background: var(--gold); }
-    h2.sh { font-family: 'Cormorant Garamond', serif; font-size: clamp(2.3rem, 4.5vw, 3.7rem); font-weight: 600; line-height: 1.08; margin-bottom: 1.3rem; }
-    h2.sh em { font-style: italic; color: var(--gold); }
-    .slead { font-size: 1rem; color: var(--white-s); line-height: 1.9; max-width: 620px; }
-    .reveal { opacity: 0; transform: translateY(26px); transition: opacity .7s var(--ease), transform .7s var(--ease); }
-    .reveal.in { opacity: 1; transform: translateY(0); }
-    .d1{transition-delay:.1s} .d2{transition-delay:.2s} .d3{transition-delay:.3s} .d4{transition-delay:.4s}
-
-    /* ABOUT */
-    #about { background: var(--black-b); }
-    .about-grid { display: grid; grid-template-columns: 400px 1fr; gap: 6rem; align-items: center; }
-    .about-img-wrap { position: relative; }
-    .about-img { width: 100%; aspect-ratio: 3/4; border-radius: var(--r); object-fit: cover; object-position: center 18%; border: 1px solid var(--border); }
-    .about-accent { position: absolute; top: 2.5rem; left: -1.6rem; width: 3px; height: 52%; background: linear-gradient(to bottom, var(--gold), var(--gold-dk), transparent); border-radius: 2px; }
-    .about-badge { position: absolute; bottom: -1.6rem; right: -1.6rem; background: var(--gold); color: var(--black); padding: 1.1rem 1.5rem; border-radius: var(--r); font-weight: 700; font-size: .82rem; line-height: 1.4; text-align: center; box-shadow: 0 8px 32px rgba(201,168,76,.38); }
-    .about-badge strong { display: block; font-family: 'Cormorant Garamond', serif; font-size: 1.7rem; font-weight: 700; line-height: 1; }
-    .about-text p { color: var(--white-s); line-height: 1.95; margin-bottom: 1.2rem; font-size: .97rem; }
-    .about-text strong { color: var(--white); font-weight: 600; }
-    .about-text em { color: var(--gold-lt); font-style: italic; }
-    .stats { display: grid; grid-template-columns: repeat(3,1fr); gap: .8rem; margin-top: 2.2rem; }
-    .stat { padding: 1.1rem; text-align: center; background: var(--black-c); border: 1px solid var(--border-s); border-radius: var(--rsm); transition: border-color .3s, transform .25s cubic-bezier(.34,1.56,.64,1), box-shadow .3s; cursor: default; }
-    .stat:hover { border-color: var(--gold); transform: translateY(-5px) scale(1.04); box-shadow: 0 8px 32px rgba(201,168,76,.2), 0 0 24px rgba(201,168,76,.1); }
-    .stat-n { font-family: 'Cormorant Garamond', serif; font-size: 2.2rem; font-weight: 700; color: var(--gold); line-height: 1; }
-    .stat-l { font-size: .7rem; color: var(--gray); letter-spacing: .08em; text-transform: uppercase; margin-top: .3rem; }
-
-    /* MINISTRY */
-    #ministry { background: var(--black); }
-    .min-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: start; }
-    .min-img { width: 100%; aspect-ratio: 2/3; object-fit: cover; object-position: center 25%; border-radius: var(--r); border: 1px solid var(--border); margin-bottom: 1.8rem; }
-    .mquote { padding: 2rem; background: var(--black-c); border: 1px solid var(--border); border-left: 3px solid var(--gold); border-radius: var(--r); }
-    .mqmark { font-family: 'Cormorant Garamond', serif; font-size: 5rem; line-height: .65; color: var(--gold); opacity: .22; margin-bottom: .5rem; }
-    .mqtext { font-family: 'Cormorant Garamond', serif; font-size: 1.35rem; font-style: italic; line-height: 1.6; color: var(--white); margin-bottom: 1rem; }
-    .mqattr { font-size: .7rem; letter-spacing: .14em; text-transform: uppercase; color: var(--gold); }
-    .pillar { display: flex; gap: 1.1rem; align-items: flex-start; padding: 1.1rem 1.3rem; margin-bottom: .75rem; background: var(--black-c); border: 1px solid var(--border-s); border-radius: var(--rsm); transition: border-color .3s, background .3s, transform .25s cubic-bezier(.34,1.56,.64,1), box-shadow .3s; }
-    .pillar:last-child { margin-bottom: 0; }
-    .pillar:hover { border-color: rgba(201,168,76,.25); background: var(--black-l); transform: translateX(6px); box-shadow: -4px 0 20px rgba(201,168,76,.1); }
-    .pillar-ico { width: 36px; height: 36px; flex-shrink: 0; border-radius: 50%; background: var(--gold-gl); border: 1px solid rgba(201,168,76,.22); display: flex; align-items: center; justify-content: center; font-size: .9rem; }
-    .pillar h4 { font-size: .9rem; font-weight: 600; color: var(--white); margin-bottom: .2rem; }
-    .pillar p  { font-size: .82rem; color: var(--gray); line-height: 1.6; }
-
-    /* VENTURES */
-    #ventures { background: var(--black-b); }
-    .vent-intro { display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: center; margin-bottom: 4rem; }
-    .vent-intro img { width: 100%; aspect-ratio: 4/3; object-fit: cover; object-position: center 20%; border-radius: var(--r); border: 1px solid var(--border); }
-    .vgrid { display: grid; grid-template-columns: repeat(3,1fr); gap: 1.2rem; }
-    .vc { padding: 1.8rem; background: var(--black-c); border: 1px solid var(--border-s); border-radius: var(--r); transition: border-color .3s, transform .25s cubic-bezier(.34,1.56,.64,1), box-shadow .35s; position: relative; overflow: hidden; }
-    .vc::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px; background: linear-gradient(90deg, var(--gold), var(--gold-lt), var(--gold)); transform: scaleX(0); transform-origin: left; transition: transform .4s var(--ease); }
-    .vc:hover { border-color: rgba(201,168,76,.3); transform: translateY(-6px) scale(1.01); box-shadow: 0 16px 48px rgba(0,0,0,.55), 0 0 30px rgba(201,168,76,.08); }
-    .vc:hover::before { transform: scaleX(1); }
-    .vc.s2 { grid-column: span 2; }
-    .vc.s3 { grid-column: span 3; }
-    .vtag { display: inline-block; font-size: .64rem; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; padding: .22rem .8rem; border-radius: 50px; margin-bottom: 1rem; }
-    .t-exit   { background: rgba(201,168,76,.15); color: var(--gold); }
-    .t-active { background: rgba(255,255,255,.07); color: var(--white-s); }
-    .t-intl   { background: rgba(255,255,255,.05); color: var(--gray-l); }
-    .t-form   { background: rgba(201,168,76,.07); color: var(--gold-dk); }
-    .vico   { font-size: 1.8rem; margin-bottom: .8rem; }
-    .vtitle { font-family: 'Cormorant Garamond', serif; font-size: 1.45rem; font-weight: 600; color: var(--white); margin-bottom: .5rem; line-height: 1.2; }
-    .vdesc  { font-size: .84rem; color: var(--gray); line-height: 1.78; }
-    .vdesc strong { color: var(--white-s); }
-    .vdesc em     { color: var(--gold-lt); font-style: italic; }
-
-    /* INVESTING */
-    #investing { background: var(--black); }
-    .inv-banner { width: 100%; aspect-ratio: 21/7; object-fit: cover; object-position: center 35%; border-radius: var(--r); border: 1px solid var(--border); margin-bottom: 4rem; }
-    .igrid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; }
-    .icard { padding: 2rem; background: var(--black-c); border: 1px solid var(--border-s); border-radius: var(--r); }
-    .icard-head { display: flex; align-items: center; gap: .9rem; margin-bottom: 1.4rem; padding-bottom: 1.2rem; border-bottom: 1px solid var(--border-s); }
-    .icard-ico { width: 42px; height: 42px; border-radius: var(--rsm); background: var(--gold-gl); border: 1px solid rgba(201,168,76,.2); display: flex; align-items: center; justify-content: center; font-size: 1.2rem; }
-    .icard-title { font-size: .95rem; font-weight: 600; color: var(--white); }
-    .icard-sub   { font-size: .75rem; color: var(--gray); }
-    .irow { display: flex; align-items: flex-start; gap: .75rem; padding: .6rem 0; border-bottom: 1px solid rgba(255,255,255,.03); }
-    .irow:last-child { border-bottom: none; }
-    .idot  { width: 6px; height: 6px; border-radius: 50%; background: var(--gold); margin-top: .55rem; flex-shrink: 0; }
-    .iname { font-size: .88rem; font-weight: 500; color: var(--white-s); }
-    .inote { font-size: .76rem; color: var(--gray); line-height: 1.5; }
-    .iphil { margin-top: 2rem; padding: 2rem; background: var(--gold-gl2); border: 1px solid var(--border); border-radius: var(--r); }
-    .iphil p { font-family: 'Cormorant Garamond', serif; font-size: 1.3rem; font-style: italic; color: var(--white); line-height: 1.7; }
-    .iphil span { color: var(--gold); }
-
-    /* PROOF */
-    #proof { background: var(--black-b); }
-    .prow { display: grid; grid-template-columns: repeat(4,1fr); gap: 1px; background: var(--border-s); border: 1px solid var(--border-s); border-radius: var(--r); overflow: hidden; margin-top: 3rem; }
-    .pnum { font-family: 'Cormorant Garamond', serif; font-size: 3.4rem; font-weight: 700; color: var(--gold); line-height: 1; margin-bottom: .5rem; }
-    .plbl { font-size: .72rem; color: var(--gray); letter-spacing: .08em; text-transform: uppercase; line-height: 1.5; }
-
-    /* PAM */
-    #pam { background: var(--black); }
-    .pam-grid { display: grid; grid-template-columns: 1fr 1.5fr; gap: 5rem; align-items: center; }
-    .pam-show { position: relative; width: 100%; aspect-ratio: 3/4; border-radius: var(--r); overflow: hidden; border: 1px solid rgba(201,168,76,.15); }
-    .pam-slide { position: absolute; inset: 0; opacity: 0; transition: opacity 1.2s ease; }
-    .pam-slide.active { opacity: 1; }
-    .pam-slide img { width: 100%; height: 100%; object-fit: cover; object-position: center top; filter: sepia(.08) contrast(1.04) brightness(.9); }
-    .pam-slide::after { content: ''; position: absolute; inset: 0; background: linear-gradient(to top, rgba(8,8,8,.48) 0%, transparent 55%); }
-    .pam-glow { position: absolute; bottom: -40px; left: 50%; transform: translateX(-50%); width: 280px; height: 180px; background: radial-gradient(ellipse, rgba(201,168,76,.16), transparent 70%); filter: blur(30px); pointer-events: none; }
-    .pam-dots { position: absolute; bottom: 1.1rem; left: 50%; transform: translateX(-50%); display: flex; gap: .5rem; z-index: 5; }
-    .pam-dot { width: 7px; height: 7px; border-radius: 50%; background: rgba(255,255,255,.28); border: none; cursor: pointer; transition: background .3s, transform .3s; padding: 0; }
-    .pam-dot.active { background: var(--gold); transform: scale(1.3); }
-    .pam-name { font-family: 'Cormorant Garamond', serif; font-size: 3.5rem; font-weight: 300; font-style: italic; color: var(--gold-lt); line-height: 1; margin-bottom: .8rem; }
-    .pam-text p { color: var(--white-s); line-height: 1.95; margin-bottom: 1.1rem; font-size: .97rem; }
-    .pam-text em { color: #F0DCA0; font-style: italic; }
-    .pam-text strong { color: var(--white); }
-    .pam-npo { margin-top: 1.8rem; padding: 1.4rem 1.7rem; background: rgba(201,168,76,.06); border: 1px solid rgba(201,168,76,.18); border-radius: var(--rsm); }
-    .pam-npo h4 { color: var(--gold); font-size: .9rem; font-weight: 600; margin-bottom: .4rem; }
-    .pam-npo p  { color: var(--gray); font-size: .84rem; margin: 0; line-height: 1.65; }
-
-    /* HEALING */
-    #healing { background: var(--black-b); }
-    .hgrid { display: grid; grid-template-columns: 1.3fr 1fr; gap: 5rem; align-items: start; }
-    .htext p { color: var(--white-s); line-height: 1.95; margin-bottom: 1.1rem; font-size: .97rem; }
-    .htext strong { color: var(--white); }
-    .hamen { margin-top: 1.8rem; padding: 1.4rem 1.7rem; background: var(--black-c); border-left: 3px solid var(--gold); border-radius: var(--rsm); font-size: .86rem; color: var(--white-s); line-height: 1.75; }
-    .hamen strong { color: var(--gold); display: block; margin-bottom: .3rem; font-size: .72rem; letter-spacing: .08em; text-transform: uppercase; }
-    .himg  { width: 100%; aspect-ratio: 3/4; object-fit: cover; object-position: center 20%; border-radius: var(--r); border: 1px solid var(--border); margin-bottom: 1.5rem; }
-    .conds { display: flex; flex-direction: column; gap: .55rem; }
-    .citem { display: flex; align-items: center; gap: .75rem; padding: .7rem 1rem; background: var(--black-c); border: 1px solid var(--border-s); border-radius: var(--rsm); font-size: .84rem; color: var(--white-s); transition: border-color .25s; }
-    .citem:hover { border-color: var(--border); }
-
-    /* CTA */
-    #cta { background: var(--black); position: relative; overflow: hidden; }
-    .cta-bg { position: absolute; inset: 0; background: url('https://raw.githubusercontent.com/presidentsuarez/chad/main/funSitting.JPG') center 25%/cover no-repeat; opacity: .1; }
-    .cta-i  { position: relative; z-index: 2; text-align: center; max-width: 740px; margin: 0 auto; }
-    .ctah   { font-family: 'Cormorant Garamond', serif; font-size: clamp(2.8rem, 5vw, 4.6rem); font-weight: 600; line-height: 1.06; margin-bottom: 1.2rem; }
-    .ctah em { color: var(--gold); font-style: italic; }
-    .cta-sub  { font-size: 1rem; color: var(--white-s); line-height: 1.85; margin-bottom: 2.5rem; }
-    .cta-tags { display: flex; flex-wrap: wrap; gap: .75rem; justify-content: center; margin-bottom: 2.8rem; }
-    .ctag { padding: .45rem 1.2rem; border: 1px solid var(--border); border-radius: 50px; font-size: .76rem; color: var(--gray); transition: border-color .25s, color .25s, transform .2s cubic-bezier(.34,1.56,.64,1), background .25s; }
-    .ctag:hover { border-color: var(--gold); color: var(--white); transform: translateY(-3px) scale(1.05); background: var(--gold-gl2); }
-
-    /* CONTACT */
-    #contact { background: var(--black-b); }
-    .cgrid { display: grid; grid-template-columns: 1fr 1.5fr; gap: 5rem; align-items: start; }
-    .cimg { width: 100%; aspect-ratio: 2/3; object-fit: cover; object-position: center 20%; border-radius: var(--r); border: 1px solid var(--border); margin-bottom: 2rem; }
-    .cl h3 { font-family: 'Cormorant Garamond', serif; font-size: 2.2rem; font-weight: 600; line-height: 1.1; margin-bottom: .8rem; }
-    .cl h3 em { color: var(--gold); font-style: italic; }
-    .cl p  { color: var(--white-s); font-size: .92rem; line-height: 1.85; margin-bottom: 1.8rem; }
-    .cdet  { display: flex; align-items: center; gap: .8rem; color: var(--white-s); font-size: .88rem; margin-bottom: .7rem; }
-    .cdico { width: 34px; height: 34px; border-radius: 50%; background: var(--gold-gl); border: 1px solid rgba(201,168,76,.2); display: flex; align-items: center; justify-content: center; font-size: .85rem; flex-shrink: 0; }
-    .socials { display: flex; gap: .6rem; margin-top: 2rem; flex-wrap: wrap; }
-    .sbtn { display: flex; align-items: center; gap: .5rem; padding: .52rem 1.1rem; border: 1px solid var(--border-s); border-radius: 50px; color: var(--gray); font-size: .74rem; font-weight: 500; letter-spacing: .06em; transition: border-color .25s, color .25s, background .25s, transform .2s cubic-bezier(.34,1.56,.64,1), box-shadow .25s; }
-    .sbtn svg { width: 14px; height: 14px; flex-shrink: 0; }
-    .sbtn:hover { border-color: var(--gold); color: var(--gold); background: var(--gold-gl2); transform: translateY(-3px) scale(1.05); box-shadow: 0 4px 20px rgba(201,168,76,.2); }
-    .fwrap { padding: 2.4rem; background: var(--black-c); border: 1px solid var(--border-s); border-radius: var(--r); }
-    .frow { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
-    .fg { margin-bottom: 1.1rem; }
-    .fg label { display: block; font-size: .72rem; font-weight: 600; letter-spacing: .1em; text-transform: uppercase; color: var(--gray); margin-bottom: .45rem; }
-    .fg input, .fg textarea, .fg select { width: 100%; padding: .82rem 1rem; background: var(--black-l); border: 1px solid var(--border-s); border-radius: var(--rsm); color: var(--white); font-family: 'Jost', sans-serif; font-size: .92rem; outline: none; transition: border-color .25s, box-shadow .25s; -webkit-appearance: none; }
-    .fg input::placeholder, .fg textarea::placeholder { color: var(--gray); }
-    .fg input:focus, .fg textarea:focus, .fg select:focus { border-color: var(--gold); box-shadow: 0 0 0 3px rgba(201,168,76,.1); }
-    .fg textarea { height: 120px; resize: vertical; }
-    .fg select option { background: var(--black-c); }
-    .fsub { width: 100%; padding: 1rem; background: var(--gold); color: var(--black); font-family: 'Jost', sans-serif; font-size: .88rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; border: none; border-radius: 50px; cursor: pointer; position: relative; overflow: hidden; transition: transform .2s cubic-bezier(.34,1.56,.64,1), box-shadow .3s, background .25s; box-shadow: 0 0 28px rgba(201,168,76,.4), 0 4px 16px rgba(0,0,0,.3); }
-    .fsub::before { content: ''; position: absolute; inset: 0; background: linear-gradient(105deg, transparent 40%, rgba(255,255,255,.2) 50%, transparent 60%); transform: translateX(-100%); transition: transform .5s ease; }
-    .fsub:hover::before { transform: translateX(100%); }
-    .fsub:hover { background: var(--gold-lt); transform: translateY(-3px) scale(1.02); box-shadow: 0 0 52px rgba(201,168,76,.65), 0 8px 24px rgba(0,0,0,.45); }
-    .fsub:active { transform: translateY(-1px) scale(.99); }
-    .fok { display: none; text-align: center; padding: 3rem 2rem; }
-    .fok h4 { font-family: 'Cormorant Garamond', serif; font-size: 1.8rem; margin-bottom: .6rem; }
-    .fok p  { color: var(--gray); font-size: .9rem; }
-
-    /* FOOTER */
-    footer { background: var(--black); border-top: 1px solid var(--border-s); padding: 3rem 4rem; }
-    .ftr { max-width: 1180px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1.5rem; }
-    .fbrand { font-family: 'Cormorant Garamond', serif; font-size: 1.25rem; font-weight: 600; }
-    .fbrand span { color: var(--gold); }
-    .fverse { font-size: .78rem; color: var(--gray); font-style: italic; text-align: center; max-width: 340px; line-height: 1.6; }
-    .fcopy  { font-size: .74rem; color: var(--gray); }
-
-    /* RESPONSIVE */
-    @media(max-width:1060px) {
-      .about-grid    { grid-template-columns: 1fr; gap: 3rem; }
-      .about-img-wrap{ max-width: 380px; }
-      .min-grid      { grid-template-columns: 1fr; gap: 3rem; }
-      .vent-intro    { grid-template-columns: 1fr; gap: 2rem; }
-      .vgrid         { grid-template-columns: 1fr 1fr; }
-      .vc.s2, .vc.s3 { grid-column: span 2; }
-      .igrid         { grid-template-columns: 1fr; }
-      .prow          { grid-template-columns: repeat(2,1fr); }
-      .pam-grid      { grid-template-columns: 1fr; gap: 3rem; }
-      .pam-show      { max-width: 380px; aspect-ratio: 4/3; }
-      .hgrid         { grid-template-columns: 1fr; gap: 3rem; }
-      .cgrid         { grid-template-columns: 1fr; gap: 3rem; }
-      .inv-banner    { aspect-ratio: 4/2; }
-    }
-    @media(max-width:768px) {
-      nav { padding: 1.2rem 1.5rem; }
-      nav.scrolled { padding: .9rem 1.5rem; }
-      .nav-links, .nav-cta { display: none; }
-      .burger { display: flex; }
-      .wrap   { padding: 4.5rem 1.5rem; }
-      #hero   { min-height: 100svh; }
-      .hero-content { padding: 0 1.5rem 5rem; }
-      .hero-scroll  { right: 1.5rem; bottom: 1.8rem; }
-      .vgrid         { grid-template-columns: 1fr; }
-      .vc.s2, .vc.s3 { grid-column: span 1; }
-      .prow          { grid-template-columns: repeat(2,1fr); }
-      .frow          { grid-template-columns: 1fr; }
-      footer         { padding: 2rem 1.5rem; }
-      .ftr           { flex-direction: column; text-align: center; }
-      .fverse        { max-width: 100%; }
-      .inv-banner    { aspect-ratio: 4/3; object-position: center 20%; }
-      .about-badge   { bottom: -.8rem; right: -.5rem; }
-    }
-    @media(max-width:480px) {
-      h1.hero-h1 { font-size: 3rem; }
-      .stats     { grid-template-columns: 1fr 1fr; }
-      .prow      { grid-template-columns: 1fr 1fr; }
-      .ctah      { font-size: 2.6rem; }
+    @media(max-width:480px){
+      h1.hero-h1{font-size:3rem}
+      .stats{grid-template-columns:1fr 1fr}
+      .prow{grid-template-columns:1fr 1fr}
+      .ctah{font-size:2.6rem}
     }
   </style>
 </head>
 <body>
 
-<!-- MOBILE MENU -->
 <div class="mmenu" id="mm">
-  <a href="#about"     onclick="closeMenu()">About</a>
-  <a href="#ministry"  onclick="closeMenu()">Ministry</a>
-  <a href="#ventures"  onclick="closeMenu()">Ventures</a>
-  <a href="#investing" onclick="closeMenu()">Investing</a>
-  <a href="#pam"       onclick="closeMenu()">Legacy</a>
-  <a href="#contact"   onclick="closeMenu()" class="mmenu-cta">Let's Connect</a>
+  <a href="#about"     onclick="cM()">About</a>
+  <a href="#ministry"  onclick="cM()">Ministry</a>
+  <a href="#ventures"  onclick="cM()">Ventures</a>
+  <a href="#investing" onclick="cM()">Investing</a>
+  <a href="#pam"       onclick="cM()">Legacy</a>
+  <a href="#contact"   onclick="cM()" class="mmenu-cta">Let's Connect</a>
 </div>
 
-<!-- NAV -->
 <nav id="nav">
   <a href="#hero" class="nav-logo">Chad<span>.</span>Panton</a>
   <ul class="nav-links">
@@ -384,7 +314,6 @@
   <button class="burger" id="burger" aria-label="Menu"><span></span><span></span><span></span></button>
 </nav>
 
-<!-- HERO: waterarmscrossed.JPG — arms crossed, commanding. Positioned at 62% to show chest/arms, not just face. -->
 <section id="hero">
   <div class="hero-bg"></div>
   <div class="hero-content">
@@ -400,13 +329,12 @@
 </section>
 <div class="divider"></div>
 
-<!-- ABOUT: waterarmscrossed.JPG — strong portrait where it belongs -->
 <section id="about">
   <div class="wrap">
     <div class="about-grid">
       <div class="about-img-wrap reveal">
         <div class="about-accent"></div>
-        <img src="https://raw.githubusercontent.com/presidentsuarez/chad/main/waterarmscrossed.JPG" alt="Chad Panton" class="about-img" loading="lazy" />
+        <img src="https://raw.githubusercontent.com/presidentsuarez/chad/main/Sittingopen.jpg" alt="Chad Panton" class="about-img" loading="lazy" />
         <div class="about-badge"><strong>14+</strong>Years as CEO</div>
       </div>
       <div class="about-text">
@@ -427,12 +355,11 @@
 </section>
 <div class="divider"></div>
 
-<!-- MINISTRY: lookingoff.JPG — contemplative, visionary -->
 <section id="ministry">
   <div class="wrap">
     <div class="min-grid">
       <div>
-        <img src="https://raw.githubusercontent.com/presidentsuarez/chad/main/lookingoff.JPG" alt="Chad Panton — Vision" class="min-img reveal" loading="lazy" />
+        <img src="https://raw.githubusercontent.com/presidentsuarez/chad/main/lookingoff.JPG" alt="Chad Panton" class="min-img reveal" loading="lazy" />
         <div class="mquote reveal d1">
           <div class="mqmark">"</div>
           <p class="mqtext">I do not want to be involved in businesses that just chase profit — but rather purpose. They need to be mission-focused and spirit-led, where all partners are equally yoked.</p>
@@ -443,17 +370,16 @@
         <div class="lbl reveal">The Philosophy</div>
         <h2 class="sh reveal d1">The Boardroom<br>and the Altar Are<br><em>the Same Room.</em></h2>
         <p class="slead reveal d2" style="margin-bottom:2rem;">Chad Panton is not simply a businessman who goes to church. He is a Marketplace Ministry Leader — convinced that kingdom purpose is expressed most powerfully through commerce.</p>
-        <div class="pillar reveal d2"><div class="pillar-ico">🤝</div><div><h4>Equally Yoked Partnerships</h4><p>Every partner, every deal — faith alignment is non-negotiable. Chad will walk away from money before he compromises on this.</p></div></div>
-        <div class="pillar reveal d3"><div class="pillar-ico">🎯</div><div><h4>Mission Before Margin</h4><p>Profit is a tool. Impact is the measure. Every venture must answer the "why" before the "what."</p></div></div>
-        <div class="pillar reveal d3"><div class="pillar-ico">🏛️</div><div><h4>Build for Exit. Build for Legacy.</h4><p>Shape every organization with the end in mind — not just a financial exit, but a lasting kingdom contribution.</p></div></div>
-        <div class="pillar reveal d4"><div class="pillar-ico">✝️</div><div><h4>Stewardship, Not Ownership</h4><p>"God didn't give me these things to own. He gave them to me to steward." Every decision flows from this truth.</p></div></div>
+        <div class="pillar reveal d2"><div class="pillar-ico">&#x1F91D;</div><div><h4>Equally Yoked Partnerships</h4><p>Every partner, every deal — faith alignment is non-negotiable. Chad will walk away from money before compromising on this.</p></div></div>
+        <div class="pillar reveal d3"><div class="pillar-ico">&#x1F3AF;</div><div><h4>Mission Before Margin</h4><p>Profit is a tool. Impact is the measure. Every venture must answer the "why" before the "what."</p></div></div>
+        <div class="pillar reveal d3"><div class="pillar-ico">&#x1F3DB;</div><div><h4>Build for Exit. Build for Legacy.</h4><p>Shape every organization with the end in mind — not just a financial exit, but a lasting kingdom contribution.</p></div></div>
+        <div class="pillar reveal d4"><div class="pillar-ico">&#x271D;</div><div><h4>Stewardship, Not Ownership</h4><p>"God didn't give me these things to own. He gave them to me to steward." Every decision flows from this truth.</p></div></div>
       </div>
     </div>
   </div>
 </section>
 <div class="divider"></div>
 
-<!-- VENTURES: sittingtophalf.JPG — confident, seated -->
 <section id="ventures">
   <div class="wrap">
     <div class="vent-intro">
@@ -466,39 +392,39 @@
     </div>
     <div class="vgrid">
       <div class="vc s2 reveal">
-        <div class="vtag t-exit">✓ Successfully Exited · Dec 2021</div>
-        <div class="vico">☕</div>
+        <div class="vtag t-exit">&#x2713; Successfully Exited &middot; Dec 2021</div>
+        <div class="vico">&#x2615;</div>
         <div class="vtitle">JavaWorks</div>
-        <div class="vdesc"><strong>The founding story.</strong> From a blank page in 2007 to a Fortune 50 acquisition — JavaWorks became the market leader in office coffee, water filtration, and micro-market services across Tampa Bay and Orlando. Chad built it, led it for 14+ years, and sold it on his own terms for $3.8 million. That exit wisdom now powers his role as M&amp;A advisor for the next generation of founders.</div>
+        <div class="vdesc"><strong>The founding story.</strong> From a blank page in 2007 to a Fortune 50 acquisition in December 2021. JavaWorks became the market leader in office coffee, water filtration, and micro-market services across Tampa Bay and Orlando. Chad built it, led it for 14+ years, and sold it on his own terms for $3.8 million. That exit wisdom now powers his role as M&amp;A advisor for the next generation of founders.</div>
       </div>
       <div class="vc reveal d1">
-        <div class="vtag t-active">Active · Commercial RE</div>
-        <div class="vico">🏗️</div>
+        <div class="vtag t-active">Active &middot; Commercial RE</div>
+        <div class="vico">&#x1F3D7;</div>
         <div class="vtitle">ISI Legacy</div>
         <div class="vdesc">A 4-acre commercial development in Kenosha, Wisconsin anchoring a <strong>Hyatt Studio Hotel</strong> plus two out-parcels — with JV partners sourced entirely through Chad's Christian faith network.</div>
       </div>
       <div class="vc reveal d2">
-        <div class="vtag t-intl">International · Costa Rica</div>
-        <div class="vico">🌿</div>
+        <div class="vtag t-intl">International &middot; Costa Rica</div>
+        <div class="vico">&#x1F33F;</div>
         <div class="vtitle">In La Keshe</div>
         <div class="vdesc"><em>"Oneness with God."</em> A Costa Rican corporation housing Casa Natura and <strong>Casa Jesus</strong> — a 9-bedroom dual estate featuring a podcast studio, biohacking lounge, and wellness deck. Sacred ground for leadership and spiritual retreats.</div>
       </div>
       <div class="vc reveal d1">
-        <div class="vtag t-active">Series A · Board Member</div>
-        <div class="vico">💊</div>
+        <div class="vtag t-active">Series A &middot; Board Member</div>
+        <div class="vico">&#x1F48A;</div>
         <div class="vtitle">R3</div>
         <div class="vdesc">An opioid prevention and awareness platform. Chad invested, joined the board, and serves as Enterprise Sales Development Officer and M&amp;A Specialist — shaping an organization positioned for a meaningful acquisition and a <strong>mission that saves lives.</strong></div>
       </div>
       <div class="vc reveal d2">
-        <div class="vtag t-active">Equity Partner · In Formation</div>
-        <div class="vico">📡</div>
+        <div class="vtag t-active">Equity Partner &middot; In Formation</div>
+        <div class="vico">&#x1F4E1;</div>
         <div class="vtitle">Carnivore Media</div>
         <div class="vdesc">A full marketing stack with two unicorn-class AI products: intent-based marketing that identifies exactly who's searching for your offering, and a pixel that de-anonymizes website visitors into <strong>72+ data points</strong> — piped directly into your CRM.</div>
       </div>
-      <div class="vc s3 reveal d3" style="background:linear-gradient(135deg,var(--black-c),var(--black-l));border-color:var(--border);">
-        <div class="vtag t-form">Forming — In God's Hands</div>
-        <div class="vico">🕊️</div>
-        <div class="vtitle">501(c)(3) — Functional Medicine Meets Biblical Truth</div>
+      <div class="vc s3 reveal d3" style="background:linear-gradient(135deg,var(--black-c),var(--black-l));border-color:var(--border)">
+        <div class="vtag t-form">Forming &mdash; In God&apos;s Hands</div>
+        <div class="vico">&#x1F54A;</div>
+        <div class="vtitle">501(c)(3) &mdash; Functional Medicine Meets Biblical Truth</div>
         <div class="vdesc">A forthcoming nonprofit at the intersection of functional medicine and scripture — offering a spirit-led, whole-body alternative to the Western pharmaceutical approach to mental health. Built on Pam's legacy, Chad's healing journey, and the research of Dr. Daniel Amen. <strong>Coming soon.</strong></div>
       </div>
     </div>
@@ -506,7 +432,6 @@
 </section>
 <div class="divider"></div>
 
-<!-- INVESTING: funSitting.JPG banner — relaxed, approachable -->
 <section id="investing">
   <div class="wrap">
     <div class="lbl reveal">The Investment Portfolio</div>
@@ -515,40 +440,39 @@
     <img src="https://raw.githubusercontent.com/presidentsuarez/chad/main/walking.JPG" alt="Chad Panton" class="inv-banner reveal d1" loading="lazy" />
     <div class="igrid">
       <div class="icard reveal">
-        <div class="icard-head"><div class="icard-ico">💼</div><div><div class="icard-title">Angel &amp; Private Equity</div><div class="icard-sub">~10 active positions</div></div></div>
-        <div class="irow"><div class="idot"></div><div><div class="iname">Ananda Science</div><div class="inote">Flagship angel bet · 2-year exit horizon · high conviction</div></div></div>
-        <div class="irow"><div class="idot"></div><div><div class="iname">Circle / USDC</div><div class="inote">Pre-IPO · now publicly traded · exit imminent</div></div></div>
-        <div class="irow"><div class="idot"></div><div><div class="iname">R3 — Opioid Prevention</div><div class="inote">Series A · board member · mission-aligned</div></div></div>
-        <div class="irow"><div class="idot"></div><div><div class="iname">Ion — Gold-Backed Stablecoin</div><div class="inote">Friends &amp; family round · NASDAQ uplisting in progress</div></div></div>
-        <div class="irow"><div class="idot"></div><div><div class="iname">Cerebrus AI</div><div class="inote">Pre-IPO · NVIDIA competitor · invested 2023</div></div></div>
-        <div class="irow"><div class="idot"></div><div><div class="iname">FarmEd · Magical Butter · Ripple</div><div class="inote">Active · cash flowing · pending exit trajectories</div></div></div>
+        <div class="icard-head"><div class="icard-ico">&#x1F4BC;</div><div><div class="icard-title">Angel &amp; Private Equity</div><div class="icard-sub">~10 active positions</div></div></div>
+        <div class="irow"><div class="idot"></div><div><div class="iname">Ananda Science</div><div class="inote">Flagship angel bet &middot; 2-year exit horizon &middot; high conviction</div></div></div>
+        <div class="irow"><div class="idot"></div><div><div class="iname">Circle / USDC</div><div class="inote">Pre-IPO &middot; now publicly traded &middot; exit imminent</div></div></div>
+        <div class="irow"><div class="idot"></div><div><div class="iname">R3 &mdash; Opioid Prevention</div><div class="inote">Series A &middot; board member &middot; mission-aligned</div></div></div>
+        <div class="irow"><div class="idot"></div><div><div class="iname">Ion &mdash; Gold-Backed Stablecoin</div><div class="inote">Friends &amp; family round &middot; NASDAQ uplisting in progress</div></div></div>
+        <div class="irow"><div class="idot"></div><div><div class="iname">Cerebrus AI</div><div class="inote">Pre-IPO &middot; NVIDIA competitor &middot; invested 2023</div></div></div>
+        <div class="irow"><div class="idot"></div><div><div class="iname">FarmEd &middot; Magical Butter &middot; Ripple</div><div class="inote">Active &middot; cash flowing &middot; pending exit trajectories</div></div></div>
       </div>
       <div class="icard reveal d2">
-        <div class="icard-head"><div class="icard-ico">🪙</div><div><div class="icard-title">Digital Assets &amp; Node Ownership</div><div class="icard-sub">20+ nodes across 4 projects</div></div></div>
-        <div class="irow"><div class="idot"></div><div><div class="iname">Gala Games — 3 Nodes</div><div class="inote">Daily token distributions · significant returns already realized · still active</div></div></div>
-        <div class="irow"><div class="idot"></div><div><div class="iname">Truth Network — 5 Nodes</div><div class="inote">Decentralized prediction market · ESPN-scale integration vision</div></div></div>
-        <div class="irow"><div class="idot"></div><div><div class="iname">TSX / TS7 — 12 Nodes</div><div class="inote">High conviction · daily distributions active</div></div></div>
-        <div class="irow"><div class="idot"></div><div><div class="iname">Connect United — Galvan &amp; Switch Network</div><div class="inote">Fractional ownership · daily distributions · monitoring</div></div></div>
-        <div class="irow"><div class="idot"></div><div><div class="iname">Spot Portfolio &amp; 401k Digital Assets</div><div class="inote">Transitioning to spot-and-hold · 401k fully in digital assets · strong returns</div></div></div>
+        <div class="icard-head"><div class="icard-ico">&#x1FA99;</div><div><div class="icard-title">Digital Assets &amp; Node Ownership</div><div class="icard-sub">20+ nodes across 4 projects</div></div></div>
+        <div class="irow"><div class="idot"></div><div><div class="iname">Gala Games &mdash; 3 Nodes</div><div class="inote">Daily token distributions &middot; significant returns already realized &middot; still active</div></div></div>
+        <div class="irow"><div class="idot"></div><div><div class="iname">Truth Network &mdash; 5 Nodes</div><div class="inote">Decentralized prediction market &middot; ESPN-scale integration vision</div></div></div>
+        <div class="irow"><div class="idot"></div><div><div class="iname">TSX / TS7 &mdash; 12 Nodes</div><div class="inote">High conviction &middot; daily distributions active</div></div></div>
+        <div class="irow"><div class="idot"></div><div><div class="iname">Connect United &mdash; Galvan &amp; Switch Network</div><div class="inote">Fractional ownership &middot; daily distributions &middot; monitoring</div></div></div>
+        <div class="irow"><div class="idot"></div><div><div class="iname">Spot Portfolio &amp; 401k Digital Assets</div><div class="inote">Transitioning to spot-and-hold &middot; 401k fully in digital assets &middot; strong returns</div></div></div>
       </div>
     </div>
     <div class="iphil reveal">
-      <p>"The same way God leads me away from the day trade and into the long hold — He's leading me away from what's fast and toward what's <span>faithful.</span> The portfolio is built for legacy, not just liquidity."</p>
+      <p>"The same way God leads me away from the day trade and into the long hold &mdash; He&apos;s leading me away from what&apos;s fast and toward what&apos;s <span>faithful.</span> The portfolio is built for legacy, not just liquidity."</p>
     </div>
   </div>
 </section>
 <div class="divider"></div>
 
-<!-- PROOF -->
 <section id="proof">
   <div class="wrap">
-    <div style="text-align:center;max-width:520px;margin:0 auto;">
-      <div class="lbl reveal" style="justify-content:center;">By the Numbers</div>
-      <h2 class="sh reveal d1" style="text-align:center;">The Work <em>Speaks.</em></h2>
+    <div style="text-align:center;max-width:520px;margin:0 auto">
+      <div class="lbl reveal" style="justify-content:center">By the Numbers</div>
+      <h2 class="sh reveal d1" style="text-align:center">The Work <em>Speaks.</em></h2>
     </div>
     <div class="prow">
       <div class="pcell reveal"><div class="pnum">14</div><div class="plbl">Years Building<br>JavaWorks</div></div>
-      <div class="pcell reveal d1"><div class="pnum" style="font-size:2rem;line-height:1.2;">Fortune 50</div><div class="plbl">Acquirer of JavaWorks<br>December 2021</div></div>
+      <div class="pcell reveal d1"><div class="pnum" style="font-size:2rem;line-height:1.2">Fortune 50</div><div class="plbl">Acquirer of JavaWorks<br>December 2021</div></div>
       <div class="pcell reveal d2"><div class="pnum">20+</div><div class="plbl">Blockchain Nodes<br>Owned</div></div>
       <div class="pcell reveal d3"><div class="pnum">10+</div><div class="plbl">Active Angel &amp;<br>PE Investments</div></div>
     </div>
@@ -556,32 +480,31 @@
 </section>
 <div class="divider"></div>
 
-<!-- PAM'S LEGACY: pam1–9 slideshow -->
 <section id="pam">
   <div class="wrap">
     <div class="pam-grid">
       <div class="reveal">
         <div class="pam-show" id="pamShow">
-          <div class="pam-slide active"><img src="https://raw.githubusercontent.com/presidentsuarez/chad/main/pam1.JPG"  alt="Pam Panton" loading="lazy" /></div>
-          <div class="pam-slide"><img src="https://raw.githubusercontent.com/presidentsuarez/chad/main/pam4.JPG"  alt="Pam Panton" loading="lazy" /></div>
-          <div class="pam-slide"><img src="https://raw.githubusercontent.com/presidentsuarez/chad/main/pam5.JPG"  alt="Pam Panton" loading="lazy" /></div>
-          <div class="pam-slide"><img src="https://raw.githubusercontent.com/presidentsuarez/chad/main/pam6.JPG"  alt="Pam Panton" loading="lazy" /></div>
-          <div class="pam-slide"><img src="https://raw.githubusercontent.com/presidentsuarez/chad/main/pam8.JPG"  alt="Pam Panton" loading="lazy" /></div>
-          <div class="pam-slide"><img src="https://raw.githubusercontent.com/presidentsuarez/chad/main/pam9.JPG"  alt="Pam Panton" loading="lazy" /></div>
+          <div class="pam-slide active"><img src="https://raw.githubusercontent.com/presidentsuarez/chad/main/pam1.JPG" alt="Pam Panton" loading="lazy" /></div>
+          <div class="pam-slide"><img src="https://raw.githubusercontent.com/presidentsuarez/chad/main/pam4.JPG" alt="Pam Panton" loading="lazy" /></div>
+          <div class="pam-slide"><img src="https://raw.githubusercontent.com/presidentsuarez/chad/main/pam5.JPG" alt="Pam Panton" loading="lazy" /></div>
+          <div class="pam-slide"><img src="https://raw.githubusercontent.com/presidentsuarez/chad/main/pam6.JPG" alt="Pam Panton" loading="lazy" /></div>
+          <div class="pam-slide"><img src="https://raw.githubusercontent.com/presidentsuarez/chad/main/pam8.JPG" alt="Pam Panton" loading="lazy" /></div>
+          <div class="pam-slide"><img src="https://raw.githubusercontent.com/presidentsuarez/chad/main/pam9.JPG" alt="Pam Panton" loading="lazy" /></div>
           <div class="pam-dots" id="pamDots"></div>
         </div>
         <div class="pam-glow"></div>
       </div>
       <div class="pam-text">
-        <div class="lbl reveal" style="color:var(--gold-dk);">In Memory</div>
+        <div class="lbl reveal" style="color:var(--gold-dk)">In Memory</div>
         <div class="pam-name reveal d1">Pam Panton</div>
-        <h2 class="sh reveal d1" style="font-size:clamp(1.9rem,3vw,2.8rem);margin-bottom:1.2rem;">An Angel,<br>Literally on <em>Earth.</em></h2>
-        <p class="reveal d2">In June 2020, Chad's mother Pam took her own life. She was deeply loved, widely revered — a woman whose warmth left a permanent mark on everyone she ever met. Chad knows she raised her hand for Jesus. He knows she is resting with the Lord.</p>
-        <p class="reveal d2">But her passing left a wound that has not been — and will not be — wasted. Chad has chosen to honor Pam's legacy not through silence or grief alone, but through <strong>action.</strong></p>
-        <p class="reveal d3"><em>"We are all walking through seasons of uncomfortableness. The more we bring those burdens forward into the Father — the more we are reminded they are not ours to carry."</em></p>
+        <h2 class="sh reveal d1" style="font-size:clamp(1.9rem,3vw,2.8rem);margin-bottom:1.2rem">An Angel,<br>Literally on <em>Earth.</em></h2>
+        <p class="reveal d2">In June 2020, Chad's mother Pam took her own life. She was deeply loved, widely revered &mdash; a woman whose warmth left a permanent mark on everyone she ever met. Chad knows she raised her hand for Jesus. He knows she is resting with the Lord.</p>
+        <p class="reveal d2">But her passing left a wound that has not been &mdash; and will not be &mdash; wasted. Chad has chosen to honor Pam's legacy not through silence or grief alone, but through <strong>action.</strong></p>
+        <p class="reveal d3"><em>"We are all walking through seasons of uncomfortableness. The more we bring those burdens forward into the Father &mdash; the more we are reminded they are not ours to carry."</em></p>
         <div class="pam-npo reveal d4">
-          <h4>🕊️ A Nonprofit Is Coming</h4>
-          <p>Built on Pam's legacy, Chad's healing journey, and the science of functional medicine — a 501(c)(3) offering a spirit-led, whole-body path to freedom. Not Xanax. Not Zoloft. Truth.</p>
+          <h4>&#x1F54A; A Nonprofit Is Coming</h4>
+          <p>Built on Pam's legacy, Chad's healing journey, and the science of functional medicine &mdash; a 501(c)(3) offering a spirit-led, whole-body path to freedom. Not Xanax. Not Zoloft. Truth.</p>
         </div>
       </div>
     </div>
@@ -589,33 +512,32 @@
 </section>
 <div class="divider"></div>
 
-<!-- HEALING: chadbw.JPG — timeless, contemplative -->
 <section id="healing">
   <div class="wrap">
     <div class="hgrid">
       <div class="htext">
         <div class="lbl reveal">The Health Journey</div>
         <h2 class="sh reveal d1">The Body Keeps<br>the <em>Score.</em></h2>
-        <p class="reveal d2"><strong>This story doesn't get told enough.</strong> Chad Panton — high-performing entrepreneur, serial investor, man of faith — moved into a home that passed inspection. What the inspection missed was quietly devastating: severe mold contamination hidden in an undisclosed area.</p>
+        <p class="reveal d2"><strong>This story doesn't get told enough.</strong> Chad Panton &mdash; high-performing entrepreneur, serial investor, man of faith &mdash; moved into a home that passed inspection. What the inspection missed was quietly devastating: severe mold contamination hidden in an undisclosed area.</p>
         <p class="reveal d2">Over time, the toxins built. His cognition clouded. His energy collapsed. His emotional state shifted in ways that didn't make sense. And Western medicine handed him a prescription. <strong>He refused it.</strong></p>
-        <p class="reveal d3">What followed was years of testing, seeking, and learning — eventually uncovering a cascade including Lyme disease, heavy metal toxicity, parasites, Epstein-Barr, all compounded by a leaky gut blocking every supplement from being absorbed.</p>
-        <p class="reveal d3"><strong>Now, Chad is healing</strong> — armed with a sequenced protocol, renewed faith, and the conviction that God is using this story for something greater.</p>
+        <p class="reveal d3">What followed was years of testing, seeking, and learning &mdash; eventually uncovering a cascade including Lyme disease, heavy metal toxicity, parasites, Epstein-Barr, all compounded by a leaky gut blocking every supplement from being absorbed.</p>
+        <p class="reveal d3"><strong>Now, Chad is healing</strong> &mdash; armed with a sequenced protocol, renewed faith, and the conviction that God is using this story for something greater.</p>
         <div class="hamen reveal d4">
-          <strong>Dr. Daniel Amen · NYT Bestselling Author · 300,000+ Brain Scans · 11 Clinics</strong>
-          "Over 90% of bipolar, depression, and anxiety is not psychiatric — it is the body being toxic. Detoxify the body, and the emotional state heals."
+          <strong>Dr. Daniel Amen &middot; NYT Bestselling Author &middot; 300,000+ Brain Scans &middot; 11 Clinics</strong>
+          "Over 90% of bipolar, depression, and anxiety is not psychiatric &mdash; it is the body being toxic. Detoxify the body, and the emotional state heals."
         </div>
       </div>
       <div>
         <img src="https://raw.githubusercontent.com/presidentsuarez/chad/main/chadbw.JPG" alt="Chad Panton" class="himg reveal" loading="lazy" />
         <div class="conds">
-          <div class="citem reveal d1">🍄&nbsp; Mold toxicity (mycotoxins)</div>
-          <div class="citem reveal d1">⚗️&nbsp; Heavy metal toxicity</div>
-          <div class="citem reveal d2">🦠&nbsp; Lyme disease</div>
-          <div class="citem reveal d2">🔬&nbsp; Parasites</div>
-          <div class="citem reveal d3">⚡&nbsp; Epstein-Barr virus</div>
-          <div class="citem reveal d3">😴&nbsp; Chronic fatigue syndrome</div>
-          <div class="citem reveal d4">🧠&nbsp; Brain inflammation &amp; severe fog</div>
-          <div class="citem reveal d4">🌿&nbsp; Leaky gut (blocking all absorption)</div>
+          <div class="citem reveal d1">&#x1F344; &nbsp;Mold toxicity (mycotoxins)</div>
+          <div class="citem reveal d1">&#x2697; &nbsp;Heavy metal toxicity</div>
+          <div class="citem reveal d2">&#x1F9A0; &nbsp;Lyme disease</div>
+          <div class="citem reveal d2">&#x1F52C; &nbsp;Parasites</div>
+          <div class="citem reveal d3">&#x26A1; &nbsp;Epstein-Barr virus</div>
+          <div class="citem reveal d3">&#x1F634; &nbsp;Chronic fatigue syndrome</div>
+          <div class="citem reveal d4">&#x1F9E0; &nbsp;Brain inflammation &amp; severe fog</div>
+          <div class="citem reveal d4">&#x1F33F; &nbsp;Leaky gut (blocking all absorption)</div>
         </div>
       </div>
     </div>
@@ -623,49 +545,47 @@
 </section>
 <div class="divider"></div>
 
-<!-- CTA -->
 <section id="cta">
   <div class="cta-bg"></div>
   <div class="wrap">
     <div class="cta-i">
-      <div class="lbl reveal" style="justify-content:center;">Work With Chad</div>
+      <div class="lbl reveal" style="justify-content:center">Work With Chad</div>
       <h2 class="ctah reveal d1">Ready to Build<br>Something That <em>Matters?</em></h2>
-      <p class="cta-sub reveal d2">Whether you're an investor, a builder, a JV partner, or someone whose vision aligns with the kingdom — Chad wants to hear from you. But only if you're serious about purpose, not just profit.</p>
+      <p class="cta-sub reveal d2">Whether you're an investor, a builder, a JV partner, or someone whose vision aligns with the kingdom &mdash; Chad wants to hear from you. But only if you're serious about purpose, not just profit.</p>
       <div class="cta-tags reveal d3">
-        <span class="ctag">🏗️ Real Estate JV</span>
-        <span class="ctag">💼 Angel Investment</span>
-        <span class="ctag">🤝 Strategic Partnership</span>
-        <span class="ctag">📡 Carnivore Media</span>
-        <span class="ctag">🕊️ Nonprofit Vision</span>
-        <span class="ctag">🎙️ Speaking</span>
+        <span class="ctag">&#x1F3D7; Real Estate JV</span>
+        <span class="ctag">&#x1F4BC; Angel Investment</span>
+        <span class="ctag">&#x1F91D; Strategic Partnership</span>
+        <span class="ctag">&#x1F4E1; Carnivore Media</span>
+        <span class="ctag">&#x1F54A; Nonprofit Vision</span>
+        <span class="ctag">&#x1F3A4; Speaking</span>
       </div>
       <div class="reveal d4">
-        <a href="#contact" class="btn-gold" style="display:inline-flex;margin:0 auto;">Start the Conversation <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+        <a href="#contact" class="btn-gold" style="display:inline-flex;margin:0 auto">Start the Conversation <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
       </div>
     </div>
   </div>
 </section>
 <div class="divider"></div>
 
-<!-- CONTACT: Sittingopen.jpg — warm, open, inviting -->
 <section id="contact">
   <div class="wrap">
     <div class="cgrid">
       <div>
-        <img src="https://raw.githubusercontent.com/presidentsuarez/chad/main/Sittingopen.jpg" alt="Chad Panton" class="cimg reveal" loading="lazy" />
+        <img src="https://raw.githubusercontent.com/presidentsuarez/chad/main/funSitting.JPG" alt="Chad Panton" class="cimg reveal" loading="lazy" />
         <div class="lbl reveal">Get in Touch</div>
         <div class="cl">
-          <h3 class="reveal d1"><em>Let's</em> Connect.<br>Let's Build.</h3>
-          <p class="reveal d2">If you're a builder, a believer, an investor, or a visionary — and you believe in doing business the right way — Chad would love to connect.</p>
+          <h3 class="reveal d1"><em>Let&apos;s</em> Connect.<br>Let&apos;s Build.</h3>
+          <p class="reveal d2">If you're a builder, a believer, an investor, or a visionary &mdash; and you believe in doing business the right way &mdash; Chad would love to connect.</p>
         </div>
-        <div class="cdet reveal d2"><div class="cdico">📍</div><span>Tampa, FL &nbsp;·&nbsp; Costa Rica &nbsp;·&nbsp; Kenosha, WI</span></div>
-        <div class="cdet reveal d3"><div class="cdico">✉️</div><a href="/cdn-cgi/l/email-protection#6a29020b0e3a0b041e05042a0d070b030644090507" style="color:var(--white-s);transition:color .2s" onmouseover="this.style.color='var(--gold)'" onmouseout="this.style.color='var(--white-s)'"><span class="__cf_email__" data-cfemail="783b10191c2819160c1716381f15191114561b1715">[email&#160;protected]</span></a></div>
-        <div class="cdet reveal d3"><div class="cdico">🌐</div><span>ChadPanton.com</span></div>
+        <div class="cdet reveal d2"><div class="cdico">&#x1F4CD;</div><span>Tampa, FL &nbsp;&middot;&nbsp; Costa Rica &nbsp;&middot;&nbsp; Kenosha, WI</span></div>
+        <div class="cdet reveal d3"><div class="cdico">&#x2709;</div><a id="emailDisplay" style="color:var(--white-s);transition:color .2s" onmouseover="this.style.color='var(--gold)'" onmouseout="this.style.color='var(--white-s)'"></a></div>
+        <div class="cdet reveal d3"><div class="cdico">&#x1F310;</div><span>ChadPanton.com</span></div>
         <div class="socials reveal d4">
-          <a href="#" class="sbtn" title="LinkedIn — coming soon"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-4 0v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>LinkedIn</a>
-          <a href="#" class="sbtn" title="Instagram — coming soon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>Instagram</a>
-          <a href="#" class="sbtn" title="Facebook — coming soon"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>Facebook</a>
-          <a href="#" class="sbtn" title="X — coming soon"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>X</a>
+          <a href="#" class="sbtn" title="LinkedIn &mdash; coming soon"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-4 0v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>LinkedIn</a>
+          <a href="#" class="sbtn" title="Instagram &mdash; coming soon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>Instagram</a>
+          <a href="#" class="sbtn" title="Facebook &mdash; coming soon"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>Facebook</a>
+          <a href="#" class="sbtn" title="X &mdash; coming soon"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>X</a>
         </div>
       </div>
       <div class="fwrap reveal d1">
@@ -678,7 +598,7 @@
           <div class="fg"><label for="ph">Phone Number</label><input type="tel" id="ph" placeholder="+1 (555) 000-0000" /></div>
           <div class="fg"><label for="co">Company / Organization</label><input type="text" id="co" placeholder="Your company (optional)" /></div>
           <div class="fg">
-            <label for="re">I'm reaching out about</label>
+            <label for="re">I&apos;m reaching out about</label>
             <select id="re">
               <option value="">Select a topic...</option>
               <option>Real Estate / JV Opportunity</option>
@@ -690,86 +610,80 @@
             </select>
           </div>
           <div class="fg"><label for="ms">Your Message</label><textarea id="ms" placeholder="Tell Chad about you, your vision, and why you should connect..." required></textarea></div>
-          <button type="submit" class="fsub">Send Message &rarr;</button>
+          <button type="submit" class="fsub">Send Message &#x2192;</button>
         </form>
         <div class="fok" id="fok">
-          <div style="font-size:2.8rem;margin-bottom:1rem;">🙏</div>
+          <div style="font-size:2.8rem;margin-bottom:1rem">&#x1F64F;</div>
           <h4>Message Sent.</h4>
-          <p>Your email client will open to complete sending. Chad will be in touch — thank you.</p>
+          <p>Your email client will open to complete sending. Chad will be in touch &mdash; thank you.</p>
         </div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- FOOTER -->
 <footer>
   <div class="ftr">
     <div class="fbrand">Chad<span>.</span>Panton</div>
-    <div class="fverse">"For we are God's handiwork, created in Christ Jesus to do good works which God prepared in advance for us to do." — Ephesians 2:10</div>
+    <div class="fverse">"For we are God's handiwork, created in Christ Jesus to do good works which God prepared in advance for us to do." &mdash; Ephesians 2:10</div>
     <div class="fcopy">&copy; 2025 ChadPanton.com &nbsp;&middot;&nbsp; Tampa, FL</div>
   </div>
 </footer>
 
-<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+<script>
   /* NAV */
-  const navEl = document.getElementById('nav');
-  window.addEventListener('scroll', function() {
-    navEl.classList.toggle('scrolled', window.scrollY > 60);
-  }, { passive: true });
+  var navEl = document.getElementById('nav');
+  window.addEventListener('scroll', function(){ navEl.classList.toggle('scrolled', window.scrollY > 60); }, { passive: true });
 
   /* BURGER */
   var burgerEl = document.getElementById('burger');
-  var mmEl     = document.getElementById('mm');
-  burgerEl.addEventListener('click', function() {
+  var mmEl = document.getElementById('mm');
+  burgerEl.addEventListener('click', function(){
     burgerEl.classList.toggle('open');
     mmEl.classList.toggle('open');
     document.body.style.overflow = mmEl.classList.contains('open') ? 'hidden' : '';
   });
-  function closeMenu() {
-    burgerEl.classList.remove('open');
-    mmEl.classList.remove('open');
-    document.body.style.overflow = '';
-  }
+  function cM(){ burgerEl.classList.remove('open'); mmEl.classList.remove('open'); document.body.style.overflow = ''; }
 
   /* SCROLL REVEAL */
-  var revealObs = new IntersectionObserver(function(entries) {
-    entries.forEach(function(e) {
-      if (e.isIntersecting) { e.target.classList.add('in'); revealObs.unobserve(e.target); }
-    });
+  var ro = new IntersectionObserver(function(entries){
+    entries.forEach(function(e){ if(e.isIntersecting){ e.target.classList.add('in'); ro.unobserve(e.target); } });
   }, { threshold: 0.1, rootMargin: '0px 0px -30px 0px' });
-  document.querySelectorAll('.reveal').forEach(function(el) { revealObs.observe(el); });
+  document.querySelectorAll('.reveal').forEach(function(el){ ro.observe(el); });
+
+  /* EMAIL — built in JS so Cloudflare never sees it in source */
+  (function(){
+    var u = 'ChadPanton';
+    var d = 'gmail.com';
+    var addr = u + '@' + d;
+    var el = document.getElementById('emailDisplay');
+    if(el){ el.textContent = addr; el.href = 'mailto:' + addr; }
+  })();
 
   /* PAM SLIDESHOW */
-  (function() {
-    var slides   = document.querySelectorAll('#pamShow .pam-slide');
+  (function(){
+    var slides = document.querySelectorAll('#pamShow .pam-slide');
     var dotsWrap = document.getElementById('pamDots');
-    var current  = 0;
-    var timer;
-
-    slides.forEach(function(_, i) {
+    var cur = 0, timer;
+    slides.forEach(function(_, i){
       var d = document.createElement('button');
       d.className = 'pam-dot' + (i === 0 ? ' active' : '');
-      d.setAttribute('aria-label', 'Photo ' + (i + 1));
-      d.addEventListener('click', function() { goTo(i); });
+      d.setAttribute('aria-label', 'Photo ' + (i+1));
+      d.addEventListener('click', function(){ goTo(i); });
       dotsWrap.appendChild(d);
     });
-
-    function goTo(n) {
-      slides[current].classList.remove('active');
-      dotsWrap.children[current].classList.remove('active');
-      current = n;
-      slides[current].classList.add('active');
-      dotsWrap.children[current].classList.add('active');
-      clearInterval(timer);
-      timer = setInterval(next, 4500);
+    function goTo(n){
+      slides[cur].classList.remove('active'); dotsWrap.children[cur].classList.remove('active');
+      cur = n;
+      slides[cur].classList.add('active'); dotsWrap.children[cur].classList.add('active');
+      clearInterval(timer); timer = setInterval(next, 4500);
     }
-    function next() { goTo((current + 1) % slides.length); }
+    function next(){ goTo((cur+1) % slides.length); }
     timer = setInterval(next, 4500);
   })();
 
-  /* CONTACT FORM — mailto to ChadPanton@gmail.com */
-  document.getElementById('cf').addEventListener('submit', function(e) {
+  /* CONTACT FORM — mailto built in JS */
+  document.getElementById('cf').addEventListener('submit', function(e){
     e.preventDefault();
     var fn = document.getElementById('fn').value.trim();
     var ln = document.getElementById('ln').value.trim();
@@ -778,16 +692,14 @@
     var co = document.getElementById('co').value.trim();
     var re = document.getElementById('re').value;
     var ms = document.getElementById('ms').value.trim();
-
-    if (!fn || !ln || !em || !ms) { alert('Please fill in all required fields.'); return; }
-
-    var subject = encodeURIComponent('ChadPanton.com — ' + (re || 'Inquiry') + ': ' + fn + ' ' + ln);
-    var body    = encodeURIComponent(
-      'New message from ChadPanton.com\n\n' +
-      'Name:    ' + fn + ' ' + ln + '\n' +
-      'Email:   ' + em + '\n' +
-      'Phone:   ' + (ph || 'Not provided') + '\n' +
-      'Company: ' + (co || 'Not provided') + '\n' +
-      'Topic:   ' + (re || 'Not selected') + '\n\n' +
-      'Message:\n' + ms + '\n\n---\nSent via ChadPanton.com'
-    );
+    if(!fn || !ln || !em || !ms){ alert('Please fill in all required fields.'); return; }
+    var to = 'ChadPanton' + '@' + 'gmail.com';
+    var sub = encodeURIComponent('ChadPanton.com — ' + (re || 'Inquiry') + ': ' + fn + ' ' + ln);
+    var bod = encodeURIComponent('New message from ChadPanton.com\n\nName:    ' + fn + ' ' + ln + '\nEmail:   ' + em + '\nPhone:   ' + (ph||'Not provided') + '\nCompany: ' + (co||'Not provided') + '\nTopic:   ' + (re||'Not selected') + '\n\nMessage:\n' + ms + '\n\n---\nSent via ChadPanton.com');
+    window.location.href = 'mailto:' + to + '?subject=' + sub + '&body=' + bod;
+    document.getElementById('cf').style.display = 'none';
+    document.getElementById('fok').style.display = 'block';
+  });
+</script>
+</body>
+</html>
