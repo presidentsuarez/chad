@@ -4,934 +4,899 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Chad Panton — Marketplace Ministry Leader</title>
-  <meta name="description" content="Entrepreneur. Angel Investor. Kingdom Builder. Marketplace Ministry Leader. Chad Panton — Tampa, FL." />
+  <meta name="description" content="Entrepreneur. Angel Investor. Kingdom Builder. Chad Panton — Tampa, FL. Purpose Over Profit. Faith Over Fear." />
+  <meta property="og:title" content="Chad Panton — Marketplace Ministry Leader" />
+  <meta property="og:description" content="Entrepreneur. Angel Investor. Kingdom Builder. Tampa, FL." />
+  <meta property="og:url" content="https://chadpanton.com" />
+  <link rel="canonical" href="https://chadpanton.com" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,600&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,600;1,700&family=Jost:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
 
   <style>
-    /* ── TOKENS ───────────────────────────────────────────────────── */
+    /* ─── DESIGN TOKENS ──────────────────────────────────────────── */
     :root {
-      --navy:        #070E1C;
-      --navy-mid:    #0C1830;
-      --navy-card:   #101F3D;
-      --navy-lift:   #162548;
-      --green:       #0EB87A;
-      --green-dim:   #0A8A5C;
-      --green-glow:  rgba(14,184,122,.18);
-      --blue:        #2563EB;
-      --blue-light:  #5B8DEF;
-      --blue-glow:   rgba(37,99,235,.18);
-      --gold:        #C9954A;
-      --gold-light:  #E5B96B;
-      --white:       #F1F5F9;
-      --white-soft:  #CBD5E1;
-      --gray:        #64748B;
-      --border:      rgba(255,255,255,.07);
-      --shadow:      0 24px 64px rgba(0,0,0,.55);
-      --r:           14px;
-      --r-sm:        8px;
-      --transition:  .45s cubic-bezier(.25,.46,.45,.94);
+      --black:       #080808;
+      --black-mid:   #0E0E0E;
+      --black-card:  #141414;
+      --black-lift:  #1C1C1C;
+      --black-border:#2A2A2A;
+      --gold:        #C9A84C;
+      --gold-light:  #E8C97A;
+      --gold-dim:    #8A6F2E;
+      --gold-pale:   #F5EDD4;
+      --gold-glow:   rgba(201,168,76,.14);
+      --gold-glow2:  rgba(201,168,76,.07);
+      --white:       #F2EDE4;
+      --white-soft:  #B8AFA0;
+      --gray:        #5C5650;
+      --border:      rgba(201,168,76,.12);
+      --border-soft: rgba(255,255,255,.06);
+      --r:           12px;
+      --r-sm:        7px;
+      --ease:        cubic-bezier(.25,.46,.45,.94);
+      --shadow-gold: 0 0 60px rgba(201,168,76,.2);
     }
 
-    /* ── RESET ────────────────────────────────────────────────────── */
+    /* ─── RESET ──────────────────────────────────────────────────── */
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    html { scroll-behavior: smooth; font-size: 16px; }
+    html { scroll-behavior: smooth; }
     body {
-      background: var(--navy);
+      background: var(--black);
       color: var(--white);
-      font-family: 'Outfit', sans-serif;
+      font-family: 'Jost', sans-serif;
       font-weight: 400;
       line-height: 1.7;
       overflow-x: hidden;
-      cursor: none;
     }
-    img { display: block; max-width: 100%; }
-    a { color: inherit; text-decoration: none; }
-    button { cursor: none; }
+    img { display: block; width: 100%; object-fit: cover; }
+    a  { color: inherit; text-decoration: none; }
 
-    /* ── CUSTOM CURSOR ────────────────────────────────────────────── */
-    .cursor {
-      position: fixed; top: 0; left: 0; z-index: 9999;
-      pointer-events: none; mix-blend-mode: difference;
-    }
-    .cursor__dot {
-      width: 8px; height: 8px;
-      background: var(--green);
-      border-radius: 50%;
-      transform: translate(-50%,-50%);
-      transition: transform .1s;
-    }
-    .cursor__ring {
-      position: fixed; top: 0; left: 0;
-      width: 36px; height: 36px;
-      border: 1.5px solid var(--green);
-      border-radius: 50%;
-      transform: translate(-50%,-50%);
-      pointer-events: none; z-index: 9998;
-      transition: transform .18s, width .35s, height .35s, border-color .35s;
-    }
-    .cursor__ring.hovered {
-      width: 56px; height: 56px;
-      border-color: var(--gold);
-    }
+    /* ─── SCROLLBAR ──────────────────────────────────────────────── */
+    ::-webkit-scrollbar { width: 3px; }
+    ::-webkit-scrollbar-track { background: var(--black); }
+    ::-webkit-scrollbar-thumb { background: var(--gold-dim); border-radius: 2px; }
 
-    /* ── SCROLLBAR ────────────────────────────────────────────────── */
-    ::-webkit-scrollbar { width: 4px; }
-    ::-webkit-scrollbar-track { background: var(--navy); }
-    ::-webkit-scrollbar-thumb { background: var(--green-dim); border-radius: 2px; }
-
-    /* ── NOISE OVERLAY ────────────────────────────────────────────── */
-    body::before {
+    /* ─── GRAIN OVERLAY ──────────────────────────────────────────── */
+    body::after {
       content: '';
-      position: fixed; inset: 0; z-index: 0;
-      opacity: .028;
+      position: fixed; inset: 0; z-index: 9999;
       pointer-events: none;
-      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
-      background-size: 128px;
+      opacity: .03;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23g)'/%3E%3C/svg%3E");
+      background-size: 200px;
     }
 
-    /* ── NAV ──────────────────────────────────────────────────────── */
+    /* ─── NAV ────────────────────────────────────────────────────── */
     nav {
-      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      position: fixed; top: 0; left: 0; right: 0; z-index: 500;
       display: flex; align-items: center; justify-content: space-between;
-      padding: 1.4rem 4rem;
-      transition: background var(--transition), padding var(--transition), backdrop-filter var(--transition);
+      padding: 1.5rem 5vw;
+      transition: background .5s var(--ease), padding .4s var(--ease), border-bottom .4s;
     }
     nav.scrolled {
-      background: rgba(7,14,28,.88);
-      backdrop-filter: blur(18px);
-      padding: 1rem 4rem;
+      background: rgba(8,8,8,.92);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      padding: 1rem 5vw;
       border-bottom: 1px solid var(--border);
     }
     .nav__logo {
       font-family: 'Cormorant Garamond', serif;
-      font-size: 1.35rem;
-      font-weight: 600;
-      letter-spacing: .04em;
+      font-size: 1.4rem; font-weight: 600;
+      letter-spacing: .06em;
       color: var(--white);
+      z-index: 501;
     }
-    .nav__logo span { color: var(--green); }
+    .nav__logo span { color: var(--gold); }
     .nav__links {
-      display: flex; gap: 2.4rem; list-style: none;
-      font-size: .82rem; font-weight: 500; letter-spacing: .1em; text-transform: uppercase;
+      display: flex; gap: 2.5rem; list-style: none;
+      font-size: .75rem; font-weight: 600;
+      letter-spacing: .16em; text-transform: uppercase;
     }
     .nav__links a {
       color: var(--white-soft);
-      transition: color .25s;
       position: relative;
+      transition: color .25s;
     }
     .nav__links a::after {
-      content: ''; position: absolute; bottom: -3px; left: 0;
-      width: 0; height: 1px; background: var(--green);
-      transition: width .3s;
+      content: ''; position: absolute;
+      bottom: -4px; left: 0;
+      width: 0; height: 1px;
+      background: var(--gold);
+      transition: width .3s var(--ease);
     }
-    .nav__links a:hover { color: var(--white); }
+    .nav__links a:hover { color: var(--gold-light); }
     .nav__links a:hover::after { width: 100%; }
     .nav__cta {
-      padding: .55rem 1.5rem;
-      border: 1px solid var(--green);
+      font-size: .72rem; font-weight: 700;
+      letter-spacing: .14em; text-transform: uppercase;
+      padding: .6rem 1.6rem;
+      border: 1px solid var(--gold);
       border-radius: 50px;
-      color: var(--green);
-      font-size: .8rem; font-weight: 600; letter-spacing: .1em; text-transform: uppercase;
-      transition: background .3s, color .3s;
+      color: var(--gold);
+      transition: background .25s, color .25s;
     }
-    .nav__cta:hover { background: var(--green); color: var(--navy); }
-    .nav__burger { display: none; flex-direction: column; gap: 5px; cursor: none; }
-    .nav__burger span { display: block; width: 26px; height: 2px; background: var(--white); border-radius: 2px; transition: .3s; }
+    .nav__cta:hover { background: var(--gold); color: var(--black); }
 
-    /* ── HERO ─────────────────────────────────────────────────────── */
+    /* burger */
+    .nav__burger {
+      display: none;
+      flex-direction: column; gap: 5px;
+      background: none; border: none;
+      cursor: pointer; z-index: 501; padding: 4px;
+    }
+    .nav__burger span {
+      display: block; width: 24px; height: 2px;
+      background: var(--white); border-radius: 2px;
+      transition: .35s var(--ease);
+    }
+    .nav__burger.open span:nth-child(1) { transform: rotate(45deg) translate(5px,5px); }
+    .nav__burger.open span:nth-child(2) { opacity: 0; transform: scaleX(0); }
+    .nav__burger.open span:nth-child(3) { transform: rotate(-45deg) translate(5px,-5px); }
+
+    /* mobile drawer */
+    .mobile-nav {
+      display: none;
+      position: fixed; inset: 0; z-index: 498;
+      background: rgba(8,8,8,.97);
+      backdrop-filter: blur(24px);
+      flex-direction: column; align-items: center; justify-content: center;
+      gap: 2rem;
+    }
+    .mobile-nav.open { display: flex; }
+    .mobile-nav a {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 2.4rem; font-weight: 600;
+      color: var(--white); letter-spacing: .04em;
+      transition: color .2s;
+    }
+    .mobile-nav a:hover { color: var(--gold); }
+    .mobile-nav .nav__cta {
+      font-family: 'Jost', sans-serif;
+      font-size: .78rem; margin-top: 1rem;
+    }
+
+    /* ─── HERO ───────────────────────────────────────────────────── */
     #hero {
-      position: relative; min-height: 100vh;
-      display: flex; align-items: center;
+      position: relative;
+      height: 100vh; min-height: 680px;
+      display: flex; align-items: flex-end;
       overflow: hidden;
-      padding: 0 4rem;
     }
-    .hero__bg {
-      position: absolute; inset: 0; z-index: 0;
-      background: radial-gradient(ellipse 80% 70% at 60% 50%, rgba(37,99,235,.13) 0%, transparent 65%),
-                  radial-gradient(ellipse 60% 80% at 10% 80%, rgba(14,184,122,.1) 0%, transparent 60%),
-                  var(--navy);
+    .hero__img {
+      position: absolute; inset: 0;
     }
-    /* Animated orbs */
-    .orb {
-      position: absolute; border-radius: 50%;
-      filter: blur(80px); pointer-events: none;
+    .hero__img img {
+      height: 100%; object-position: center top;
+      filter: brightness(.55) contrast(1.08);
     }
-    .orb-1 {
-      width: 520px; height: 520px;
-      background: radial-gradient(circle, rgba(14,184,122,.22) 0%, transparent 70%);
-      top: -100px; right: 5%;
-      animation: float1 12s ease-in-out infinite;
+    .hero__overlay {
+      position: absolute; inset: 0;
+      background:
+        linear-gradient(to top, rgba(8,8,8,.98) 0%, rgba(8,8,8,.6) 40%, rgba(8,8,8,.1) 100%),
+        linear-gradient(to right, rgba(8,8,8,.5) 0%, transparent 60%);
     }
-    .orb-2 {
-      width: 380px; height: 380px;
-      background: radial-gradient(circle, rgba(37,99,235,.2) 0%, transparent 70%);
-      bottom: 5%; left: 10%;
-      animation: float2 15s ease-in-out infinite;
-    }
-    .orb-3 {
-      width: 260px; height: 260px;
-      background: radial-gradient(circle, rgba(201,149,74,.14) 0%, transparent 70%);
-      top: 30%; left: 40%;
-      animation: float3 18s ease-in-out infinite;
-    }
-    @keyframes float1 { 0%,100%{transform:translate(0,0) scale(1)} 50%{transform:translate(-40px,30px) scale(1.08)} }
-    @keyframes float2 { 0%,100%{transform:translate(0,0)} 50%{transform:translate(30px,-50px)} }
-    @keyframes float3 { 0%,100%{transform:translate(0,0) scale(1)} 33%{transform:translate(20px,20px) scale(1.1)} 66%{transform:translate(-20px,10px) scale(.95)} }
-
-    /* Grid lines */
-    .hero__grid {
-      position: absolute; inset: 0; z-index: 0;
-      background-image:
-        linear-gradient(rgba(255,255,255,.025) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(255,255,255,.025) 1px, transparent 1px);
-      background-size: 80px 80px;
-      mask-image: radial-gradient(ellipse 80% 80% at 50% 50%, black 30%, transparent 100%);
-    }
-
     .hero__content {
       position: relative; z-index: 2;
-      max-width: 860px;
+      padding: 0 5vw 6vh;
+      max-width: 820px;
     }
     .hero__eyebrow {
-      display: inline-flex; align-items: center; gap: .6rem;
-      font-size: .75rem; font-weight: 600; letter-spacing: .18em; text-transform: uppercase;
-      color: var(--green);
-      margin-bottom: 1.8rem;
-      opacity: 0; animation: fadeUp .8s .2s forwards;
+      display: inline-flex; align-items: center; gap: .7rem;
+      font-size: .7rem; font-weight: 700;
+      letter-spacing: .22em; text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 1.4rem;
+      opacity: 0; animation: fadeUp .8s .3s forwards;
     }
     .hero__eyebrow::before {
-      content: ''; display: block; width: 28px; height: 1px; background: var(--green);
+      content: ''; width: 30px; height: 1px; background: var(--gold);
     }
-    .hero__title {
+    h1.hero__title {
       font-family: 'Cormorant Garamond', serif;
-      font-size: clamp(3.2rem, 7vw, 6.4rem);
-      font-weight: 600;
-      line-height: 1.04;
+      font-size: clamp(3.4rem, 7.5vw, 7rem);
+      font-weight: 600; line-height: 1.0;
       letter-spacing: -.01em;
-      margin-bottom: 1.8rem;
-      opacity: 0; animation: fadeUp .9s .4s forwards;
+      margin-bottom: 1.6rem;
+      opacity: 0; animation: fadeUp .9s .5s forwards;
     }
-    .hero__title em { font-style: italic; color: var(--green); }
-    .hero__title .blue { color: var(--blue-light); }
-
+    h1.hero__title em { font-style: italic; color: var(--gold-light); }
     .hero__sub {
-      font-size: 1.15rem; font-weight: 300;
-      color: var(--white-soft);
-      max-width: 580px;
-      line-height: 1.8;
-      margin-bottom: 2.8rem;
-      opacity: 0; animation: fadeUp .9s .6s forwards;
+      font-size: clamp(.95rem, 1.5vw, 1.12rem);
+      font-weight: 300; color: var(--white-soft);
+      max-width: 520px; line-height: 1.85;
+      margin-bottom: 2.4rem;
+      opacity: 0; animation: fadeUp .9s .7s forwards;
     }
     .hero__actions {
-      display: flex; gap: 1.2rem; flex-wrap: wrap;
-      opacity: 0; animation: fadeUp .9s .8s forwards;
+      display: flex; flex-wrap: wrap; gap: 1rem;
+      opacity: 0; animation: fadeUp .9s .9s forwards;
     }
-    .btn-primary {
-      display: inline-flex; align-items: center; gap: .6rem;
+    .btn-gold {
+      display: inline-flex; align-items: center; gap: .55rem;
       padding: .85rem 2.2rem;
-      background: var(--green);
-      color: var(--navy);
-      font-weight: 700; font-size: .9rem; letter-spacing: .06em; text-transform: uppercase;
+      background: var(--gold);
+      color: var(--black);
+      font-family: 'Jost', sans-serif;
+      font-size: .8rem; font-weight: 700;
+      letter-spacing: .12em; text-transform: uppercase;
       border-radius: 50px;
+      border: none; cursor: pointer;
       transition: transform .25s, box-shadow .25s, background .25s;
-      box-shadow: 0 0 40px rgba(14,184,122,.3);
+      box-shadow: 0 0 40px rgba(201,168,76,.3);
     }
-    .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 0 60px rgba(14,184,122,.5); }
-    .btn-ghost {
-      display: inline-flex; align-items: center; gap: .6rem;
+    .btn-gold:hover { transform: translateY(-2px); box-shadow: 0 0 60px rgba(201,168,76,.5); background: var(--gold-light); }
+    .btn-outline {
+      display: inline-flex; align-items: center; gap: .55rem;
       padding: .85rem 2.2rem;
-      border: 1px solid var(--border);
+      background: transparent;
+      border: 1px solid rgba(255,255,255,.2);
       color: var(--white);
-      font-weight: 500; font-size: .9rem; letter-spacing: .04em;
-      border-radius: 50px;
+      font-size: .8rem; font-weight: 500; letter-spacing: .08em;
+      border-radius: 50px; cursor: pointer;
       transition: border-color .25s, background .25s;
     }
-    .btn-ghost:hover { border-color: rgba(255,255,255,.25); background: rgba(255,255,255,.04); }
+    .btn-outline:hover { border-color: var(--gold); background: rgba(201,168,76,.06); color: var(--gold-light); }
 
     .hero__scroll {
-      position: absolute; bottom: 2.5rem; left: 50%; transform: translateX(-50%);
+      position: absolute; bottom: 2rem; right: 5vw;
       display: flex; flex-direction: column; align-items: center; gap: .5rem;
-      font-size: .7rem; letter-spacing: .15em; text-transform: uppercase; color: var(--gray);
+      font-size: .65rem; letter-spacing: .18em; text-transform: uppercase; color: var(--gray);
       opacity: 0; animation: fadeIn 1s 1.4s forwards;
+      writing-mode: vertical-rl;
     }
     .hero__scroll-line {
-      width: 1px; height: 50px;
-      background: linear-gradient(to bottom, var(--green), transparent);
+      width: 1px; height: 48px;
+      background: linear-gradient(to bottom, var(--gold), transparent);
       animation: scrollPulse 2s ease-in-out infinite;
     }
-    @keyframes scrollPulse { 0%,100%{opacity:.4} 50%{opacity:1} }
+    @keyframes scrollPulse { 0%,100%{opacity:.3} 50%{opacity:1} }
 
-    /* ── SECTION SHARED ───────────────────────────────────────────── */
-    section { position: relative; z-index: 1; }
-    .section-wrap { max-width: 1200px; margin: 0 auto; padding: 7rem 4rem; }
-    .section-wrap.narrow { max-width: 860px; }
+    /* ─── SHARED SECTION ─────────────────────────────────────────── */
+    section { position: relative; }
+    .wrap { max-width: 1200px; margin: 0 auto; padding: 7rem 5vw; }
+    .wrap.tight { max-width: 900px; }
 
-    .label {
+    .section-label {
       display: inline-flex; align-items: center; gap: .6rem;
-      font-size: .72rem; font-weight: 600; letter-spacing: .2em; text-transform: uppercase;
-      color: var(--green); margin-bottom: 1.2rem;
+      font-size: .68rem; font-weight: 700; letter-spacing: .22em; text-transform: uppercase;
+      color: var(--gold); margin-bottom: 1rem;
     }
-    .label::before { content:''; display:block; width:22px; height:1px; background:var(--green); }
+    .section-label::before { content:''; width:20px; height:1px; background:var(--gold); }
 
-    .section-title {
+    h2.section-title {
       font-family: 'Cormorant Garamond', serif;
-      font-size: clamp(2.4rem, 4.5vw, 3.8rem);
+      font-size: clamp(2.2rem, 4vw, 3.6rem);
       font-weight: 600; line-height: 1.1;
-      margin-bottom: 1.4rem;
+      margin-bottom: 1.2rem;
     }
-    .section-title em { font-style: italic; color: var(--green); }
-    .section-title .blue { color: var(--blue-light); }
+    h2.section-title em { font-style: italic; color: var(--gold-light); }
 
     .section-lead {
-      font-size: 1.05rem; color: var(--white-soft);
-      line-height: 1.85; max-width: 640px;
+      font-size: 1rem; color: var(--white-soft);
+      line-height: 1.9; max-width: 600px;
     }
 
-    /* Reveal animations */
-    .reveal {
-      opacity: 0; transform: translateY(32px);
-      transition: opacity .75s ease, transform .75s ease;
-    }
-    .reveal.visible { opacity: 1; transform: translateY(0); }
-    .reveal-delay-1 { transition-delay: .1s; }
-    .reveal-delay-2 { transition-delay: .2s; }
-    .reveal-delay-3 { transition-delay: .3s; }
-    .reveal-delay-4 { transition-delay: .4s; }
-    .reveal-delay-5 { transition-delay: .5s; }
-
-    /* Divider */
     .divider {
       width: 100%; height: 1px;
       background: linear-gradient(90deg, transparent, var(--border), transparent);
     }
 
-    /* ── ABOUT ────────────────────────────────────────────────────── */
-    #about { background: var(--navy); }
+    /* reveal */
+    .reveal {
+      opacity: 0; transform: translateY(28px);
+      transition: opacity .7s var(--ease), transform .7s var(--ease);
+    }
+    .reveal.vis { opacity: 1; transform: translateY(0); }
+    .d1{transition-delay:.1s} .d2{transition-delay:.2s}
+    .d3{transition-delay:.3s} .d4{transition-delay:.4s}
+    .d5{transition-delay:.5s}
+
+    /* ─── ABOUT ──────────────────────────────────────────────────── */
+    #about { background: var(--black); }
     .about__grid {
-      display: grid; grid-template-columns: 1fr 1fr;
-      gap: 6rem; align-items: center;
+      display: grid; grid-template-columns: 5fr 7fr;
+      gap: 5rem; align-items: center;
     }
-    .about__visual {
+    .about__img-wrap {
       position: relative;
     }
-    .about__photo-frame {
-      position: relative;
+    .about__img {
       border-radius: var(--r);
       overflow: hidden;
       aspect-ratio: 3/4;
-      background: var(--navy-card);
       border: 1px solid var(--border);
     }
-    .about__photo-placeholder {
-      width: 100%; height: 100%;
-      display: flex; flex-direction: column;
-      align-items: center; justify-content: center;
-      gap: 1rem; color: var(--gray);
-      font-size: .85rem; letter-spacing: .05em;
-    }
-    .about__photo-placeholder svg { opacity: .4; }
-    .about__badge {
-      position: absolute; bottom: -1.5rem; right: -1.5rem;
-      background: var(--green);
-      color: var(--navy);
-      padding: 1.2rem 1.5rem;
-      border-radius: var(--r);
-      font-weight: 700; font-size: .85rem;
-      line-height: 1.3;
-      box-shadow: 0 12px 40px rgba(14,184,122,.35);
-    }
-    .about__badge span { display: block; font-size: 1.4rem; font-family: 'Cormorant Garamond', serif; }
-    .about__accent-line {
-      position: absolute; top: 2rem; left: -1.5rem;
-      width: 4px; height: 60%;
-      background: linear-gradient(to bottom, var(--green), var(--blue), transparent);
+    .about__img img { height: 100%; object-position: center top; }
+    .about__accent {
+      position: absolute; top: 1.5rem; left: -1.2rem;
+      width: 3px; height: 55%;
+      background: linear-gradient(to bottom, var(--gold), transparent);
       border-radius: 2px;
     }
+    .about__badge {
+      position: absolute; bottom: -1.2rem; right: -1.2rem;
+      background: var(--gold);
+      color: var(--black);
+      padding: 1rem 1.4rem;
+      border-radius: var(--r);
+      font-weight: 700; font-size: .78rem; line-height: 1.4;
+      box-shadow: 0 12px 40px rgba(201,168,76,.35);
+      text-align: center;
+    }
+    .about__badge strong { display: block; font-family:'Cormorant Garamond',serif; font-size:1.6rem; line-height:1; }
     .about__text p {
       color: var(--white-soft); line-height: 1.9;
-      margin-bottom: 1.2rem; font-size: 1rem;
+      margin-bottom: 1.1rem; font-size: .97rem;
     }
     .about__text p strong { color: var(--white); font-weight: 600; }
+    .about__text p em { color: var(--gold-light); font-style: italic; }
     .about__stats {
-      display: grid; grid-template-columns: repeat(3, 1fr);
-      gap: 1rem; margin-top: 2.4rem;
+      display: grid; grid-template-columns: repeat(3,1fr);
+      gap: .8rem; margin-top: 2.2rem;
     }
-    .stat-card {
-      padding: 1.2rem;
-      background: var(--navy-card);
+    .stat {
+      padding: 1.1rem;
+      background: var(--black-card);
       border: 1px solid var(--border);
       border-radius: var(--r-sm);
       transition: border-color .3s, transform .3s;
-    }
-    .stat-card:hover { border-color: var(--green); transform: translateY(-3px); }
-    .stat-card__num {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 2rem; font-weight: 700;
-      color: var(--green); line-height: 1;
-      margin-bottom: .3rem;
-    }
-    .stat-card__label { font-size: .75rem; color: var(--gray); letter-spacing: .06em; text-transform: uppercase; }
-
-    /* ── MINISTRY ─────────────────────────────────────────────────── */
-    #ministry {
-      background: var(--navy-mid);
-    }
-    .ministry__inner {
-      display: grid; grid-template-columns: 1fr 1.2fr;
-      gap: 5rem; align-items: start;
-    }
-    .ministry__quote-block {
-      position: relative; padding: 3rem;
-      background: var(--navy-card);
-      border: 1px solid var(--border);
-      border-left: 3px solid var(--gold);
-      border-radius: var(--r);
-    }
-    .ministry__quote-mark {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 6rem; line-height: .7;
-      color: var(--gold); opacity: .25;
-      position: absolute; top: 1rem; left: 1.5rem;
-    }
-    .ministry__quote {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 1.6rem; line-height: 1.5;
-      font-style: italic; color: var(--white);
-      position: relative; z-index: 1;
-      margin-bottom: 1.2rem;
-    }
-    .ministry__quote-attr {
-      font-size: .8rem; letter-spacing: .1em; text-transform: uppercase;
-      color: var(--gold);
-    }
-    .ministry__pillars { display: flex; flex-direction: column; gap: 1rem; }
-    .pillar {
-      display: flex; gap: 1.2rem; align-items: flex-start;
-      padding: 1.2rem 1.4rem;
-      background: var(--navy-card);
-      border: 1px solid var(--border);
-      border-radius: var(--r-sm);
-      transition: border-color .3s, background .3s;
-    }
-    .pillar:hover { border-color: rgba(14,184,122,.35); background: var(--navy-lift); }
-    .pillar__icon {
-      width: 38px; height: 38px; flex-shrink: 0;
-      border-radius: 50%;
-      background: var(--green-glow);
-      border: 1px solid rgba(14,184,122,.3);
-      display: flex; align-items: center; justify-content: center;
-      color: var(--green); font-size: 1rem;
-    }
-    .pillar__text h4 {
-      font-size: .95rem; font-weight: 600;
-      color: var(--white); margin-bottom: .2rem;
-    }
-    .pillar__text p { font-size: .85rem; color: var(--gray); line-height: 1.6; }
-
-    /* ── VENTURES ─────────────────────────────────────────────────── */
-    #ventures { background: var(--navy); }
-    .ventures__grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 1.5rem;
-      margin-top: 3.5rem;
-    }
-    .venture-card {
-      padding: 2rem;
-      background: var(--navy-card);
-      border: 1px solid var(--border);
-      border-radius: var(--r);
-      transition: border-color .35s, transform .35s, box-shadow .35s;
-      position: relative; overflow: hidden;
-    }
-    .venture-card::before {
-      content: ''; position: absolute;
-      inset: 0; opacity: 0;
-      background: radial-gradient(ellipse 80% 60% at 50% -10%, rgba(14,184,122,.09), transparent);
-      transition: opacity .4s;
-    }
-    .venture-card:hover { border-color: rgba(14,184,122,.35); transform: translateY(-5px); box-shadow: 0 20px 50px rgba(0,0,0,.4); }
-    .venture-card:hover::before { opacity: 1; }
-    .venture-card.featured {
-      grid-column: span 2;
-      border-color: rgba(14,184,122,.2);
-      background: linear-gradient(135deg, var(--navy-card), var(--navy-lift));
-    }
-    .venture-card.blue-accent::before {
-      background: radial-gradient(ellipse 80% 60% at 50% -10%, rgba(37,99,235,.1), transparent);
-    }
-    .venture-card.blue-accent:hover { border-color: rgba(91,141,239,.35); }
-    .venture__tag {
-      display: inline-block;
-      font-size: .68rem; font-weight: 600; letter-spacing: .14em; text-transform: uppercase;
-      padding: .25rem .75rem;
-      border-radius: 50px;
-      margin-bottom: 1.2rem;
-    }
-    .tag-sold { background: rgba(14,184,122,.15); color: var(--green); }
-    .tag-active { background: rgba(37,99,235,.15); color: var(--blue-light); }
-    .tag-forming { background: rgba(201,149,74,.15); color: var(--gold); }
-    .tag-intl { background: rgba(91,141,239,.15); color: #93C5FD; }
-
-    .venture__icon {
-      font-size: 2rem; margin-bottom: 1rem;
-    }
-    .venture__title {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 1.5rem; font-weight: 600;
-      color: var(--white); margin-bottom: .6rem; line-height: 1.2;
-    }
-    .venture__desc {
-      font-size: .88rem; color: var(--gray); line-height: 1.75;
-    }
-    .venture__desc strong { color: var(--white-soft); }
-    .venture__bullet-list {
-      margin-top: 1rem;
-      display: flex; flex-direction: column; gap: .4rem;
-    }
-    .venture__bullet {
-      display: flex; align-items: flex-start; gap: .5rem;
-      font-size: .82rem; color: var(--gray);
-    }
-    .venture__bullet::before {
-      content: '—'; color: var(--green); flex-shrink: 0; margin-top: .05rem;
-    }
-
-    /* ── INVESTING ────────────────────────────────────────────────── */
-    #investing { background: var(--navy-mid); }
-    .investing__grid {
-      display: grid; grid-template-columns: 1fr 1fr;
-      gap: 3rem; margin-top: 3.5rem; align-items: start;
-    }
-    .invest-category {
-      padding: 2.2rem;
-      background: var(--navy-card);
-      border: 1px solid var(--border);
-      border-radius: var(--r);
-    }
-    .invest-category__header {
-      display: flex; align-items: center; gap: 1rem;
-      margin-bottom: 1.5rem;
-      padding-bottom: 1.2rem;
-      border-bottom: 1px solid var(--border);
-    }
-    .invest-category__icon {
-      width: 44px; height: 44px;
-      border-radius: var(--r-sm);
-      display: flex; align-items: center; justify-content: center;
-      font-size: 1.3rem;
-    }
-    .icon-green { background: var(--green-glow); border: 1px solid rgba(14,184,122,.2); }
-    .icon-blue  { background: var(--blue-glow);  border: 1px solid rgba(37,99,235,.2); }
-    .icon-gold  { background: rgba(201,149,74,.12); border: 1px solid rgba(201,149,74,.2); }
-    .invest-category__title { font-size: 1rem; font-weight: 600; color: var(--white); }
-    .invest-category__sub   { font-size: .78rem; color: var(--gray); }
-    .invest-item {
-      display: flex; align-items: flex-start; gap: .8rem;
-      padding: .65rem 0;
-      border-bottom: 1px solid rgba(255,255,255,.04);
-    }
-    .invest-item:last-child { border-bottom: none; }
-    .invest-item__dot {
-      width: 7px; height: 7px; border-radius: 50%;
-      background: var(--green); margin-top: .55rem; flex-shrink: 0;
-    }
-    .invest-item__dot.blue { background: var(--blue-light); }
-    .invest-item__dot.gold { background: var(--gold); }
-    .invest-item__name { font-size: .9rem; font-weight: 500; color: var(--white-soft); }
-    .invest-item__note { font-size: .78rem; color: var(--gray); line-height: 1.5; }
-
-    .invest-philosophy {
-      margin-top: 3rem; padding: 2.2rem;
-      background: linear-gradient(135deg, rgba(14,184,122,.07), rgba(37,99,235,.07));
-      border: 1px solid rgba(14,184,122,.18);
-      border-radius: var(--r);
-    }
-    .invest-philosophy p {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 1.35rem; font-style: italic;
-      color: var(--white); line-height: 1.65;
-    }
-    .invest-philosophy span { color: var(--green); }
-
-    /* ── PAM'S LEGACY ─────────────────────────────────────────────── */
-    #pam {
-      background: var(--navy);
-      position: relative; overflow: hidden;
-    }
-    #pam::before {
-      content: ''; position: absolute; inset: 0;
-      background: radial-gradient(ellipse 70% 80% at 30% 50%, rgba(201,149,74,.06), transparent);
-      pointer-events: none;
-    }
-    .pam__inner {
-      display: grid; grid-template-columns: 1fr 1.4fr;
-      gap: 5rem; align-items: center;
-    }
-    .pam__portrait {
-      aspect-ratio: 3/4;
-      border-radius: var(--r);
-      background: var(--navy-card);
-      border: 1px solid var(--border);
-      display: flex; flex-direction: column;
-      align-items: center; justify-content: center;
-      gap: 1rem; color: var(--gray);
-      font-size: .85rem;
-      position: relative; overflow: hidden;
-    }
-    .pam__portrait::after {
-      content: '';
-      position: absolute; bottom: 0; left: 0; right: 0;
-      height: 40%;
-      background: linear-gradient(to top, rgba(201,149,74,.08), transparent);
-    }
-    .pam__glow {
-      position: absolute; bottom: -60px; left: 50%;
-      transform: translateX(-50%);
-      width: 280px; height: 280px;
-      background: radial-gradient(circle, rgba(201,149,74,.25), transparent 70%);
-      filter: blur(40px);
-    }
-    .pam__content .label { color: var(--gold); }
-    .pam__content .label::before { background: var(--gold); }
-    .pam__name {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 3.2rem; font-weight: 300;
-      font-style: italic;
-      color: var(--gold-light);
-      margin-bottom: 1rem; line-height: 1;
-    }
-    .pam__content p {
-      color: var(--white-soft); line-height: 1.95;
-      margin-bottom: 1.2rem; font-size: 1rem;
-    }
-    .pam__nonprofit-banner {
-      margin-top: 2rem; padding: 1.4rem 1.8rem;
-      background: rgba(201,149,74,.08);
-      border: 1px solid rgba(201,149,74,.2);
-      border-radius: var(--r-sm);
-    }
-    .pam__nonprofit-banner h4 {
-      color: var(--gold); font-size: .95rem; font-weight: 600;
-      margin-bottom: .4rem;
-    }
-    .pam__nonprofit-banner p { font-size: .88rem; color: var(--gray); margin: 0; line-height: 1.65; }
-
-    /* ── HEALING ──────────────────────────────────────────────────── */
-    #healing { background: var(--navy-mid); }
-    .healing__grid {
-      display: grid; grid-template-columns: 1.4fr 1fr;
-      gap: 5rem; align-items: start;
-    }
-    .healing__text p {
-      color: var(--white-soft); line-height: 1.9;
-      margin-bottom: 1.2rem; font-size: 1rem;
-    }
-    .healing__text p strong { color: var(--white); }
-    .healing__amen {
-      margin-top: 1.8rem; padding: 1.5rem 1.8rem;
-      background: var(--navy-card);
-      border-left: 3px solid var(--blue-light);
-      border-radius: var(--r-sm);
-      font-size: .9rem; color: var(--white-soft); line-height: 1.75;
-    }
-    .healing__amen strong { color: var(--blue-light); display: block; margin-bottom: .3rem; }
-    .healing__conditions {
-      display: flex; flex-direction: column; gap: .7rem;
-    }
-    .condition-item {
-      display: flex; align-items: center; gap: .8rem;
-      padding: .75rem 1.1rem;
-      background: var(--navy-card);
-      border: 1px solid var(--border);
-      border-radius: var(--r-sm);
-      font-size: .88rem; color: var(--white-soft);
-      transition: border-color .25s;
-    }
-    .condition-item:hover { border-color: rgba(91,141,239,.3); }
-    .condition-icon { font-size: 1rem; }
-    .healing__cta {
-      margin-top: 1.5rem; padding: 1.4rem 1.8rem;
-      background: linear-gradient(135deg, rgba(14,184,122,.07), rgba(37,99,235,.07));
-      border: 1px solid rgba(14,184,122,.2);
-      border-radius: var(--r-sm);
-    }
-    .healing__cta p { font-size: .9rem; color: var(--white-soft); line-height: 1.75; }
-    .healing__cta strong { color: var(--green); }
-
-    /* ── NUMBERS / PROOF ──────────────────────────────────────────── */
-    #proof { background: var(--navy); }
-    .proof__grid {
-      display: grid; grid-template-columns: repeat(4, 1fr);
-      gap: 1px; background: var(--border);
-      border: 1px solid var(--border); border-radius: var(--r);
-      overflow: hidden; margin-top: 3.5rem;
-    }
-    .proof__item {
-      padding: 2.5rem 2rem;
-      background: var(--navy-card);
       text-align: center;
-      transition: background .3s;
     }
-    .proof__item:hover { background: var(--navy-lift); }
-    .proof__num {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 3.2rem; font-weight: 700;
-      color: var(--green); line-height: 1;
-      margin-bottom: .5rem;
+    .stat:hover { border-color: var(--gold); transform: translateY(-3px); }
+    .stat__n {
+      font-family:'Cormorant Garamond',serif;
+      font-size: 2rem; font-weight:700;
+      color: var(--gold); line-height:1; margin-bottom:.2rem;
     }
-    .proof__num.blue { color: var(--blue-light); }
-    .proof__num.gold { color: var(--gold); }
-    .proof__label {
-      font-size: .78rem; color: var(--gray);
-      letter-spacing: .08em; text-transform: uppercase; line-height: 1.5;
-    }
-    .proof__context {
-      font-size: .75rem; color: var(--green);
-      margin-top: .3rem;
-    }
+    .stat__l { font-size:.7rem; color:var(--gray); letter-spacing:.08em; text-transform:uppercase; }
 
-    /* ── CONNECT (CTA) ────────────────────────────────────────────── */
-    #connect {
-      background: var(--navy-mid);
-      position: relative; overflow: hidden;
-    }
-    #connect::before {
-      content: '';
-      position: absolute; inset: 0;
-      background:
-        radial-gradient(ellipse 60% 70% at 20% 50%, rgba(14,184,122,.07), transparent),
-        radial-gradient(ellipse 60% 70% at 80% 50%, rgba(37,99,235,.07), transparent);
-    }
-    .connect__inner {
-      text-align: center; position: relative; z-index: 1;
-      max-width: 760px; margin: 0 auto;
-    }
-    .connect__title {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: clamp(2.8rem, 5vw, 4.5rem);
-      font-weight: 600; line-height: 1.08;
-      margin-bottom: 1.4rem;
-    }
-    .connect__title em { color: var(--green); font-style: italic; }
-    .connect__sub {
-      font-size: 1.05rem; color: var(--white-soft);
-      line-height: 1.8; margin-bottom: 2.8rem;
-    }
-    .connect__options {
-      display: flex; justify-content: center;
-      gap: 1rem; flex-wrap: wrap;
-      margin-bottom: 3rem;
-    }
-    .connect__pill {
-      padding: .5rem 1.3rem;
-      border: 1px solid var(--border);
-      border-radius: 50px;
-      font-size: .8rem; color: var(--gray);
-      transition: border-color .25s, color .25s;
-    }
-    .connect__pill:hover { border-color: var(--green); color: var(--white); }
-
-    /* ── CONTACT FORM ─────────────────────────────────────────────── */
-    #contact { background: var(--navy); }
-    .contact__grid {
-      display: grid; grid-template-columns: 1fr 1.4fr;
+    /* ─── MINISTRY ───────────────────────────────────────────────── */
+    #ministry { background: var(--black-mid); }
+    .ministry__grid {
+      display: grid; grid-template-columns: 1fr 1fr;
       gap: 5rem; align-items: start;
     }
-    .contact__info h3 {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 2rem; font-weight: 600;
-      margin-bottom: 1rem;
+    .ministry__img {
+      border-radius: var(--r); overflow: hidden;
+      aspect-ratio: 4/5; border: 1px solid var(--border);
+      position: relative;
     }
-    .contact__info p {
-      color: var(--white-soft); font-size: .95rem; line-height: 1.85;
+    .ministry__img img { height:100%; object-position: center; }
+    .ministry__img::after {
+      content:''; position:absolute; inset:0;
+      background: linear-gradient(to top, rgba(8,8,8,.7) 0%, transparent 50%);
+    }
+    .ministry__img-caption {
+      position:absolute; bottom:1.5rem; left:1.5rem; z-index:2;
+      font-family:'Cormorant Garamond',serif;
+      font-size:1.1rem; font-style:italic; color:var(--gold-light);
+    }
+    .ministry__content { padding-top: 1rem; }
+    .ministry__quote {
+      padding: 2rem 2rem 2rem 1.8rem;
+      border-left: 2px solid var(--gold);
+      background: var(--black-card);
+      border-radius: 0 var(--r) var(--r) 0;
       margin-bottom: 2rem;
     }
-    .contact__detail {
-      display: flex; align-items: center; gap: .8rem;
-      font-size: .9rem; color: var(--white-soft);
-      margin-bottom: .8rem;
+    .ministry__quote p {
+      font-family:'Cormorant Garamond',serif;
+      font-size: 1.45rem; font-style:italic;
+      color:var(--white); line-height:1.55;
+      margin-bottom: .7rem;
     }
-    .contact__detail-icon {
-      width: 36px; height: 36px;
-      background: var(--green-glow);
-      border: 1px solid rgba(14,184,122,.2);
-      border-radius: 50%; display: flex;
-      align-items: center; justify-content: center;
-      font-size: .9rem; flex-shrink: 0;
+    .ministry__quote cite { font-size:.72rem; letter-spacing:.12em; text-transform:uppercase; color:var(--gold); }
+    .pillar {
+      display:flex; gap:1.1rem; align-items:flex-start;
+      padding:.9rem 1rem;
+      background:var(--black-card);
+      border:1px solid var(--border-soft);
+      border-radius:var(--r-sm);
+      margin-bottom:.7rem;
+      transition:border-color .3s, background .3s;
     }
-    .contact__social {
-      display: flex; gap: .8rem; margin-top: 2rem;
+    .pillar:hover { border-color:var(--border); background:var(--black-lift); }
+    .pillar__ico {
+      width:34px; height:34px; flex-shrink:0;
+      border-radius:50%;
+      background:var(--gold-glow);
+      border:1px solid rgba(201,168,76,.2);
+      display:flex; align-items:center; justify-content:center;
+      font-size:.95rem;
     }
-    .social-btn {
-      width: 42px; height: 42px;
-      border: 1px solid var(--border);
-      border-radius: 50%; display: flex;
-      align-items: center; justify-content: center;
-      color: var(--gray); font-size: .9rem;
-      transition: border-color .25s, color .25s, background .25s;
-    }
-    .social-btn:hover { border-color: var(--green); color: var(--green); background: var(--green-glow); }
+    .pillar h4 { font-size:.9rem; font-weight:600; color:var(--white); margin-bottom:.15rem; }
+    .pillar p  { font-size:.8rem; color:var(--gray); line-height:1.6; }
 
-    .form-card {
+    /* ─── VENTURES ───────────────────────────────────────────────── */
+    #ventures { background: var(--black); }
+    .ventures__featured {
+      display: grid; grid-template-columns: 5fr 7fr;
+      gap: 3rem; align-items: center;
+      margin-bottom: 2rem;
       padding: 2.5rem;
-      background: var(--navy-card);
+      background: var(--black-card);
       border: 1px solid var(--border);
       border-radius: var(--r);
     }
-    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
-    .form-group { margin-bottom: 1.2rem; }
-    .form-group label {
-      display: block; font-size: .78rem;
-      font-weight: 600; letter-spacing: .08em; text-transform: uppercase;
-      color: var(--gray); margin-bottom: .5rem;
+    .ventures__featured-img {
+      border-radius: var(--r-sm); overflow:hidden;
+      aspect-ratio: 4/3;
     }
-    .form-group input,
-    .form-group textarea,
-    .form-group select {
-      width: 100%;
-      padding: .85rem 1.1rem;
-      background: var(--navy-lift);
-      border: 1px solid var(--border);
-      border-radius: var(--r-sm);
-      color: var(--white);
-      font-family: 'Outfit', sans-serif;
-      font-size: .95rem;
-      outline: none;
-      transition: border-color .25s, box-shadow .25s;
-      -webkit-appearance: none;
+    .ventures__featured-img img { height:100%; }
+    .ventures__tag {
+      display:inline-block;
+      font-size:.65rem; font-weight:700; letter-spacing:.14em; text-transform:uppercase;
+      padding:.22rem .8rem; border-radius:50px;
+      margin-bottom:1rem;
     }
-    .form-group input::placeholder,
-    .form-group textarea::placeholder { color: var(--gray); }
-    .form-group input:focus,
-    .form-group textarea:focus,
-    .form-group select:focus {
-      border-color: var(--green);
-      box-shadow: 0 0 0 3px rgba(14,184,122,.12);
-    }
-    .form-group textarea { height: 130px; resize: vertical; }
-    .form-group select option { background: var(--navy-card); }
-    .form-submit {
-      width: 100%;
-      padding: 1rem;
-      background: var(--green);
-      color: var(--navy);
-      font-family: 'Outfit', sans-serif;
-      font-size: .92rem; font-weight: 700;
-      letter-spacing: .08em; text-transform: uppercase;
-      border: none; border-radius: 50px;
-      cursor: none;
-      transition: transform .25s, box-shadow .25s;
-      box-shadow: 0 0 30px rgba(14,184,122,.25);
-    }
-    .form-submit:hover { transform: translateY(-2px); box-shadow: 0 0 50px rgba(14,184,122,.45); }
+    .tag-exit    { background:rgba(201,168,76,.15); color:var(--gold); border:1px solid rgba(201,168,76,.2); }
+    .tag-active  { background:rgba(255,255,255,.06); color:var(--white-soft); border:1px solid rgba(255,255,255,.08); }
+    .tag-intl    { background:rgba(201,168,76,.08); color:var(--gold-light); border:1px solid rgba(201,168,76,.15); }
+    .tag-forming { background:rgba(255,255,255,.04); color:var(--gray); border:1px solid rgba(255,255,255,.06); }
 
-    /* ── FOOTER ───────────────────────────────────────────────────── */
+    .venture__title {
+      font-family:'Cormorant Garamond',serif;
+      font-size:1.7rem; font-weight:600;
+      color:var(--white); margin-bottom:.6rem;
+    }
+    .venture__desc { font-size:.88rem; color:var(--white-soft); line-height:1.8; }
+    .venture__desc strong { color:var(--white); }
+    .venture__bullets { margin-top:1rem; display:flex; flex-direction:column; gap:.3rem; }
+    .venture__bullet {
+      font-size:.8rem; color:var(--gray);
+      display:flex; gap:.5rem; align-items:flex-start;
+    }
+    .venture__bullet::before { content:'—'; color:var(--gold); flex-shrink:0; }
+
+    .ventures__grid {
+      display:grid; grid-template-columns:repeat(3,1fr);
+      gap:1.2rem;
+    }
+    .vcard {
+      padding:1.8rem;
+      background:var(--black-card);
+      border:1px solid var(--border-soft);
+      border-radius:var(--r);
+      transition:border-color .35s, transform .35s;
+      position:relative; overflow:hidden;
+    }
+    .vcard::before {
+      content:''; position:absolute;
+      top:0; left:0; right:0; height:2px;
+      background: var(--gold);
+      transform:scaleX(0); transform-origin:left;
+      transition:transform .4s var(--ease);
+    }
+    .vcard:hover { border-color:var(--border); transform:translateY(-4px); }
+    .vcard:hover::before { transform:scaleX(1); }
+    .vcard__ico { font-size:1.6rem; margin-bottom:.9rem; }
+    .vcard__title { font-family:'Cormorant Garamond',serif; font-size:1.3rem; font-weight:600; color:var(--white); margin-bottom:.5rem; }
+    .vcard__desc  { font-size:.82rem; color:var(--gray); line-height:1.75; }
+    .vcard__desc strong { color:var(--white-soft); }
+
+    /* ─── INVESTING ──────────────────────────────────────────────── */
+    #investing { background:var(--black-mid); }
+    .investing__layout {
+      display:grid; grid-template-columns:5fr 7fr;
+      gap:5rem; align-items:start;
+    }
+    .investing__img {
+      border-radius:var(--r); overflow:hidden;
+      aspect-ratio:3/4; border:1px solid var(--border);
+      position:sticky; top:120px;
+    }
+    .investing__img img { height:100%; object-position:center top; }
+    .invest-block {
+      padding:1.8rem;
+      background:var(--black-card);
+      border:1px solid var(--border-soft);
+      border-radius:var(--r);
+      margin-bottom:1.2rem;
+    }
+    .invest-block__head {
+      display:flex; align-items:center; gap:.9rem;
+      margin-bottom:1.2rem;
+      padding-bottom:1rem;
+      border-bottom:1px solid var(--border-soft);
+    }
+    .invest-block__ico {
+      width:40px; height:40px;
+      border-radius:var(--r-sm);
+      background:var(--gold-glow);
+      border:1px solid rgba(201,168,76,.18);
+      display:flex; align-items:center; justify-content:center;
+      font-size:1.1rem;
+    }
+    .invest-block__title { font-size:.95rem; font-weight:600; color:var(--white); }
+    .invest-block__sub   { font-size:.75rem; color:var(--gray); }
+    .invest-row {
+      display:flex; gap:.8rem; align-items:flex-start;
+      padding:.55rem 0;
+      border-bottom:1px solid rgba(255,255,255,.04);
+    }
+    .invest-row:last-child { border:none; }
+    .invest-dot {
+      width:6px; height:6px; border-radius:50%;
+      background:var(--gold); margin-top:.6rem; flex-shrink:0;
+    }
+    .invest-row__name { font-size:.87rem; font-weight:500; color:var(--white-soft); }
+    .invest-row__note { font-size:.75rem; color:var(--gray); line-height:1.5; }
+    .invest-quote {
+      padding:2rem;
+      background:linear-gradient(135deg, rgba(201,168,76,.06), rgba(201,168,76,.02));
+      border:1px solid var(--border);
+      border-radius:var(--r);
+      margin-top:1.5rem;
+    }
+    .invest-quote p {
+      font-family:'Cormorant Garamond',serif;
+      font-size:1.25rem; font-style:italic;
+      color:var(--white); line-height:1.65;
+    }
+    .invest-quote span { color:var(--gold); }
+
+    /* ─── PROOF ──────────────────────────────────────────────────── */
+    #proof { background:var(--black); }
+    .proof__img-row {
+      display:grid; grid-template-columns:repeat(3,1fr);
+      gap:1.2rem; margin-bottom:3rem;
+    }
+    .proof__img-item {
+      border-radius:var(--r); overflow:hidden;
+      aspect-ratio:4/3; border:1px solid var(--border);
+    }
+    .proof__img-item img { height:100%; transition:transform .6s var(--ease); }
+    .proof__img-item:hover img { transform:scale(1.04); }
+    .proof__nums {
+      display:grid; grid-template-columns:repeat(4,1fr);
+      gap:1px; background:var(--border-soft);
+      border:1px solid var(--border-soft);
+      border-radius:var(--r); overflow:hidden;
+    }
+    .proof__item {
+      padding:2.5rem 1.5rem;
+      background:var(--black-card);
+      text-align:center;
+      transition:background .3s;
+    }
+    .proof__item:hover { background:var(--black-lift); }
+    .proof__n {
+      font-family:'Cormorant Garamond',serif;
+      font-size:3rem; font-weight:700;
+      color:var(--gold); line-height:1;
+      margin-bottom:.4rem;
+    }
+    .proof__l { font-size:.72rem; color:var(--gray); letter-spacing:.08em; text-transform:uppercase; line-height:1.5; }
+    .proof__c { font-size:.7rem; color:var(--gold-dim); margin-top:.2rem; }
+
+    /* ─── PAM ────────────────────────────────────────────────────── */
+    #pam {
+      background:var(--black);
+      position:relative; overflow:hidden;
+    }
+    #pam::before {
+      content:''; position:absolute; inset:0;
+      background:radial-gradient(ellipse 60% 70% at 25% 50%, rgba(201,168,76,.05), transparent);
+      pointer-events:none;
+    }
+    .pam__grid {
+      display:grid; grid-template-columns:1fr 1.4fr;
+      gap:5rem; align-items:center;
+    }
+    .pam__img {
+      border-radius:var(--r); overflow:hidden;
+      aspect-ratio:3/4; border:1px solid var(--border);
+      position:relative;
+    }
+    .pam__img img { height:100%; filter:sepia(.15) brightness(.9); }
+    .pam__img::after {
+      content:''; position:absolute; inset:0;
+      background:linear-gradient(to top, rgba(8,8,8,.5) 0%, transparent 60%);
+    }
+    .pam__label { color:var(--gold-dim); }
+    .pam__label::before { background:var(--gold-dim); }
+    .pam__name {
+      font-family:'Cormorant Garamond',serif;
+      font-size:clamp(2rem,3.5vw,3rem); font-weight:300;
+      font-style:italic; color:var(--gold-light);
+      line-height:1; margin-bottom:1.2rem;
+    }
+    .pam__text p {
+      color:var(--white-soft); line-height:1.9;
+      margin-bottom:1.1rem; font-size:.97rem;
+    }
+    .pam__text em { color:var(--gold-pale); font-style:italic; }
+    .pam__npo {
+      margin-top:1.8rem; padding:1.4rem 1.6rem;
+      background:var(--black-card);
+      border:1px solid var(--border);
+      border-radius:var(--r-sm);
+    }
+    .pam__npo h4 { color:var(--gold); font-size:.92rem; font-weight:600; margin-bottom:.3rem; }
+    .pam__npo p  { font-size:.84rem; color:var(--gray); line-height:1.65; }
+
+    /* ─── HEALING ────────────────────────────────────────────────── */
+    #healing { background:var(--black-mid); }
+    .healing__grid {
+      display:grid; grid-template-columns:1.3fr 1fr;
+      gap:5rem; align-items:start;
+    }
+    .healing__text p {
+      color:var(--white-soft); line-height:1.9;
+      margin-bottom:1.1rem; font-size:.97rem;
+    }
+    .healing__text strong { color:var(--white); }
+    .healing__amen {
+      padding:1.4rem 1.6rem;
+      border-left:2px solid var(--gold);
+      background:var(--black-card);
+      border-radius:0 var(--r-sm) var(--r-sm) 0;
+      font-size:.88rem; color:var(--white-soft); line-height:1.75;
+      margin-top:1.8rem;
+    }
+    .healing__amen strong { color:var(--gold-light); display:block; margin-bottom:.3rem; font-size:.78rem; text-transform:uppercase; letter-spacing:.08em; }
+    .conditions { display:flex; flex-direction:column; gap:.6rem; }
+    .cond {
+      display:flex; align-items:center; gap:.8rem;
+      padding:.7rem 1rem;
+      background:var(--black-card);
+      border:1px solid var(--border-soft);
+      border-radius:var(--r-sm);
+      font-size:.85rem; color:var(--white-soft);
+      transition:border-color .25s;
+    }
+    .cond:hover { border-color:var(--border); }
+    .cond__ico { font-size:.95rem; }
+    .healing__cta {
+      margin-top:1.5rem; padding:1.4rem 1.6rem;
+      background:var(--gold-glow2);
+      border:1px solid var(--border);
+      border-radius:var(--r-sm);
+    }
+    .healing__cta p { font-size:.87rem; color:var(--white-soft); line-height:1.75; }
+    .healing__cta strong { color:var(--gold); }
+
+    /* ─── CONNECT CTA ────────────────────────────────────────────── */
+    #connect {
+      background:var(--black);
+      position:relative; overflow:hidden;
+    }
+    .connect__bg-img {
+      position:absolute; inset:0;
+    }
+    .connect__bg-img img {
+      height:100%;
+      object-position:center 30%;
+      filter:brightness(.18) contrast(1.1);
+    }
+    .connect__overlay {
+      position:absolute; inset:0;
+      background:linear-gradient(to right, rgba(8,8,8,.96) 50%, rgba(8,8,8,.7));
+    }
+    .connect__inner {
+      position:relative; z-index:2;
+      max-width:680px;
+    }
+    .connect__title {
+      font-family:'Cormorant Garamond',serif;
+      font-size:clamp(2.6rem,5vw,4.2rem);
+      font-weight:600; line-height:1.1;
+      margin-bottom:1.2rem;
+    }
+    .connect__title em { color:var(--gold); font-style:italic; }
+    .connect__sub {
+      font-size:1rem; color:var(--white-soft);
+      line-height:1.85; max-width:520px;
+      margin-bottom:2.4rem;
+    }
+    .connect__tags {
+      display:flex; flex-wrap:wrap; gap:.7rem;
+      margin-bottom:2.4rem;
+    }
+    .ctag {
+      padding:.35rem 1rem;
+      border:1px solid var(--border);
+      border-radius:50px;
+      font-size:.72rem; color:var(--gray);
+      transition:border-color .25s, color .25s;
+    }
+    .ctag:hover { border-color:var(--gold); color:var(--gold-light); }
+
+    /* ─── CONTACT ────────────────────────────────────────────────── */
+    #contact { background:var(--black-mid); }
+    .contact__grid {
+      display:grid; grid-template-columns:1fr 1.4fr;
+      gap:5rem; align-items:start;
+    }
+    .contact__left h3 {
+      font-family:'Cormorant Garamond',serif;
+      font-size:2.2rem; font-weight:600;
+      line-height:1.15; margin-bottom:1rem;
+    }
+    .contact__left h3 em { color:var(--gold); font-style:italic; }
+    .contact__left p {
+      color:var(--white-soft); font-size:.93rem;
+      line-height:1.85; margin-bottom:1.8rem;
+    }
+    .contact__detail {
+      display:flex; align-items:center; gap:.8rem;
+      font-size:.88rem; color:var(--white-soft);
+      margin-bottom:.8rem;
+    }
+    .contact__detail-ico {
+      width:34px; height:34px;
+      background:var(--gold-glow);
+      border:1px solid rgba(201,168,76,.18);
+      border-radius:50%;
+      display:flex; align-items:center; justify-content:center;
+      font-size:.85rem; flex-shrink:0;
+    }
+
+    /* social */
+    .social-row { display:flex; gap:.7rem; margin-top:2rem; flex-wrap:wrap; }
+    .social-btn {
+      display:flex; align-items:center; gap:.5rem;
+      padding:.5rem 1.1rem;
+      border:1px solid var(--border-soft);
+      border-radius:50px;
+      font-size:.72rem; font-weight:600; letter-spacing:.08em; text-transform:uppercase;
+      color:var(--gray);
+      transition:border-color .25s, color .25s, background .25s;
+    }
+    .social-btn svg { width:14px; height:14px; flex-shrink:0; }
+    .social-btn:hover { border-color:var(--gold); color:var(--gold-light); background:var(--gold-glow); }
+
+    /* form */
+    .form-card {
+      padding:2.4rem;
+      background:var(--black-card);
+      border:1px solid var(--border-soft);
+      border-radius:var(--r);
+    }
+    .form-row { display:grid; grid-template-columns:1fr 1fr; gap:1rem; }
+    .fgroup { margin-bottom:1.1rem; }
+    .fgroup label {
+      display:block;
+      font-size:.68rem; font-weight:700;
+      letter-spacing:.12em; text-transform:uppercase;
+      color:var(--gray); margin-bottom:.45rem;
+    }
+    .fgroup input,
+    .fgroup textarea,
+    .fgroup select {
+      width:100%;
+      padding:.8rem 1rem;
+      background:var(--black-lift);
+      border:1px solid var(--border-soft);
+      border-radius:var(--r-sm);
+      color:var(--white);
+      font-family:'Jost',sans-serif;
+      font-size:.92rem;
+      outline:none;
+      transition:border-color .25s, box-shadow .25s;
+      -webkit-appearance:none;
+    }
+    .fgroup input::placeholder,
+    .fgroup textarea::placeholder { color:var(--gray); }
+    .fgroup input:focus,
+    .fgroup textarea:focus,
+    .fgroup select:focus {
+      border-color:var(--gold);
+      box-shadow:0 0 0 3px rgba(201,168,76,.1);
+    }
+    .fgroup select option { background:var(--black-card); }
+    .fgroup textarea { height:120px; resize:vertical; }
+    .form-submit {
+      width:100%;
+      padding:.95rem;
+      background:var(--gold);
+      color:var(--black);
+      font-family:'Jost',sans-serif;
+      font-size:.82rem; font-weight:700;
+      letter-spacing:.14em; text-transform:uppercase;
+      border:none; border-radius:50px;
+      cursor:pointer;
+      transition:transform .25s, box-shadow .25s, background .25s;
+      box-shadow:0 0 30px rgba(201,168,76,.2);
+    }
+    .form-submit:hover { transform:translateY(-2px); box-shadow:0 0 50px rgba(201,168,76,.4); background:var(--gold-light); }
+    .form-success {
+      display:none; text-align:center; padding:2.5rem 1rem;
+    }
+    .form-success__icon { font-size:3rem; margin-bottom:1rem; }
+    .form-success h4 {
+      font-family:'Cormorant Garamond',serif;
+      font-size:1.8rem; margin-bottom:.5rem;
+    }
+    .form-success p { color:var(--gray); font-size:.9rem; }
+
+    /* ─── FOOTER ─────────────────────────────────────────────────── */
     footer {
-      background: var(--navy);
-      border-top: 1px solid var(--border);
-      padding: 3rem 4rem;
+      background:var(--black);
+      border-top:1px solid var(--border-soft);
+      padding:2.5rem 5vw;
     }
     .footer__inner {
-      max-width: 1200px; margin: 0 auto;
-      display: flex; align-items: center; justify-content: space-between;
-      flex-wrap: wrap; gap: 1.5rem;
+      max-width:1200px; margin:0 auto;
+      display:flex; align-items:center;
+      justify-content:space-between; flex-wrap:wrap; gap:1.2rem;
     }
-    .footer__brand {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 1.2rem; font-weight: 600;
+    .footer__logo {
+      font-family:'Cormorant Garamond',serif;
+      font-size:1.2rem; font-weight:600;
     }
-    .footer__brand span { color: var(--green); }
+    .footer__logo span { color:var(--gold); }
     .footer__verse {
-      font-size: .8rem; color: var(--gray);
-      font-style: italic; text-align: center;
+      font-size:.75rem; color:var(--gray);
+      font-style:italic; text-align:center; flex:1; min-width:200px;
     }
-    .footer__copy { font-size: .78rem; color: var(--gray); }
+    .footer__copy { font-size:.72rem; color:var(--gray); }
 
-    /* ── ANIMATIONS ───────────────────────────────────────────────── */
-    @keyframes fadeUp {
-      from { opacity: 0; transform: translateY(24px); }
-      to   { opacity: 1; transform: translateY(0); }
-    }
-    @keyframes fadeIn {
-      from { opacity: 0; } to { opacity: 1; }
-    }
+    /* ─── ANIMATIONS ─────────────────────────────────────────────── */
+    @keyframes fadeUp { from{opacity:0;transform:translateY(22px)} to{opacity:1;transform:translateY(0)} }
+    @keyframes fadeIn { from{opacity:0} to{opacity:1} }
 
-    /* ── MOBILE NAV ───────────────────────────────────────────────── */
-    .mobile-nav {
-      display: none;
-      position: fixed; inset: 0; z-index: 99;
-      background: rgba(7,14,28,.97);
-      backdrop-filter: blur(20px);
-      flex-direction: column; align-items: center; justify-content: center;
-      gap: 2.5rem;
-    }
-    .mobile-nav.open { display: flex; }
-    .mobile-nav a {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 2.2rem; font-weight: 600;
-      color: var(--white); letter-spacing: .04em;
-      transition: color .25s;
-    }
-    .mobile-nav a:hover { color: var(--green); }
-    .mobile-nav__close {
-      position: absolute; top: 2rem; right: 2.5rem;
-      background: none; border: none; color: var(--white);
-      font-size: 1.8rem; cursor: none;
+    /* ─── RESPONSIVE ─────────────────────────────────────────────── */
+    @media(max-width:1024px) {
+      .about__grid         { grid-template-columns:1fr; gap:3rem; }
+      .about__img-wrap     { max-width:360px; }
+      .ministry__grid      { grid-template-columns:1fr; gap:3rem; }
+      .ventures__featured  { grid-template-columns:1fr; }
+      .ventures__grid      { grid-template-columns:1fr 1fr; }
+      .investing__layout   { grid-template-columns:1fr; gap:3rem; }
+      .investing__img      { max-width:400px; aspect-ratio:4/3; position:static; }
+      .proof__img-row      { grid-template-columns:1fr 1fr; }
+      .pam__grid           { grid-template-columns:1fr; gap:3rem; }
+      .pam__img            { max-width:380px; aspect-ratio:4/3; }
+      .healing__grid       { grid-template-columns:1fr; gap:3rem; }
+      .contact__grid       { grid-template-columns:1fr; gap:3rem; }
+      .proof__nums         { grid-template-columns:repeat(2,1fr); }
     }
 
-    /* ── RESPONSIVE ───────────────────────────────────────────────── */
-    @media (max-width: 1024px) {
-      .about__grid { grid-template-columns: 1fr; gap: 3rem; }
-      .about__visual { max-width: 380px; }
-      .ministry__inner { grid-template-columns: 1fr; gap: 3rem; }
-      .ventures__grid { grid-template-columns: 1fr 1fr; }
-      .venture-card.featured { grid-column: span 2; }
-      .investing__grid { grid-template-columns: 1fr; }
-      .pam__inner { grid-template-columns: 1fr; gap: 3rem; }
-      .pam__portrait { max-width: 320px; aspect-ratio: 4/3; }
-      .healing__grid { grid-template-columns: 1fr; gap: 3rem; }
-      .proof__grid { grid-template-columns: repeat(2, 1fr); }
-      .contact__grid { grid-template-columns: 1fr; gap: 3rem; }
+    @media(max-width:768px) {
+      nav { padding:1.1rem 1rem; }
+      nav.scrolled { padding:.9rem 1rem; }
+      .nav__links, .nav__cta { display:none; }
+      .nav__burger { display:flex; }
+      .wrap { padding:4.5rem 1rem; }
+      #hero { padding:0 1rem; }
+      .hero__scroll { display:none; }
+      .ventures__grid { grid-template-columns:1fr; }
+      .proof__img-row { grid-template-columns:1fr; }
+      .proof__img-item:nth-child(2),
+      .proof__img-item:nth-child(3) { display:none; }
+      .proof__nums { grid-template-columns:repeat(2,1fr); }
+      .form-row { grid-template-columns:1fr; }
+      .footer__inner { flex-direction:column; text-align:center; }
+      .footer__verse { text-align:center; }
+      .social-row { justify-content:center; }
     }
-    @media (max-width: 768px) {
-      nav { padding: 1.2rem 1.5rem; }
-      nav.scrolled { padding: .9rem 1.5rem; }
-      .nav__links, .nav__cta { display: none; }
-      .nav__burger { display: flex; }
-      .section-wrap { padding: 4.5rem 1.5rem; }
-      #hero { padding: 0 1.5rem; }
-      .ventures__grid { grid-template-columns: 1fr; }
-      .venture-card.featured { grid-column: span 1; }
-      .proof__grid { grid-template-columns: repeat(2, 1fr); }
-      .form-row { grid-template-columns: 1fr; }
-      footer { padding: 2rem 1.5rem; }
-      .footer__inner { flex-direction: column; text-align: center; }
-      body { cursor: auto; }
-      .cursor, .cursor__ring { display: none; }
+
+    @media(max-width:480px) {
+      h1.hero__title { font-size:2.8rem; }
+      h2.section-title { font-size:2rem; }
+      .about__stats { grid-template-columns:1fr 1fr; }
+      .proof__nums { grid-template-columns:1fr 1fr; }
+      .hero__actions { flex-direction:column; }
+      .hero__actions a, .hero__actions button { width:100%; justify-content:center; }
     }
   </style>
 </head>
 <body>
 
-<!-- Custom Cursor -->
-<div class="cursor" id="cursor"><div class="cursor__dot"></div></div>
-<div class="cursor__ring" id="cursorRing"></div>
-
-<!-- Mobile Nav -->
+<!-- ═══ MOBILE DRAWER ════════════════════════════════════════════ -->
 <div class="mobile-nav" id="mobileNav">
-  <button class="mobile-nav__close" id="mobileClose">✕</button>
-  <a href="#about" onclick="closeMobile()">About</a>
-  <a href="#ministry" onclick="closeMobile()">Ministry</a>
-  <a href="#ventures" onclick="closeMobile()">Ventures</a>
-  <a href="#investing" onclick="closeMobile()">Investing</a>
-  <a href="#pam" onclick="closeMobile()">Legacy</a>
-  <a href="#contact" onclick="closeMobile()">Connect</a>
+  <a href="#about"     onclick="closeNav()">About</a>
+  <a href="#ministry"  onclick="closeNav()">Ministry</a>
+  <a href="#ventures"  onclick="closeNav()">Ventures</a>
+  <a href="#investing" onclick="closeNav()">Investing</a>
+  <a href="#pam"       onclick="closeNav()">Legacy</a>
+  <a href="#contact"   onclick="closeNav()" class="nav__cta">Let's Connect</a>
 </div>
 
-<!-- Nav -->
+<!-- ═══ NAV ══════════════════════════════════════════════════════ -->
 <nav id="navbar">
   <a href="#hero" class="nav__logo">Chad<span>.</span>Panton</a>
   <ul class="nav__links">
@@ -948,31 +913,29 @@
   </button>
 </nav>
 
-<!-- ═══════════════════════════════════════════════════ HERO ══ -->
+<!-- ═══ HERO ══════════════════════════════════════════════════════ -->
 <section id="hero">
-  <div class="hero__bg"></div>
-  <div class="hero__grid"></div>
-  <div class="orb orb-1"></div>
-  <div class="orb orb-2"></div>
-  <div class="orb orb-3"></div>
+  <div class="hero__img">
+    <img src="https://raw.githubusercontent.com/presidentsuarez/chad/main/waterarmscrossed.JPG"
+         alt="Chad Panton" />
+  </div>
+  <div class="hero__overlay"></div>
 
   <div class="hero__content">
     <div class="hero__eyebrow">Marketplace Ministry Leader</div>
     <h1 class="hero__title">
-      Purpose<br>
-      Over <em>Profit.</em><br>
-      Faith Over <span class="blue">Fear.</span>
+      Purpose<br>Over <em>Profit.</em><br>Faith Over Fear.
     </h1>
     <p class="hero__sub">
-      Entrepreneur. Angel Investor. Kingdom Builder. Chad Panton is on a mission to prove
-      that business and faith aren't just compatible — they're <em>inseparable.</em>
+      Entrepreneur. Angel Investor. Kingdom Builder. Chad Panton is on a mission to prove that business
+      and faith aren't just compatible — they're <em style="color:var(--gold-light)">inseparable.</em>
     </p>
     <div class="hero__actions">
-      <a href="#about" class="btn-primary">
-        <span>Discover the Story</span>
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      <a href="#about" class="btn-gold">
+        Discover the Story
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" width="16" height="16"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
       </a>
-      <a href="#contact" class="btn-ghost">Let's Connect</a>
+      <a href="#contact" class="btn-outline">Let's Connect</a>
     </div>
   </div>
 
@@ -984,484 +947,38 @@
 
 <div class="divider"></div>
 
-<!-- ═══════════════════════════════════════════════════ ABOUT ══ -->
+<!-- ═══ ABOUT ═════════════════════════════════════════════════════ -->
 <section id="about">
-  <div class="section-wrap">
+  <div class="wrap">
     <div class="about__grid">
-      <div class="about__visual reveal">
-        <div class="about__accent-line"></div>
-        <div class="about__photo-frame">
-          <div class="about__photo-placeholder">
-            <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg>
-            <span>Photo Coming Soon</span>
-          </div>
+
+      <div class="about__img-wrap reveal">
+        <div class="about__accent"></div>
+        <div class="about__img">
+          <img src="https://raw.githubusercontent.com/presidentsuarez/chad/main/Sittingopen.jpg"
+               alt="Chad Panton — About" />
         </div>
         <div class="about__badge">
-          <span>$3.2M</span>
-          Exit — Dec 2021
-        </div>
-      </div>
-
-      <div class="about__text">
-        <div class="label reveal">The Story</div>
-        <h2 class="section-title reveal reveal-delay-1">
-          Built from the Ground Up.<br>
-          Sold to <em>the Top.</em>
-        </h2>
-
-        <p class="reveal reveal-delay-2">
-          <strong>Chad Panton didn't inherit a playbook.</strong> He wrote one. Starting with nothing more than a vision and relentless work ethic, he built JavaWorks — a market-leading office coffee, water filtration, and micro-market services company serving the Tampa Bay and Orlando markets for over 14 years.
-        </p>
-        <p class="reveal reveal-delay-2">
-          In December 2021, Chad sold JavaWorks to a <strong>Fortune 50 company</strong> — a milestone that validated everything he had built and everything he believed. But more than the exit, it was what came next that defines who Chad Panton is.
-        </p>
-        <p class="reveal reveal-delay-3">
-          <strong>He heard a different call.</strong> After the sale, God opened a door for Chad to travel to Costa Rica — to be still, to listen, and to let the next chapter take shape. Out of that season of quiet, he founded a Costa Rican corporation named <em>In La Keshe</em> — a Mayan phrase meaning "Oneness with God" — and returned home not as a man who had arrived, but as a man who had just begun.
-        </p>
-        <p class="reveal reveal-delay-3">
-          Today, Chad operates at the intersection of <strong>faith, business, and purpose</strong> — stewarding a portfolio of ventures, investments, and real estate across the United States and internationally, always with one question at the center: <em>Does this glorify God?</em>
-        </p>
-
-        <div class="about__stats reveal reveal-delay-4">
-          <div class="stat-card">
-            <div class="stat-card__num">14+</div>
-            <div class="stat-card__label">Years as CEO</div>
-          </div>
-          <div class="stat-card">
-            <div class="stat-card__num">10+</div>
-            <div class="stat-card__label">Active Investments</div>
-          </div>
-          <div class="stat-card">
-            <div class="stat-card__num">3</div>
-            <div class="stat-card__label">Countries</div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<div class="divider"></div>
-
-<!-- ═══════════════════════════════════════════════ MINISTRY ══ -->
-<section id="ministry">
-  <div class="section-wrap">
-    <div style="max-width:620px; margin-bottom:3.5rem;">
-      <div class="label reveal">The Philosophy</div>
-      <h2 class="section-title reveal reveal-delay-1">
-        The <em>Boardroom</em> and the<br>
-        Altar Are the Same Room.
-      </h2>
-      <p class="section-lead reveal reveal-delay-2">
-        Chad Panton is not simply a businessman who goes to church. He is a Marketplace Ministry
-        Leader — convinced that kingdom purpose is expressed most powerfully through commerce.
-      </p>
-    </div>
-
-    <div class="ministry__inner">
-      <div class="ministry__quote-block reveal">
-        <div class="ministry__quote-mark">"</div>
-        <p class="ministry__quote">
-          I do not want to be involved in businesses that just chase profit — but rather purpose.
-          They need to be mission-focused and spirit-led, where all partners are equally yoked.
-        </p>
-        <div class="ministry__quote-attr">— Chad D. Panton</div>
-      </div>
-
-      <div class="ministry__pillars">
-        <div class="pillar reveal reveal-delay-1">
-          <div class="pillar__icon">🤝</div>
-          <div class="pillar__text">
-            <h4>Equally Yoked Partnerships</h4>
-            <p>Every partner, every deal — faith alignment is non-negotiable. Chad will walk away from money before he compromises on this.</p>
-          </div>
-        </div>
-        <div class="pillar reveal reveal-delay-2">
-          <div class="pillar__icon">🎯</div>
-          <div class="pillar__text">
-            <h4>Mission Before Margin</h4>
-            <p>Profit is a tool. Impact is the measure. Every venture Chad enters must answer the "why" before the "what."</p>
-          </div>
-        </div>
-        <div class="pillar reveal reveal-delay-3">
-          <div class="pillar__icon">🏛️</div>
-          <div class="pillar__text">
-            <h4>Build for Exit. Build for Legacy.</h4>
-            <p>Shape every organization with the end in mind — not just a financial exit, but a lasting contribution to the world it served.</p>
-          </div>
-        </div>
-        <div class="pillar reveal reveal-delay-4">
-          <div class="pillar__icon">🌱</div>
-          <div class="pillar__text">
-            <h4>Stewardship, Not Ownership</h4>
-            <p>"God didn't give me these things to own. He gave them to me to steward." This is the lens through which every decision is made.</p>
-          </div>
-        </div>
-        <div class="pillar reveal reveal-delay-5">
-          <div class="pillar__icon">✝️</div>
-          <div class="pillar__text">
-            <h4>The Why Roots Everything</h4>
-            <p>Disconnecting from the "what" and "when" to anchor in the "why" — this is the spiritual posture Chad brings to every table.</p>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<div class="divider"></div>
-
-<!-- ═══════════════════════════════════════════════ VENTURES ══ -->
-<section id="ventures">
-  <div class="section-wrap">
-    <div style="max-width:620px;">
-      <div class="label reveal">Active Ventures</div>
-      <h2 class="section-title reveal reveal-delay-1">
-        A Portfolio Built on<br>
-        <em>Purpose & Precision.</em>
-      </h2>
-      <p class="section-lead reveal reveal-delay-2">
-        From a landmark exit to active development across real estate, health, media, and technology —
-        Chad is building a kingdom-aligned portfolio that creates real-world impact.
-      </p>
-    </div>
-
-    <div class="ventures__grid">
-
-      <!-- JavaWorks -->
-      <div class="venture-card featured reveal">
-        <div class="venture__tag tag-sold">✓ Successfully Exited</div>
-        <div class="venture__icon">☕</div>
-        <div class="venture__title">JavaWorks</div>
-        <div class="venture__desc">
-          <strong>The Founding Story.</strong> From a blank sheet of paper in 2007 to a Fortune 50 acquisition in December 2021 — JavaWorks became the market leader in office coffee, water filtration, and micro-market services across Tampa Bay and Orlando. Chad built it. Led it. And sold it on his own terms.
-        </div>
-        <div class="venture__bullet-list">
-          <div class="venture__bullet">14+ years of market leadership in Greater Tampa & Orlando</div>
-          <div class="venture__bullet">Sold to a Fortune 50 company — December 2021</div>
-          <div class="venture__bullet">Mission: "Be the best at serving the best."</div>
-        </div>
-      </div>
-
-      <!-- ISI Legacy -->
-      <div class="venture-card reveal reveal-delay-1">
-        <div class="venture__tag tag-active">Active</div>
-        <div class="venture__icon">🏗️</div>
-        <div class="venture__title">ISI Legacy</div>
-        <div class="venture__desc">
-          Commercial real estate development rooted in faith-sourced partnerships. Chad's active project is a <strong>4-acre development in Kenosha, Wisconsin</strong> anchoring a Hyatt Studio Hotel — with JV partners sourced entirely through his Christian network.
-        </div>
-      </div>
-
-      <!-- In La Keshe -->
-      <div class="venture-card blue-accent reveal reveal-delay-2">
-        <div class="venture__tag tag-intl">International</div>
-        <div class="venture__icon">🌿</div>
-        <div class="venture__title">In La Keshe</div>
-        <div class="venture__desc">
-          <em>"Oneness with God"</em> — a Mayan phrase and a Costa Rican corporation. Home to Casa Natura, an Airbnb property listed for sale, and Lot 43, where <strong>Casa Jesus</strong> is being designed: a 9-bedroom dual estate featuring a podcast studio, biohacking lounge, and wellness deck — sacred ground for leadership and spiritual retreats.
-        </div>
-      </div>
-
-      <!-- R3 -->
-      <div class="venture-card reveal reveal-delay-1">
-        <div class="venture__tag tag-active">Series A · Board Member</div>
-        <div class="venture__icon">💊</div>
-        <div class="venture__title">R3</div>
-        <div class="venture__desc">
-          An opioid prevention and awareness platform. Chad invested, joined the board, and is serving as Enterprise Sales Development Officer and M&A Specialist — bringing his exit expertise to shape an organization built for a meaningful acquisition and a mission that could save lives.
-        </div>
-      </div>
-
-      <!-- Carnivore Media -->
-      <div class="venture-card reveal reveal-delay-2">
-        <div class="venture__tag tag-active">Equity Partner · In Formation</div>
-        <div class="venture__icon">📡</div>
-        <div class="venture__title">Carnivore Media</div>
-        <div class="venture__desc">
-          A full marketing stack with two unicorn-class AI products: an <strong>intent-based marketing platform</strong> that identifies exactly who's searching for your product and pipes them into your CRM — and a website pixel that de-anonymizes visitors into 72+ known data points. Chad is building out a brokerage model layered with AI power dialers and call center relationships.
-        </div>
-      </div>
-
-      <!-- 501c3 -->
-      <div class="venture-card reveal reveal-delay-3">
-        <div class="venture__tag tag-forming">Forming — In God's Hands</div>
-        <div class="venture__icon">🕊️</div>
-        <div class="venture__title">Nonprofit Vision</div>
-        <div class="venture__desc">
-          A forthcoming 501(c)(3) at the intersection of <strong>functional medicine and biblical truth</strong> — offering a spirit-led alternative to the Western pharmaceutical system. Built on Pam's legacy, Chad's healing journey, and the research of Dr. Daniel Amen. Coming soon.
-        </div>
-      </div>
-
-    </div>
-  </div>
-</section>
-
-<div class="divider"></div>
-
-<!-- ═══════════════════════════════════════════════ INVESTING ══ -->
-<section id="investing">
-  <div class="section-wrap">
-    <div style="max-width:620px; margin-bottom:1rem;">
-      <div class="label reveal">The Investment Portfolio</div>
-      <h2 class="section-title reveal reveal-delay-1">
-        Deployed with <em>Conviction.</em><br>
-        Built for <span class="blue">the Long Game.</span>
-      </h2>
-      <p class="section-lead reveal reveal-delay-2">
-        From angel investments and private equity to blockchain node ownership and digital assets —
-        Chad's portfolio is as diverse as it is deliberate, always positioned at the intersection of
-        emerging technology and long-term purpose.
-      </p>
-    </div>
-
-    <div class="investing__grid">
-      <!-- Angel & PE -->
-      <div class="invest-category reveal reveal-delay-1">
-        <div class="invest-category__header">
-          <div class="invest-category__icon icon-green">💼</div>
-          <div>
-            <div class="invest-category__title">Angel & Private Equity</div>
-            <div class="invest-category__sub">~10 active positions</div>
-          </div>
-        </div>
-        <div class="invest-item">
-          <div class="invest-item__dot"></div>
-          <div>
-            <div class="invest-item__name">Ananda Science</div>
-            <div class="invest-item__note">Flagship angel bet · 2-year exit horizon · high conviction</div>
-          </div>
-        </div>
-        <div class="invest-item">
-          <div class="invest-item__dot"></div>
-          <div>
-            <div class="invest-item__name">Circle / USDC</div>
-            <div class="invest-item__note">Pre-IPO investment · now publicly traded · exit imminent</div>
-          </div>
-        </div>
-        <div class="invest-item">
-          <div class="invest-item__dot"></div>
-          <div>
-            <div class="invest-item__name">R3 — Opioid Prevention</div>
-            <div class="invest-item__note">Series A · board member · mission-aligned · 20–40x target</div>
-          </div>
-        </div>
-        <div class="invest-item">
-          <div class="invest-item__dot"></div>
-          <div>
-            <div class="invest-item__name">Ion — Gold-Backed Stablecoin</div>
-            <div class="invest-item__note">Friends & family round · NASDAQ uplisting in progress</div>
-          </div>
-        </div>
-        <div class="invest-item">
-          <div class="invest-item__dot"></div>
-          <div>
-            <div class="invest-item__name">Cerebrus AI</div>
-            <div class="invest-item__note">Pre-IPO · NVIDIA competitor · invested 2023</div>
-          </div>
-        </div>
-        <div class="invest-item">
-          <div class="invest-item__dot"></div>
-          <div>
-            <div class="invest-item__name">FarmEd · Magical Butter · Ripple</div>
-            <div class="invest-item__note">Active positions · cash flowing · pending exit trajectories</div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Crypto & Nodes -->
-      <div class="invest-category reveal reveal-delay-2">
-        <div class="invest-category__header">
-          <div class="invest-category__icon icon-blue">🪙</div>
-          <div>
-            <div class="invest-category__title">Digital Assets & Node Ownership</div>
-            <div class="invest-category__sub">20+ nodes across 3 projects</div>
-          </div>
-        </div>
-        <div class="invest-item">
-          <div class="invest-item__dot blue"></div>
-          <div>
-            <div class="invest-item__name">Gala Games — 3 Nodes</div>
-            <div class="invest-item__note">Daily token distributions · over $150K already cashed out · nodes still running</div>
-          </div>
-        </div>
-        <div class="invest-item">
-          <div class="invest-item__dot blue"></div>
-          <div>
-            <div class="invest-item__name">Truth Network — 5 Nodes</div>
-            <div class="invest-item__note">Decentralized prediction market · ESPN-scale integration vision</div>
-          </div>
-        </div>
-        <div class="invest-item">
-          <div class="invest-item__dot blue"></div>
-          <div>
-            <div class="invest-item__name">TSX / TS7 — 12 Nodes</div>
-            <div class="invest-item__note">High conviction · details forthcoming · daily distributions active</div>
-          </div>
-        </div>
-        <div class="invest-item">
-          <div class="invest-item__dot blue"></div>
-          <div>
-            <div class="invest-item__name">Connect United — Galvan & Switch Network</div>
-            <div class="invest-item__note">Fractional ownership · daily distributions · monitoring</div>
-          </div>
-        </div>
-        <div class="invest-item">
-          <div class="invest-item__dot blue"></div>
-          <div>
-            <div class="invest-item__name">Spot Portfolio & 401k Digital Assets</div>
-            <div class="invest-item__note">Transitioning to spot-and-hold · 401k fully in digital assets · strong returns</div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div class="invest-philosophy reveal">
-      <p>
-        "The same way God leads me away from the day trade and into the long hold —
-        He's leading me away from what's fast and toward what's <span>faithful.</span>
-        The portfolio is built for legacy, not liquidity."
-      </p>
-    </div>
-  </div>
-</section>
-
-<div class="divider"></div>
-
-<!-- ══════════════════════════════════════════ PROOF / NUMBERS ══ -->
-<section id="proof">
-  <div class="section-wrap">
-    <div style="text-align:center; max-width:560px; margin:0 auto 1rem;">
-      <div class="label reveal" style="justify-content:center;">By the Numbers</div>
-      <h2 class="section-title reveal reveal-delay-1" style="text-align:center;">
-        The Work <em>Speaks.</em>
-      </h2>
-    </div>
-    <div class="proof__grid">
-      <div class="proof__item reveal">
-        <div class="proof__num">14</div>
-        <div class="proof__label">Years Building<br>JavaWorks</div>
-      </div>
-      <div class="proof__item reveal reveal-delay-1">
-        <div class="proof__num blue">Fortune 50</div>
-        <div class="proof__label">Acquirer of<br>JavaWorks</div>
-        <div class="proof__context">Dec 2021 Exit</div>
-      </div>
-      <div class="proof__item reveal reveal-delay-2">
-        <div class="proof__num">20+</div>
-        <div class="proof__label">Blockchain Nodes<br>Owned</div>
-      </div>
-      <div class="proof__item reveal reveal-delay-3">
-        <div class="proof__num gold">10+</div>
-        <div class="proof__label">Active Angel &<br>PE Investments</div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<div class="divider"></div>
-
-<!-- ═══════════════════════════════════════════════ PAM'S LEGACY ══ -->
-<section id="pam">
-  <div class="section-wrap">
-    <div class="pam__inner">
-      <div class="pam__portrait reveal">
-        <svg width="52" height="52" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg>
-        <span style="font-size:.8rem; letter-spacing:.08em;">Photo of Pam</span>
-        <div class="pam__glow"></div>
-      </div>
-
-      <div class="pam__content">
-        <div class="label reveal">In Memory</div>
-        <div class="pam__name reveal reveal-delay-1">Pam Panton</div>
-        <h2 class="section-title reveal reveal-delay-1" style="font-size:clamp(1.8rem,3vw,2.8rem);">
-          An Angel, Literally<br>on <em>Earth.</em>
-        </h2>
-
-        <p class="reveal reveal-delay-2">
-          In June 2020, Chad's mother Pam took her own life. She was deeply loved, widely revered — a woman whose warmth and presence left a permanent mark on everyone she ever met. Chad knows she raised her hand for Jesus. He knows she is resting with the Lord.
-        </p>
-        <p class="reveal reveal-delay-2">
-          But her passing left a wound that has not been — and will not be — wasted. Chad has chosen to honor Pam's legacy not through silence or grief alone, but through action. Her story, his own health journey, and the science of doctors like Dr. Daniel Amen are converging into something that could set others free.
-        </p>
-        <p class="reveal reveal-delay-3">
-          <em>"We are all walking through seasons of uncomfortableness. The more we bring those burdens forward into the Father — the more we are reminded they are not ours to carry."</em>
-        </p>
-
-        <div class="pam__nonprofit-banner reveal reveal-delay-4">
-          <h4>🕊️ A Nonprofit Is Coming</h4>
-          <p>Built on Pam's legacy, Chad's healing journey, and the science of functional medicine — a 501(c)(3) that will offer people a spirit-led, whole-body path to freedom. Not Xanax. Not Zoloft. Truth.</p>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<div class="divider"></div>
-
-<!-- ══════════════════════════════════════════════════ HEALING ══ -->
-<section id="healing">
-  <div class="section-wrap">
-    <div style="max-width:620px; margin-bottom:3.5rem;">
-      <div class="label reveal">The Health Journey</div>
-      <h2 class="section-title reveal reveal-delay-1">
-        The Body Keeps<br>
-        the <em>Score.</em>
-      </h2>
-    </div>
-
-    <div class="healing__grid">
-      <div class="healing__text">
-        <p class="reveal">
-          <strong>This story doesn't get told enough.</strong> Chad Panton — high-performing entrepreneur, serial investor, man of faith — moved into a home that passed inspection. What the inspection missed was quietly devastating: <strong>severe mold contamination</strong> hidden in an undisclosed area.
-        </p>
-        <p class="reveal reveal-delay-1">
-          Over time, the toxins built. His cognition clouded. His energy collapsed. His emotional state shifted in ways that didn't make sense. And Western medicine handed him a prescription. He refused it.
-        </p>
-        <p class="reveal reveal-delay-2">
-          What followed was years of testing, seeking, suffering, and learning — eventually uncovering a cascade of co-infections including Lyme disease, heavy metal toxicity, parasites, Epstein-Barr, and chronic fatigue, all compounded by a leaky gut that had been quietly blocking every supplement he took from being absorbed.
-        </p>
-        <p class="reveal reveal-delay-3">
-          <strong>Now, Chad is healing.</strong> Armed with a sequenced protocol, a renewed faith, and a conviction that God is using this story for something greater — he is reclaiming his mind, his body, and his calling.
-        </p>
-
-        <div class="healing__amen reveal reveal-delay-4">
-          <strong>Dr. Daniel Amen | NYT Bestselling Author | 300,000+ Brain Scans</strong>
-          "Over 90% of bipolar, depression, and anxiety is not psychiatric — it is the body being toxic. Detoxify the body, and the emotional state heals."
+          <strong>$3.2M</strong>
+          Exit · Dec 2021
         </div>
       </div>
 
       <div>
-        <p style="font-size:.78rem; letter-spacing:.12em; text-transform:uppercase; color:var(--gray); margin-bottom:1rem;" class="reveal">Chad's healing journey included:</p>
-        <div class="healing__conditions">
-          <div class="condition-item reveal reveal-delay-1">
-            <span class="condition-icon">🍄</span> Mold toxicity (mycotoxins)
-          </div>
-          <div class="condition-item reveal reveal-delay-1">
-            <span class="condition-icon">⚗️</span> Heavy metal toxicity
-          </div>
-          <div class="condition-item reveal reveal-delay-2">
-            <span class="condition-icon">🦠</span> Lyme disease
-          </div>
-          <div class="condition-item reveal reveal-delay-2">
-            <span class="condition-icon">🔬</span> Parasites
-          </div>
-          <div class="condition-item reveal reveal-delay-3">
-            <span class="condition-icon">⚡</span> Epstein-Barr virus
-          </div>
-          <div class="condition-item reveal reveal-delay-3">
-            <span class="condition-icon">😴</span> Chronic fatigue syndrome
-          </div>
-          <div class="condition-item reveal reveal-delay-4">
-            <span class="condition-icon">🧠</span> Brain inflammation & severe fog
-          </div>
-          <div class="condition-item reveal reveal-delay-4">
-            <span class="condition-icon">🌿</span> Leaky gut (blocking all absorption)
-          </div>
+        <div class="section-label reveal">The Story</div>
+        <h2 class="section-title reveal d1">
+          Built from Nothing.<br>Sold to the <em>Top.</em>
+        </h2>
+        <div class="about__text">
+          <p class="reveal d2"><strong>Chad Panton didn't inherit a playbook.</strong> He wrote one. Starting in 2007, he built JavaWorks from the ground up — a market-leading office coffee, water filtration, and micro-market services company that served the Greater Tampa and Orlando markets for over 14 years.</p>
+          <p class="reveal d2">In December 2021, Chad sold JavaWorks to a <strong>Fortune 50 company</strong> — a landmark exit that proved his model, validated his leadership, and opened the door to an entirely new chapter.</p>
+          <p class="reveal d3"><strong>But he didn't cash out and cruise.</strong> He heard a different call. After the sale, God opened a door for Chad to travel to Costa Rica — to be still, to listen, and to let the next chapter take shape. Out of that stillness, he founded <em>In La Keshe</em> — a Mayan phrase meaning "Oneness with God" — and returned not as a man who had arrived, but as a man who had just begun.</p>
+          <p class="reveal d3">Today, Chad operates at the intersection of <strong>faith, business, and purpose</strong> — stewarding a portfolio of ventures, investments, and real estate across the U.S. and internationally, always with one question at the center: <em>Does this glorify God?</em></p>
         </div>
-
-        <div class="healing__cta reveal reveal-delay-5">
-          <p>This experience is becoming a <strong>movement</strong> — a forthcoming nonprofit combining Pam's story, Chad's healing, functional medicine, and biblical truth to help others find the wholeness that the pharmaceutical system was never designed to offer.</p>
+        <div class="about__stats">
+          <div class="stat reveal d2"><div class="stat__n">14+</div><div class="stat__l">Years as CEO</div></div>
+          <div class="stat reveal d3"><div class="stat__n">10+</div><div class="stat__l">Active Investments</div></div>
+          <div class="stat reveal d4"><div class="stat__n">3</div><div class="stat__l">Countries Active</div></div>
         </div>
       </div>
     </div>
@@ -1470,31 +987,351 @@
 
 <div class="divider"></div>
 
-<!-- ════════════════════════════════════════════════ CONNECT ══ -->
+<!-- ═══ MINISTRY ══════════════════════════════════════════════════ -->
+<section id="ministry">
+  <div class="wrap">
+    <div class="ministry__grid">
+
+      <div class="reveal">
+        <div class="ministry__img">
+          <img src="https://raw.githubusercontent.com/presidentsuarez/chad/main/lookingoff.JPG"
+               alt="Chad Panton — Vision" />
+          <div class="ministry__img-caption">"Rooted in the why."</div>
+        </div>
+      </div>
+
+      <div class="ministry__content">
+        <div class="section-label reveal">The Philosophy</div>
+        <h2 class="section-title reveal d1">
+          The Boardroom and<br>the Altar Are the<br><em>Same Room.</em>
+        </h2>
+        <p class="section-lead reveal d2" style="margin-bottom:1.8rem;">
+          Chad Panton is not simply a businessman who goes to church. He is a Marketplace Ministry Leader — convinced that kingdom purpose is expressed most powerfully through commerce.
+        </p>
+
+        <div class="ministry__quote reveal d2">
+          <p>"I do not want to be involved in businesses that just chase profit — but rather purpose. Mission-focused. Spirit-led. Every partner equally yoked."</p>
+          <cite>— Chad D. Panton</cite>
+        </div>
+
+        <div class="reveal d3">
+          <div class="pillar">
+            <div class="pillar__ico">🤝</div>
+            <div><h4>Equally Yoked Partnerships</h4><p>Faith alignment is non-negotiable. Chad will walk away from money before compromising on this.</p></div>
+          </div>
+          <div class="pillar">
+            <div class="pillar__ico">🎯</div>
+            <div><h4>Mission Before Margin</h4><p>Profit is a tool. Impact is the measure. Every venture must answer the "why" before the "what."</p></div>
+          </div>
+          <div class="pillar">
+            <div class="pillar__ico">🏛️</div>
+            <div><h4>Build for Exit. Build for Legacy.</h4><p>Shape every organization with the end in mind — financially and in terms of lasting kingdom impact.</p></div>
+          </div>
+          <div class="pillar">
+            <div class="pillar__ico">✝️</div>
+            <div><h4>Stewardship, Not Ownership</h4><p>"God didn't give me these things to own. He gave them to me to steward." Every decision flows from this.</p></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ═══ VENTURES ══════════════════════════════════════════════════ -->
+<section id="ventures">
+  <div class="wrap">
+    <div style="max-width:580px;margin-bottom:3rem;">
+      <div class="section-label reveal">Active Ventures</div>
+      <h2 class="section-title reveal d1">A Portfolio Built on<br><em>Purpose & Precision.</em></h2>
+      <p class="section-lead reveal d2">From a landmark exit to active development across real estate, health, media, and technology — every venture is mission-aligned.</p>
+    </div>
+
+    <!-- JavaWorks Featured -->
+    <div class="ventures__featured reveal">
+      <div class="ventures__featured-img">
+        <img src="https://raw.githubusercontent.com/presidentsuarez/chad/main/walking.JPG"
+             alt="Chad Panton — Moving Forward" />
+      </div>
+      <div>
+        <div class="ventures__tag tag-exit">✓ Successfully Exited · Dec 2021</div>
+        <div class="venture__title">JavaWorks</div>
+        <div class="venture__desc">
+          <strong>The founding story.</strong> From a blank page in 2007 to a Fortune 50 acquisition — JavaWorks became the market leader in office coffee, water filtration, and micro-market services across Tampa Bay and Orlando. Chad built it, led it for 14 years, and sold it on his own terms for $3.2 million.
+        </div>
+        <div class="venture__bullets">
+          <div class="venture__bullet">14+ years of market leadership across Greater Tampa & Orlando</div>
+          <div class="venture__bullet">Sold to a Fortune 50 company in December 2021</div>
+          <div class="venture__bullet">Mission: "Be the best at serving the best."</div>
+          <div class="venture__bullet">Exit wisdom now shared as M&A advisor and board member to growing companies</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Venture Cards Grid -->
+    <div class="ventures__grid">
+      <div class="vcard reveal d1">
+        <div class="ventures__tag tag-active">Active · Commercial RE</div>
+        <div class="vcard__ico">🏗️</div>
+        <div class="vcard__title">ISI Legacy</div>
+        <p class="vcard__desc">Commercial real estate development rooted in faith-sourced JV partnerships. Active 4-acre development in <strong>Kenosha, Wisconsin</strong> anchoring a Hyatt Studio Hotel — with partners sourced through Chad's Christian network.</p>
+      </div>
+      <div class="vcard reveal d2">
+        <div class="ventures__tag tag-intl">International · Costa Rica</div>
+        <div class="vcard__ico">🌿</div>
+        <div class="vcard__title">In La Keshe</div>
+        <p class="vcard__desc"><em>"Oneness with God."</em> A Costa Rican corporation housing Casa Natura (an active Airbnb listed for sale) and <strong>Casa Jesus</strong> — a 9-bedroom estate being designed as sacred ground for leadership and spiritual retreats.</p>
+      </div>
+      <div class="vcard reveal d3">
+        <div class="ventures__tag tag-active">Series A · Board Member</div>
+        <div class="vcard__ico">💊</div>
+        <div class="vcard__title">R3</div>
+        <p class="vcard__desc">An opioid prevention and awareness platform. Chad invested, joined the board, and serves as Enterprise Sales Development Officer and M&A Specialist — shaping a company built for a meaningful acquisition and a mission that saves lives.</p>
+      </div>
+      <div class="vcard reveal d1">
+        <div class="ventures__tag tag-active">Equity Partner · In Formation</div>
+        <div class="vcard__ico">📡</div>
+        <div class="vcard__title">Carnivore Media</div>
+        <p class="vcard__desc">A full marketing stack powered by two AI unicorn products: an <strong>intent-based marketing platform</strong> and a pixel that de-anonymizes website visitors into 72+ known data points — piped directly into your CRM.</p>
+      </div>
+      <div class="vcard reveal d2">
+        <div class="ventures__tag tag-forming">Forming · In God's Hands</div>
+        <div class="vcard__ico">🕊️</div>
+        <div class="vcard__title">501(c)(3) Nonprofit</div>
+        <p class="vcard__desc">A spirit-led nonprofit at the intersection of <strong>functional medicine and biblical truth</strong> — built on Pam's legacy, Chad's healing journey, and Dr. Daniel Amen's research. An alternative to Western pharma. Coming soon.</p>
+      </div>
+      <div class="vcard reveal d3" style="background:linear-gradient(135deg,var(--black-card),var(--black-lift)); border-color:var(--border);">
+        <div class="vcard__ico">🌍</div>
+        <div class="vcard__title" style="font-size:1.1rem; margin-bottom:.5rem; color:var(--gold-light);">Real Estate Portfolio</div>
+        <p class="vcard__desc" style="font-size:.8rem;">Casa NoHo — Tampa Airbnb (1726 W LaSalle St) · Casa Natura — Costa Rica ($1.48M listed) · Casa Jesus — Lot 43 development · Kenosha 4-acre commercial · North Georgia mountain land (6 acres)</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ═══ INVESTING ══════════════════════════════════════════════════ -->
+<section id="investing">
+  <div class="wrap">
+    <div class="investing__layout">
+      <div>
+        <div class="investing__img reveal">
+          <img src="https://raw.githubusercontent.com/presidentsuarez/chad/main/chadbw.JPG"
+               alt="Chad Panton — Investor" />
+        </div>
+      </div>
+      <div>
+        <div class="section-label reveal">The Investment Portfolio</div>
+        <h2 class="section-title reveal d1">Deployed with<br><em>Conviction.</em></h2>
+        <p class="section-lead reveal d2" style="margin-bottom:2rem;">From angel investments and private equity to blockchain node ownership and digital assets — built for the long game, always positioned where technology meets purpose.</p>
+
+        <div class="invest-block reveal d2">
+          <div class="invest-block__head">
+            <div class="invest-block__ico">💼</div>
+            <div>
+              <div class="invest-block__title">Angel & Private Equity</div>
+              <div class="invest-block__sub">~10 active positions</div>
+            </div>
+          </div>
+          <div class="invest-row">
+            <div class="invest-dot"></div>
+            <div><div class="invest-row__name">Ananda Science</div><div class="invest-row__note">Flagship angel bet · 2-year exit horizon · high conviction · 3–7x target</div></div>
+          </div>
+          <div class="invest-row">
+            <div class="invest-dot"></div>
+            <div><div class="invest-row__name">Circle / USDC</div><div class="invest-row__note">Pre-IPO investment → now publicly traded · exit imminent</div></div>
+          </div>
+          <div class="invest-row">
+            <div class="invest-dot"></div>
+            <div><div class="invest-row__name">R3 — Opioid Prevention</div><div class="invest-row__note">Series A · board member · 20–40x target exit in 20–28 months</div></div>
+          </div>
+          <div class="invest-row">
+            <div class="invest-dot"></div>
+            <div><div class="invest-row__name">Ion — Gold-Backed Stablecoin</div><div class="invest-row__note">Friends & family round · NASDAQ uplisting in progress</div></div>
+          </div>
+          <div class="invest-row">
+            <div class="invest-dot"></div>
+            <div><div class="invest-row__name">Cerebrus AI · FarmEd · Magical Butter · Ripple</div><div class="invest-row__note">Pre-IPO and active equity positions across AI, agriculture, and fintech</div></div>
+          </div>
+        </div>
+
+        <div class="invest-block reveal d3">
+          <div class="invest-block__head">
+            <div class="invest-block__ico">🪙</div>
+            <div>
+              <div class="invest-block__title">Digital Assets & Node Ownership</div>
+              <div class="invest-block__sub">20+ nodes · daily distributions · spot portfolio</div>
+            </div>
+          </div>
+          <div class="invest-row">
+            <div class="invest-dot"></div>
+            <div><div class="invest-row__name">Gala Games — 3 Nodes</div><div class="invest-row__note">$32K invested → over $150K already cashed out · still distributing daily</div></div>
+          </div>
+          <div class="invest-row">
+            <div class="invest-dot"></div>
+            <div><div class="invest-row__name">Truth Network — 5 Nodes</div><div class="invest-row__note">Decentralized prediction market · ESPN-scale integration vision</div></div>
+          </div>
+          <div class="invest-row">
+            <div class="invest-dot"></div>
+            <div><div class="invest-row__name">TSX / TS7 — 12 Nodes</div><div class="invest-row__note">High conviction · daily distributions active</div></div>
+          </div>
+          <div class="invest-row">
+            <div class="invest-dot"></div>
+            <div><div class="invest-row__name">Spot Portfolio & 401k Digital Assets</div><div class="invest-row__note">Transitioning to spot-and-hold strategy · 401k fully in digital assets</div></div>
+          </div>
+        </div>
+
+        <div class="invest-quote reveal d4">
+          <p>"The same way God leads me away from the day trade and into the long hold — He's leading me away from what's fast and toward what's <span>faithful.</span>"</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ═══ PROOF ══════════════════════════════════════════════════════ -->
+<section id="proof">
+  <div class="wrap">
+    <div class="proof__img-row">
+      <div class="proof__img-item reveal">
+        <img src="https://raw.githubusercontent.com/presidentsuarez/chad/main/funSitting.JPG"
+             alt="Chad Panton" />
+      </div>
+      <div class="proof__img-item reveal d2">
+        <img src="https://raw.githubusercontent.com/presidentsuarez/chad/main/sittingtophalf.JPG"
+             alt="Chad Panton" />
+      </div>
+      <div class="proof__img-item reveal d3">
+        <img src="https://raw.githubusercontent.com/presidentsuarez/chad/main/chadbw.JPG"
+             alt="Chad Panton" />
+      </div>
+    </div>
+    <div class="proof__nums">
+      <div class="proof__item reveal">
+        <div class="proof__n">14</div>
+        <div class="proof__l">Years Building<br>JavaWorks</div>
+      </div>
+      <div class="proof__item reveal d1">
+        <div class="proof__n" style="font-size:1.9rem; padding-top:.3rem;">Fortune 50</div>
+        <div class="proof__l">Acquirer of<br>JavaWorks</div>
+        <div class="proof__c">Dec 2021</div>
+      </div>
+      <div class="proof__item reveal d2">
+        <div class="proof__n">20+</div>
+        <div class="proof__l">Blockchain Nodes<br>Owned</div>
+      </div>
+      <div class="proof__item reveal d3">
+        <div class="proof__n">10+</div>
+        <div class="proof__l">Active Angel &<br>PE Investments</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ═══ PAM'S LEGACY ══════════════════════════════════════════════ -->
+<section id="pam">
+  <div class="wrap">
+    <div class="pam__grid">
+      <div class="pam__img reveal">
+        <img src="https://raw.githubusercontent.com/presidentsuarez/chad/main/funSitting.JPG"
+             alt="In memory of Pam Panton" />
+      </div>
+      <div>
+        <div class="section-label pam__label reveal">In Memory</div>
+        <div class="pam__name reveal d1">Pam Panton</div>
+        <h2 class="section-title reveal d1" style="font-size:clamp(1.8rem,3vw,2.6rem);">An Angel,<br>Literally on <em>Earth.</em></h2>
+        <div class="pam__text">
+          <p class="reveal d2">In June 2020, Chad's mother Pam took her own life. She was deeply loved, widely revered — a woman whose warmth and presence left a permanent mark on every person she ever met. Chad knows she raised her hand for Jesus. He knows she is resting with the Lord.</p>
+          <p class="reveal d2">Her passing left a wound that has not been — and will not be — wasted. Chad has chosen to honor Pam's legacy not through silence or grief alone, but through action. Her story, his own health journey, and the science of functional medicine are converging into something that could set others free.</p>
+          <p class="reveal d3"><em>"We are all walking through seasons of uncomfortableness. The more we bring those burdens forward into the Father — the more we are reminded they are not ours to carry."</em></p>
+          <div class="pam__npo reveal d4">
+            <h4>🕊️ A Nonprofit Is Coming</h4>
+            <p>Built on Pam's legacy, Chad's healing journey, and the science of Dr. Daniel Amen — a 501(c)(3) offering a spirit-led, whole-body path to freedom. Not Xanax. Not Zoloft. Truth.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ═══ HEALING ════════════════════════════════════════════════════ -->
+<section id="healing">
+  <div class="wrap">
+    <div style="max-width:580px; margin-bottom:3rem;">
+      <div class="section-label reveal">The Health Journey</div>
+      <h2 class="section-title reveal d1">The Body Keeps<br>the <em>Score.</em></h2>
+    </div>
+    <div class="healing__grid">
+      <div>
+        <div class="healing__text">
+          <p class="reveal"><strong>This story doesn't get told enough.</strong> Chad Panton — high-performing entrepreneur, serial investor, man of faith — moved into a home that passed inspection. What the inspection missed was quietly devastating: severe mold contamination in an undisclosed area of the home.</p>
+          <p class="reveal d1">The toxins built. His cognition clouded. His energy collapsed. His emotional state shifted in ways that didn't make sense. And Western medicine handed him a prescription. <strong>He refused it.</strong></p>
+          <p class="reveal d2">What followed was years of testing, seeking, and suffering — eventually uncovering a cascade of co-infections including Lyme disease, heavy metal toxicity, parasites, Epstein-Barr, and chronic fatigue, all compounded by a leaky gut that had been silently blocking every supplement he took from being absorbed.</p>
+          <p class="reveal d3"><strong>Now, Chad is healing.</strong> Armed with a sequenced functional protocol, renewed faith, and the conviction that God is using this story for something greater — he is reclaiming his mind, his body, and his calling.</p>
+          <div class="healing__amen reveal d4">
+            <strong>Dr. Daniel Amen · NYT Bestselling Author · 300,000+ Brain Scans · 11 Clinics</strong>
+            "Over 90% of bipolar, depression, and anxiety is not psychiatric — it is the body being toxic. Detoxify the body, and the emotional state heals."
+          </div>
+        </div>
+      </div>
+      <div>
+        <p style="font-size:.68rem; letter-spacing:.15em; text-transform:uppercase; color:var(--gray); margin-bottom:.9rem;" class="reveal">Chad's healing journey included:</p>
+        <div class="conditions">
+          <div class="cond reveal d1"><span class="cond__ico">🍄</span> Mold toxicity (mycotoxins)</div>
+          <div class="cond reveal d1"><span class="cond__ico">⚗️</span> Heavy metal toxicity</div>
+          <div class="cond reveal d2"><span class="cond__ico">🦠</span> Lyme disease</div>
+          <div class="cond reveal d2"><span class="cond__ico">🔬</span> Parasites</div>
+          <div class="cond reveal d3"><span class="cond__ico">⚡</span> Epstein-Barr virus</div>
+          <div class="cond reveal d3"><span class="cond__ico">😴</span> Chronic fatigue syndrome</div>
+          <div class="cond reveal d4"><span class="cond__ico">🧠</span> Brain inflammation & severe fog</div>
+          <div class="cond reveal d4"><span class="cond__ico">🌿</span> Leaky gut (blocking all absorption)</div>
+        </div>
+        <div class="healing__cta reveal d5">
+          <p>This experience is becoming a <strong>movement</strong> — a forthcoming nonprofit combining Pam's story, Chad's healing, functional medicine, and biblical truth to help others find freedom that the pharmaceutical system was never designed to offer.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ═══ CONNECT CTA ════════════════════════════════════════════════ -->
 <section id="connect">
-  <div class="section-wrap" style="padding-top:6rem;padding-bottom:6rem;">
+  <div class="connect__bg-img">
+    <img src="https://raw.githubusercontent.com/presidentsuarez/chad/main/sittingtophalf.JPG"
+         alt="Chad Panton" />
+  </div>
+  <div class="connect__overlay"></div>
+  <div class="wrap" style="padding-top:7rem;padding-bottom:7rem;">
     <div class="connect__inner">
-      <div class="label reveal" style="justify-content:center;">Work With Chad</div>
-      <h2 class="connect__title reveal reveal-delay-1">
+      <div class="section-label reveal">Work With Chad</div>
+      <h2 class="connect__title reveal d1">
         Ready to Build<br>Something That <em>Matters?</em>
       </h2>
-      <p class="connect__sub reveal reveal-delay-2">
-        Whether you're an investor, an entrepreneur, a potential JV partner, or someone whose
-        vision aligns with the kingdom — Chad wants to hear from you. But only if you're serious
-        about purpose, not just profit.
+      <p class="connect__sub reveal d2">
+        Whether you're an investor, an entrepreneur, a JV partner, or a visionary whose calling aligns with the kingdom — Chad wants to hear from you. But only if you're serious about purpose, not just profit.
       </p>
-      <div class="connect__options reveal reveal-delay-3">
-        <span class="connect__pill">🏗️ Real Estate JV</span>
-        <span class="connect__pill">💼 Angel Investment</span>
-        <span class="connect__pill">🤝 Strategic Partnership</span>
-        <span class="connect__pill">📡 Carnivore Media</span>
-        <span class="connect__pill">🕊️ Nonprofit Vision</span>
-        <span class="connect__pill">🎙️ Speaking</span>
+      <div class="connect__tags reveal d3">
+        <span class="ctag">🏗️ Real Estate JV</span>
+        <span class="ctag">💼 Angel Investment</span>
+        <span class="ctag">🤝 Strategic Partnership</span>
+        <span class="ctag">📡 Carnivore Media</span>
+        <span class="ctag">🕊️ Nonprofit Vision</span>
+        <span class="ctag">🎙️ Speaking</span>
       </div>
-      <div class="reveal reveal-delay-4">
-        <a href="#contact" class="btn-primary" style="margin:0 auto;">
-          <span>Start the Conversation</span>
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      <div class="reveal d4">
+        <a href="#contact" class="btn-gold">
+          Start the Conversation
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" width="16" height="16"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
         </a>
       </div>
     </div>
@@ -1503,62 +1340,71 @@
 
 <div class="divider"></div>
 
-<!-- ══════════════════════════════════════════════ CONTACT ══ -->
+<!-- ═══ CONTACT ════════════════════════════════════════════════════ -->
 <section id="contact">
-  <div class="section-wrap">
+  <div class="wrap">
     <div class="contact__grid">
-      <div>
-        <div class="label reveal">Get in Touch</div>
-        <h3 class="contact__info reveal reveal-delay-1" style="font-family:'Cormorant Garamond',serif; font-size:2.4rem; font-weight:600; margin-bottom:1rem; line-height:1.1;">
-          Let's Connect.<br>Let's <em style="color:var(--green)">Build.</em>
-        </h3>
-        <p class="contact__info reveal reveal-delay-2" style="color:var(--white-soft); font-size:.95rem; line-height:1.85; margin-bottom:2rem;">
-          If you're a builder, a believer, an investor, or a visionary — and you believe in doing business the right way — Chad would love to connect.
-        </p>
+      <div class="contact__left">
+        <div class="section-label reveal">Get in Touch</div>
+        <h3 class="reveal d1">Let's Connect.<br>Let's <em>Build.</em></h3>
+        <p class="reveal d2">If you're a builder, a believer, an investor, or a visionary — and you believe in doing business the right way — Chad would love to connect.</p>
 
-        <div class="contact__detail reveal reveal-delay-2">
-          <div class="contact__detail-icon">📍</div>
-          <span>Tampa, Florida · Costa Rica · Kenosha, Wisconsin</span>
+        <div class="contact__detail reveal d2">
+          <div class="contact__detail-ico">📍</div>
+          <span>Tampa, FL · Costa Rica · Kenosha, WI</span>
         </div>
-        <div class="contact__detail reveal reveal-delay-3">
-          <div class="contact__detail-icon">✉️</div>
-          <span>Connect via the form →</span>
+        <div class="contact__detail reveal d3">
+          <div class="contact__detail-ico">✉️</div>
+          <a href="mailto:ChadPanton@gmail.com" style="color:var(--white-soft);">ChadPanton@gmail.com</a>
+        </div>
+        <div class="contact__detail reveal d3">
+          <div class="contact__detail-ico">🌐</div>
+          <span>ChadPanton.com</span>
         </div>
 
-        <div class="contact__social reveal reveal-delay-4">
-          <a href="#" class="social-btn" title="LinkedIn">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+        <!-- Social Media Buttons — links to be added later -->
+        <div class="social-row reveal d4">
+          <a href="#" class="social-btn" aria-label="LinkedIn">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+            LinkedIn
           </a>
-          <a href="#" class="social-btn" title="Instagram">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+          <a href="#" class="social-btn" aria-label="Instagram">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+            Instagram
           </a>
-          <a href="#" class="social-btn" title="Facebook">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+          <a href="#" class="social-btn" aria-label="Facebook">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+            Facebook
+          </a>
+          <a href="#" class="social-btn" aria-label="X / Twitter">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+            X
           </a>
         </div>
       </div>
 
-      <div class="form-card reveal reveal-delay-2">
-        <form id="contactForm" onsubmit="handleSubmit(event)">
+      <!-- Contact Form → mailto to ChadPanton@gmail.com -->
+      <div class="form-card reveal d2">
+        <form id="contactForm" onsubmit="sendEmail(event)">
           <div class="form-row">
-            <div class="form-group">
+            <div class="fgroup">
               <label for="fname">First Name</label>
               <input type="text" id="fname" placeholder="John" required />
             </div>
-            <div class="form-group">
+            <div class="fgroup">
               <label for="lname">Last Name</label>
               <input type="text" id="lname" placeholder="Smith" required />
             </div>
           </div>
-          <div class="form-group">
+          <div class="fgroup">
             <label for="email">Email Address</label>
             <input type="email" id="email" placeholder="john@company.com" required />
           </div>
-          <div class="form-group">
+          <div class="fgroup">
             <label for="phone">Phone Number</label>
             <input type="tel" id="phone" placeholder="+1 (555) 000-0000" />
           </div>
-          <div class="form-group">
+          <div class="fgroup">
             <label for="reason">I'm reaching out about</label>
             <select id="reason">
               <option value="">Select a topic...</option>
@@ -1570,106 +1416,105 @@
               <option>General Inquiry</option>
             </select>
           </div>
-          <div class="form-group">
+          <div class="fgroup">
             <label for="message">Your Message</label>
             <textarea id="message" placeholder="Tell me about you, your vision, and why we should connect..." required></textarea>
           </div>
           <button type="submit" class="form-submit">Send Message →</button>
         </form>
-        <div id="formSuccess" style="display:none; text-align:center; padding:2rem;">
-          <div style="font-size:2.5rem; margin-bottom:1rem;">🙏</div>
-          <h4 style="font-family:'Cormorant Garamond',serif; font-size:1.6rem; margin-bottom:.6rem;">Message Received.</h4>
-          <p style="color:var(--gray); font-size:.9rem;">Chad will be in touch. Thank you for reaching out.</p>
+        <div class="form-success" id="formSuccess">
+          <div class="form-success__icon">🙏</div>
+          <h4>Message Sent.</h4>
+          <p>Your email client will open to send your message to Chad. He'll be in touch.</p>
         </div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ══════════════════════════════════════════════════ FOOTER ══ -->
+<!-- ═══ FOOTER ═════════════════════════════════════════════════════ -->
 <footer>
   <div class="footer__inner">
-    <div class="footer__brand">Chad<span>.</span>Panton</div>
+    <div class="footer__logo">Chad<span>.</span>Panton</div>
     <div class="footer__verse">"For we are God's handiwork, created in Christ Jesus to do good works." — Ephesians 2:10</div>
-    <div class="footer__copy">© 2025 Chad D. Panton. Tampa, FL.</div>
+    <div class="footer__copy">© 2025 Chad D. Panton · Tampa, FL · ChadPanton.com</div>
   </div>
 </footer>
 
-<!-- ══════════════════════════════════════════════════ JS ══ -->
+<!-- ═══ SCRIPTS ════════════════════════════════════════════════════ -->
 <script>
-  // ── CURSOR ──────────────────────────────────────────────────
-  const cursor     = document.getElementById('cursor');
-  const cursorDot  = cursor?.querySelector('.cursor__dot');
-  const cursorRing = document.getElementById('cursorRing');
-  let mx = 0, my = 0, rx = 0, ry = 0;
-
-  document.addEventListener('mousemove', e => {
-    mx = e.clientX; my = e.clientY;
-    if (cursor) {
-      cursor.style.transform = `translate(${mx}px,${my}px)`;
-    }
-  });
-
-  function animateRing() {
-    rx += (mx - rx) * .14;
-    ry += (my - ry) * .14;
-    if (cursorRing) cursorRing.style.transform = `translate(${rx}px,${ry}px)`;
-    requestAnimationFrame(animateRing);
-  }
-  animateRing();
-
-  document.querySelectorAll('a, button, .pillar, .venture-card, .stat-card, .invest-category, .condition-item').forEach(el => {
-    el.addEventListener('mouseenter', () => cursorRing?.classList.add('hovered'));
-    el.addEventListener('mouseleave', () => cursorRing?.classList.remove('hovered'));
-  });
-
-  // ── NAV SCROLL ──────────────────────────────────────────────
+  /* ── NAV SCROLL ─────────────────────────────────────────────── */
   const navbar = document.getElementById('navbar');
   window.addEventListener('scroll', () => {
     navbar.classList.toggle('scrolled', window.scrollY > 60);
   }, { passive: true });
 
-  // ── BURGER MENU ─────────────────────────────────────────────
+  /* ── BURGER ─────────────────────────────────────────────────── */
   const burger    = document.getElementById('burger');
   const mobileNav = document.getElementById('mobileNav');
-  const mobileClose = document.getElementById('mobileClose');
+  burger.addEventListener('click', () => {
+    burger.classList.toggle('open');
+    mobileNav.classList.toggle('open');
+    document.body.style.overflow = mobileNav.classList.contains('open') ? 'hidden' : '';
+  });
+  function closeNav() {
+    burger.classList.remove('open');
+    mobileNav.classList.remove('open');
+    document.body.style.overflow = '';
+  }
 
-  burger.addEventListener('click', () => mobileNav.classList.add('open'));
-  mobileClose.addEventListener('click', () => mobileNav.classList.remove('open'));
-  function closeMobile() { mobileNav.classList.remove('open'); }
-
-  // ── INTERSECTION OBSERVER (reveal) ──────────────────────────
-  const reveals = document.querySelectorAll('.reveal');
+  /* ── INTERSECTION OBSERVER ──────────────────────────────────── */
+  const revealEls = document.querySelectorAll('.reveal');
   const io = new IntersectionObserver((entries) => {
     entries.forEach(e => {
-      if (e.isIntersecting) {
-        e.target.classList.add('visible');
-        io.unobserve(e.target);
-      }
+      if (e.isIntersecting) { e.target.classList.add('vis'); io.unobserve(e.target); }
     });
-  }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
-  reveals.forEach(el => io.observe(el));
+  }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+  revealEls.forEach(el => io.observe(el));
 
-  // ── FORM ────────────────────────────────────────────────────
-  function handleSubmit(e) {
+  /* ── EMAIL FORM ─────────────────────────────────────────────── */
+  function sendEmail(e) {
     e.preventDefault();
+    const fname   = document.getElementById('fname').value.trim();
+    const lname   = document.getElementById('lname').value.trim();
+    const email   = document.getElementById('email').value.trim();
+    const phone   = document.getElementById('phone').value.trim();
+    const reason  = document.getElementById('reason').value;
+    const message = document.getElementById('message').value.trim();
+
+    const subject = encodeURIComponent(
+      `ChadPanton.com Inquiry: ${reason || 'General'} — ${fname} ${lname}`
+    );
+    const body = encodeURIComponent(
+      `Hi Chad,\n\nYou have a new inquiry from ChadPanton.com:\n\n` +
+      `Name:    ${fname} ${lname}\n` +
+      `Email:   ${email}\n` +
+      `Phone:   ${phone || 'Not provided'}\n` +
+      `Topic:   ${reason || 'Not specified'}\n\n` +
+      `Message:\n${message}\n\n` +
+      `---\nSent from ChadPanton.com`
+    );
+
+    window.location.href = `mailto:ChadPanton@gmail.com?subject=${subject}&body=${body}`;
+
+    // Show success state
     document.getElementById('contactForm').style.display = 'none';
     document.getElementById('formSuccess').style.display = 'block';
   }
 
-  // ── SMOOTH NAV ACTIVE ────────────────────────────────────────
+  /* ── ACTIVE NAV HIGHLIGHT ───────────────────────────────────── */
   const sections = document.querySelectorAll('section[id]');
-  const navLinks = document.querySelectorAll('.nav__links a');
-  const sectionObserver = new IntersectionObserver(entries => {
+  const navAs    = document.querySelectorAll('.nav__links a');
+  const secObs   = new IntersectionObserver(entries => {
     entries.forEach(entry => {
       if (entry.isIntersecting) {
-        navLinks.forEach(a => a.style.color = '');
+        navAs.forEach(a => a.style.color = '');
         const active = document.querySelector(`.nav__links a[href="#${entry.target.id}"]`);
-        if (active) active.style.color = 'var(--white)';
+        if (active) active.style.color = 'var(--gold-light)';
       }
     });
-  }, { threshold: 0.4 });
-  sections.forEach(s => sectionObserver.observe(s));
+  }, { threshold: 0.35 });
+  sections.forEach(s => secObs.observe(s));
 </script>
 </body>
 </html>
