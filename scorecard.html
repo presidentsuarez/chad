@@ -3,600 +3,1674 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Chad Panton — Personal Brand Scorecard</title>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<title>Chad Panton — Personal Brand Scorecard 2026</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Syne:wght@400;500;600;700;800&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
 <style>
-  :root {
-    --gold: #C9A84C;
-    --gold-light: #E8C96A;
-    --gold-pale: #F5EDD6;
-    --dark: #0D0D0D;
-    --dark-2: #141414;
-    --dark-3: #1C1C1C;
-    --dark-4: #242424;
-    --red: #C0392B;
-    --orange: #D4621A;
-    --yellow: #D4AA1A;
-    --green: #27AE60;
-    --text: #E8E8E8;
-    --text-muted: #888;
-    --text-faint: #555;
-    --border: #2A2A2A;
-  }
-  * { margin: 0; padding: 0; box-sizing: border-box; }
-  body { background: var(--dark); color: var(--text); font-family: 'DM Sans', sans-serif; line-height: 1.6; }
+:root {
+  --cream:   #faf7f2;
+  --white:   #ffffff;
+  --paper:   #f5f1ea;
+  --navy:    #0c1f4a;
+  --navy2:   #16305f;
+  --gold:    #b8790f;
+  --gold-lt: #e8a820;
+  --gold-bg: #fdf3dc;
+  --red:     #d63a2a;
+  --red-bg:  #fdecea;
+  --amber:   #d4820a;
+  --amber-bg:#fef4e0;
+  --green:   #158c5a;
+  --green-bg:#e6f7ef;
+  --blue:    #1a55a8;
+  --blue-bg: #e8eef9;
+  --ink:     #0f172a;
+  --ink2:    #334155;
+  --muted:   #7c8aa0;
+  --border:  #e8e2d8;
+  --shadow:  0 4px 24px rgba(12,31,74,0.08);
+  --shadow-lg: 0 12px 48px rgba(12,31,74,0.13);
+}
 
-  .header {
-    background: linear-gradient(135deg, #0D0D0D 0%, #1a1208 50%, #0D0D0D 100%);
-    border-bottom: 1px solid var(--gold);
-    padding: 60px 40px 40px;
-    position: relative; overflow: hidden;
-  }
-  .header::before {
-    content: ''; position: absolute; top: -60px; right: -60px;
-    width: 300px; height: 300px;
-    background: radial-gradient(circle, rgba(201,168,76,0.12) 0%, transparent 70%);
-    border-radius: 50%;
-  }
-  .header-inner { max-width: 1100px; margin: 0 auto; }
-  .report-label { font-family: 'DM Mono', monospace; font-size: 11px; letter-spacing: 3px; color: var(--gold); text-transform: uppercase; margin-bottom: 12px; }
-  .header h1 { font-family: 'Playfair Display', serif; font-size: 52px; font-weight: 900; letter-spacing: -1px; color: #fff; margin-bottom: 4px; }
-  .header h1 span { color: var(--gold); }
-  .header-sub { font-size: 15px; color: var(--text-muted); margin-bottom: 32px; }
+*, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
 
-  .aggregate-bar {
-    display: flex; align-items: center; gap: 32px;
-    background: var(--dark-3); border: 1px solid var(--border);
-    border-left: 4px solid var(--red); border-radius: 8px; padding: 24px 32px;
-  }
-  .aggregate-score-num { font-family: 'Playfair Display', serif; font-size: 80px; font-weight: 900; color: var(--red); line-height: 1; min-width: 160px; }
-  .aggregate-score-num span { font-size: 36px; color: var(--text-muted); }
-  .aggregate-right { flex: 1; }
-  .aggregate-grade { font-family: 'DM Mono', monospace; font-size: 13px; letter-spacing: 2px; color: var(--red); text-transform: uppercase; margin-bottom: 6px; }
-  .aggregate-title { font-family: 'Playfair Display', serif; font-size: 26px; color: #fff; margin-bottom: 8px; }
-  .aggregate-desc { font-size: 14px; color: var(--text-muted); line-height: 1.7; }
+html { scroll-behavior: smooth; }
 
-  .main { max-width: 1100px; margin: 0 auto; padding: 48px 40px; }
+body {
+  background: var(--cream);
+  color: var(--ink);
+  font-family: 'Syne', sans-serif;
+  font-size: 15px;
+  line-height: 1.6;
+  overflow-x: hidden;
+}
 
-  .section-label {
-    font-family: 'DM Mono', monospace; font-size: 10px; letter-spacing: 4px;
-    color: var(--gold); text-transform: uppercase; margin-bottom: 20px;
-    display: flex; align-items: center; gap: 12px;
-  }
-  .section-label::after { content: ''; flex: 1; height: 1px; background: var(--border); }
+/* ─── HERO ─────────────────────────────── */
+.hero {
+  background: var(--navy);
+  position: relative;
+  overflow: hidden;
+  padding: 0;
+}
+.hero-bg-lines {
+  position: absolute;
+  inset: 0;
+  opacity: 0.06;
+  background-image:
+    repeating-linear-gradient(0deg, transparent, transparent 48px, rgba(255,255,255,0.6) 48px, rgba(255,255,255,0.6) 49px),
+    repeating-linear-gradient(90deg, transparent, transparent 48px, rgba(255,255,255,0.6) 48px, rgba(255,255,255,0.6) 49px);
+}
+.hero-glow {
+  position: absolute;
+  width: 700px; height: 700px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(184,121,15,0.25) 0%, transparent 70%);
+  top: -200px; right: -100px;
+  pointer-events: none;
+}
+.hero-glow2 {
+  position: absolute;
+  width: 400px; height: 400px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(26,85,168,0.3) 0%, transparent 70%);
+  bottom: -100px; left: 10%;
+  pointer-events: none;
+}
+.hero-inner {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 60px;
+  align-items: center;
+  padding: 64px 72px;
+}
+.hero-left {}
+.hero-eyebrow {
+  font-family: 'Fira Code', monospace;
+  font-size: 11px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--gold-lt);
+  margin-bottom: 18px;
+  opacity: 0;
+  animation: fadeUp 0.6s 0.1s ease forwards;
+}
+.hero-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(42px, 5vw, 72px);
+  font-weight: 700;
+  line-height: 1.0;
+  color: #fff;
+  margin-bottom: 6px;
+  opacity: 0;
+  animation: fadeUp 0.6s 0.2s ease forwards;
+}
+.hero-title em { color: var(--gold-lt); font-style: italic; }
+.hero-subtitle {
+  font-size: 13px;
+  color: rgba(255,255,255,0.5);
+  letter-spacing: 0.5px;
+  margin-bottom: 36px;
+  opacity: 0;
+  animation: fadeUp 0.6s 0.3s ease forwards;
+}
+.hero-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  opacity: 0;
+  animation: fadeUp 0.6s 0.4s ease forwards;
+}
+.hero-tag {
+  background: rgba(255,255,255,0.08);
+  border: 1px solid rgba(255,255,255,0.15);
+  color: rgba(255,255,255,0.7);
+  font-family: 'Fira Code', monospace;
+  font-size: 10px;
+  letter-spacing: 1px;
+  padding: 5px 12px;
+  border-radius: 20px;
+}
 
-  .scorecard-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 56px; }
+/* BIG SCORE RING */
+.hero-score-block {
+  text-align: center;
+  opacity: 0;
+  animation: fadeIn 0.8s 0.5s ease forwards;
+}
+.score-ring-wrap {
+  position: relative;
+  width: 220px;
+  height: 220px;
+  margin: 0 auto 16px;
+}
+.score-ring-wrap svg {
+  transform: rotate(-90deg);
+}
+.score-ring-center {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.score-grade {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 68px;
+  font-weight: 700;
+  line-height: 1;
+  color: #fff;
+}
+.score-grade-sub {
+  font-family: 'Fira Code', monospace;
+  font-size: 11px;
+  color: rgba(255,255,255,0.45);
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  margin-top: 2px;
+}
+.score-pts {
+  font-family: 'Fira Code', monospace;
+  font-size: 12px;
+  color: rgba(255,255,255,0.6);
+  text-align: center;
+  letter-spacing: 1px;
+}
+.score-pts strong { color: var(--red); font-size: 20px; }
+.score-pts span { color: rgba(255,255,255,0.3); }
+.score-headline {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 13px;
+  color: rgba(255,255,255,0.45);
+  font-style: italic;
+  margin-top: 8px;
+  max-width: 200px;
+  text-align: center;
+}
 
-  .score-card {
-    background: var(--dark-3); border: 1px solid var(--border);
-    border-radius: 8px; padding: 24px; position: relative; overflow: hidden;
-  }
-  .score-card::before { content: ''; position: absolute; top: 0; left: 0; width: 4px; height: 100%; }
-  .score-card.grade-f::before { background: var(--red); }
-  .score-card.grade-d::before { background: var(--orange); }
-  .score-card.grade-c::before { background: var(--yellow); }
-  .score-card.grade-b::before { background: #4CAF50; }
-  .score-card-full { grid-column: 1 / -1; }
+/* ─── STAT STRIP ─── */
+.stat-strip {
+  background: var(--white);
+  border-bottom: 2px solid var(--border);
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+}
+.stat-item {
+  padding: 28px 24px;
+  border-right: 1px solid var(--border);
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+.stat-item:last-child { border-right: none; }
+.stat-item::after {
+  content: '';
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  height: 3px;
+  transform: scaleX(0);
+  transition: transform 0.5s ease;
+}
+.stat-item:hover::after { transform: scaleX(1); }
+.stat-item.danger::after { background: var(--red); }
+.stat-item.warning::after { background: var(--amber); }
+.stat-item.ok::after { background: var(--green); }
+.stat-val {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 38px;
+  font-weight: 700;
+  line-height: 1;
+  color: var(--navy);
+  margin-bottom: 4px;
+}
+.stat-val.red { color: var(--red); }
+.stat-val.green { color: var(--green); }
+.stat-label {
+  font-size: 11px;
+  color: var(--muted);
+  letter-spacing: 0.5px;
+  line-height: 1.4;
+}
 
-  .score-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 14px; }
-  .score-platform { font-family: 'Playfair Display', serif; font-size: 18px; font-weight: 700; color: #fff; }
-  .score-number { font-family: 'DM Mono', monospace; font-size: 28px; font-weight: 500; line-height: 1; }
-  .score-number span { font-size: 14px; color: var(--text-muted); }
-  .grade-f .score-number { color: var(--red); }
-  .grade-d .score-number { color: var(--orange); }
-  .grade-c .score-number { color: var(--yellow); }
-  .grade-b .score-number { color: #4CAF50; }
+/* ─── LAYOUT ─── */
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 48px;
+}
 
-  .score-progress { height: 4px; background: var(--dark-4); border-radius: 2px; margin-bottom: 12px; overflow: hidden; }
-  .score-progress-fill { height: 100%; border-radius: 2px; }
-  .grade-f .score-progress-fill { background: var(--red); }
-  .grade-d .score-progress-fill { background: var(--orange); }
-  .grade-c .score-progress-fill { background: var(--yellow); }
-  .grade-b .score-progress-fill { background: #4CAF50; }
+/* ─── SECTION HEADERS ─── */
+.section {
+  padding: 64px 0;
+}
+.section-label {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 40px;
+}
+.section-label-text {
+  font-family: 'Fira Code', monospace;
+  font-size: 10px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--gold);
+  white-space: nowrap;
+}
+.section-label-num {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 13px;
+  color: var(--muted);
+  margin-right: 8px;
+}
+.section-label hr { flex: 1; border: none; border-top: 1px solid var(--border); }
+.section-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(28px, 3vw, 40px);
+  font-weight: 700;
+  color: var(--navy);
+  line-height: 1.2;
+  margin-bottom: 8px;
+}
+.section-desc {
+  font-size: 14px;
+  color: var(--muted);
+  max-width: 600px;
+  line-height: 1.7;
+}
 
-  .score-finding { font-size: 13px; color: var(--text-muted); line-height: 1.6; }
-  .score-finding strong { color: var(--text); display: block; margin-bottom: 3px; font-size: 12px; text-transform: uppercase; letter-spacing: 0.5px; margin-top: 10px; }
+/* ─── CHARTS GRID ─── */
+.charts-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+  margin-bottom: 24px;
+}
+.charts-grid-3 {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 24px;
+}
+.chart-card {
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 32px;
+  box-shadow: var(--shadow);
+}
+.chart-card.full { grid-column: 1 / -1; }
+.chart-card-label {
+  font-family: 'Fira Code', monospace;
+  font-size: 9px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 6px;
+}
+.chart-card-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--navy);
+  margin-bottom: 24px;
+}
+.chart-wrap { position: relative; }
 
-  .score-badge {
-    display: inline-block; font-family: 'DM Mono', monospace; font-size: 9px;
-    letter-spacing: 1.5px; text-transform: uppercase; padding: 3px 8px;
-    border-radius: 3px; margin-bottom: 8px;
-  }
-  .grade-f .score-badge { background: rgba(192,57,43,0.15); color: var(--red); border: 1px solid rgba(192,57,43,0.3); }
-  .grade-d .score-badge { background: rgba(212,98,26,0.15); color: var(--orange); border: 1px solid rgba(212,98,26,0.3); }
-  .grade-c .score-badge { background: rgba(212,170,26,0.15); color: var(--yellow); border: 1px solid rgba(212,170,26,0.3); }
-  .grade-b .score-badge { background: rgba(76,175,80,0.15); color: #4CAF50; border: 1px solid rgba(76,175,80,0.3); }
+/* ─── RING METERS ─── */
+.ring-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+  margin-bottom: 20px;
+}
+.ring-grid-2 {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+.ring-card {
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 28px 20px;
+  text-align: center;
+  box-shadow: var(--shadow);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+.ring-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-lg);
+}
+.ring-wrap {
+  position: relative;
+  width: 100px;
+  height: 100px;
+  margin: 0 auto 14px;
+}
+.ring-wrap svg { transform: rotate(-90deg); }
+.ring-center {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.ring-score {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 28px;
+  font-weight: 700;
+  line-height: 1;
+}
+.ring-denom {
+  font-family: 'Fira Code', monospace;
+  font-size: 9px;
+  color: var(--muted);
+}
+.ring-platform {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--navy);
+  margin-bottom: 4px;
+}
+.ring-status {
+  font-family: 'Fira Code', monospace;
+  font-size: 9px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  padding: 3px 8px;
+  border-radius: 20px;
+  display: inline-block;
+}
+.ring-status.critical { background: var(--red-bg); color: var(--red); }
+.ring-status.poor { background: var(--amber-bg); color: var(--amber); }
+.ring-status.fair { background: var(--blue-bg); color: var(--blue); }
 
-  .benchmark-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-bottom: 56px; }
-  .benchmark-card { background: var(--dark-3); border: 1px solid var(--border); border-radius: 8px; padding: 24px; }
-  .benchmark-card h4 { font-family: 'Playfair Display', serif; font-size: 16px; color: var(--gold); margin-bottom: 12px; }
-  .benchmark-card ul { list-style: none; font-size: 13px; color: var(--text-muted); line-height: 2.1; }
-  .benchmark-card ul li::before { content: '→ '; color: var(--gold); }
+/* ─── SCORECARD TABLE ─── */
+.score-table {
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: var(--shadow);
+}
+.score-table table { width: 100%; border-collapse: collapse; }
+.score-table thead tr {
+  background: var(--navy);
+}
+.score-table thead th {
+  padding: 14px 20px;
+  text-align: left;
+  font-family: 'Fira Code', monospace;
+  font-size: 9px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.6);
+  font-weight: 400;
+}
+.score-table thead th:nth-child(2),
+.score-table thead th:nth-child(3),
+.score-table thead th:nth-child(4) { text-align: center; }
+.score-table tbody tr {
+  border-bottom: 1px solid var(--border);
+  transition: background 0.15s;
+}
+.score-table tbody tr:hover { background: var(--paper); }
+.score-table tbody tr:last-child { border-bottom: none; background: var(--gold-bg); }
+.score-table td { padding: 14px 20px; font-size: 13px; }
+.score-table td:nth-child(2), .score-table td:nth-child(3), .score-table td:nth-child(4) { text-align: center; }
+.score-pill {
+  display: inline-block;
+  font-family: 'Fira Code', monospace;
+  font-size: 11px;
+  font-weight: 500;
+  padding: 3px 10px;
+  border-radius: 20px;
+}
+.score-pill.red { background: var(--red-bg); color: var(--red); }
+.score-pill.green { background: var(--green-bg); color: var(--green); }
+.score-pill.bold-row { font-family: 'Cormorant Garamond', serif; font-size: 16px; font-weight: 700; }
+.bar-mini {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.bar-mini-track {
+  flex: 1;
+  height: 6px;
+  background: var(--paper);
+  border-radius: 3px;
+  overflow: hidden;
+}
+.bar-mini-fill {
+  height: 100%;
+  border-radius: 3px;
+  transition: width 1.2s cubic-bezier(0.4,0,0.2,1);
+}
 
-  .insight-box {
-    background: linear-gradient(135deg, rgba(201,168,76,0.05), rgba(201,168,76,0.02));
-    border: 1px solid rgba(201,168,76,0.25); border-radius: 8px; padding: 32px; margin-bottom: 56px;
-  }
-  .insight-box h3 { font-family: 'Playfair Display', serif; font-size: 22px; color: var(--gold); margin-bottom: 16px; }
-  .insight-box p { font-size: 15px; color: var(--text-muted); line-height: 1.8; margin-bottom: 12px; }
-  .insight-box p:last-child { margin-bottom: 0; }
-  .insight-box p strong { color: var(--text); }
+/* ─── INSIGHTS ─── */
+.insights-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 20px;
+}
+.insight-card {
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 32px;
+  box-shadow: var(--shadow);
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+.insight-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-lg); }
+.insight-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 4px;
+}
+.insight-card.navy::before { background: var(--navy); }
+.insight-card.gold::before { background: var(--gold); }
+.insight-card.red::before { background: var(--red); }
+.insight-card.green::before { background: var(--green); }
+.insight-card.blue::before { background: var(--blue); }
+.insight-card.amber::before { background: var(--amber); }
+.insight-icon-wrap {
+  width: 48px; height: 48px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 22px;
+  margin-bottom: 16px;
+}
+.insight-icon-wrap.navy-bg { background: rgba(12,31,74,0.08); }
+.insight-icon-wrap.gold-bg { background: var(--gold-bg); }
+.insight-icon-wrap.red-bg { background: var(--red-bg); }
+.insight-icon-wrap.green-bg { background: var(--green-bg); }
+.insight-icon-wrap.blue-bg { background: var(--blue-bg); }
+.insight-icon-wrap.amber-bg { background: var(--amber-bg); }
+.insight-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 19px;
+  font-weight: 700;
+  color: var(--navy);
+  margin-bottom: 10px;
+  line-height: 1.3;
+}
+.insight-body {
+  font-size: 13px;
+  color: var(--ink2);
+  line-height: 1.75;
+}
+.insight-body strong { color: var(--navy); font-weight: 700; }
 
-  .roadmap-section { margin-bottom: 56px; }
-  .phase { margin-bottom: 40px; }
-  .phase-header { display: flex; align-items: center; gap: 16px; margin-bottom: 20px; }
-  .phase-num { font-family: 'DM Mono', monospace; font-size: 11px; letter-spacing: 2px; color: var(--dark); background: var(--gold); padding: 4px 12px; border-radius: 4px; text-transform: uppercase; white-space: nowrap; }
-  .phase-title { font-family: 'Playfair Display', serif; font-size: 22px; color: #fff; }
-  .phase-date { font-family: 'DM Mono', monospace; font-size: 11px; color: var(--text-faint); margin-left: auto; letter-spacing: 1px; white-space: nowrap; }
+/* ─── ROADMAP ─── */
+.roadmap-wrap {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 20px;
+}
+.phase-card {
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: var(--shadow);
+}
+.phase-head {
+  padding: 28px;
+  position: relative;
+  overflow: hidden;
+}
+.phase-head.p1 { background: linear-gradient(135deg, #0c1f4a 0%, #1a3060 100%); }
+.phase-head.p2 { background: linear-gradient(135deg, #1a55a8 0%, #2a70d8 100%); }
+.phase-head.p3 { background: linear-gradient(135deg, #158c5a 0%, #20b87a 100%); }
+.phase-badge {
+  font-family: 'Fira Code', monospace;
+  font-size: 9px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.6);
+  margin-bottom: 10px;
+}
+.phase-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 26px;
+  font-weight: 700;
+  color: #fff;
+  margin-bottom: 4px;
+}
+.phase-sub {
+  font-size: 12px;
+  color: rgba(255,255,255,0.55);
+}
+.phase-body { padding: 24px 28px; }
+.task-item {
+  display: flex;
+  gap: 14px;
+  margin-bottom: 20px;
+  align-items: flex-start;
+}
+.task-item:last-child { margin-bottom: 0; }
+.task-day {
+  font-family: 'Fira Code', monospace;
+  font-size: 9px;
+  letter-spacing: 1px;
+  padding: 4px 8px;
+  border-radius: 6px;
+  flex-shrink: 0;
+  margin-top: 1px;
+  text-align: center;
+  min-width: 44px;
+  white-space: nowrap;
+}
+.p1-day { background: rgba(12,31,74,0.08); color: var(--navy); }
+.p2-day { background: var(--blue-bg); color: var(--blue); }
+.p3-day { background: var(--green-bg); color: var(--green); }
+.task-text {}
+.task-name {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--navy);
+  margin-bottom: 3px;
+}
+.task-desc {
+  font-size: 12px;
+  color: var(--muted);
+  line-height: 1.65;
+}
 
-  .day-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
-  .day-card { background: var(--dark-3); border: 1px solid var(--border); border-radius: 6px; padding: 20px; }
-  .day-label { font-family: 'DM Mono', monospace; font-size: 10px; letter-spacing: 2px; color: var(--gold); text-transform: uppercase; margin-bottom: 8px; }
-  .day-task { font-size: 14px; font-weight: 600; color: #fff; margin-bottom: 6px; }
-  .day-desc { font-size: 12px; color: var(--text-muted); line-height: 1.6; }
-  .day-priority { display: inline-block; font-family: 'DM Mono', monospace; font-size: 9px; letter-spacing: 1px; padding: 2px 6px; border-radius: 2px; margin-bottom: 8px; text-transform: uppercase; }
-  .priority-critical { background: rgba(192,57,43,0.2); color: #E74C3C; border: 1px solid rgba(192,57,43,0.3); }
-  .priority-high { background: rgba(212,98,26,0.2); color: var(--orange); border: 1px solid rgba(212,98,26,0.3); }
-  .priority-medium { background: rgba(201,168,76,0.2); color: var(--gold); border: 1px solid rgba(201,168,76,0.3); }
+/* ─── QUOTE BAND ─── */
+.quote-band {
+  background: var(--navy);
+  padding: 56px 72px;
+  position: relative;
+  overflow: hidden;
+}
+.quote-band::before {
+  content: '\201C';
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 300px;
+  color: rgba(255,255,255,0.04);
+  position: absolute;
+  top: -60px; left: 40px;
+  line-height: 1;
+  pointer-events: none;
+}
+.quote-inner {
+  max-width: 900px;
+  margin: 0 auto;
+  text-align: center;
+  position: relative;
+  z-index: 1;
+}
+.quote-text {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(22px, 2.5vw, 34px);
+  font-style: italic;
+  color: #fff;
+  line-height: 1.5;
+  margin-bottom: 20px;
+}
+.quote-attr {
+  font-family: 'Fira Code', monospace;
+  font-size: 10px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--gold-lt);
+}
 
-  .potential-section { background: var(--dark-3); border: 1px solid var(--border); border-top: 3px solid var(--gold); border-radius: 8px; padding: 40px; text-align: center; }
-  .potential-section h3 { font-family: 'Playfair Display', serif; font-size: 28px; color: var(--gold); margin-bottom: 12px; }
-  .potential-score-display { display: flex; justify-content: center; align-items: center; gap: 48px; margin: 32px 0; flex-wrap: wrap; }
-  .pot-score { text-align: center; }
-  .pot-score-num { font-family: 'Playfair Display', serif; font-size: 64px; font-weight: 900; line-height: 1; margin-bottom: 4px; }
-  .pot-score-label { font-family: 'DM Mono', monospace; font-size: 10px; letter-spacing: 2px; text-transform: uppercase; color: var(--text-muted); }
-  .arrow-right { font-size: 32px; color: var(--gold); }
-  .potential-section > p { font-size: 14px; color: var(--text-muted); max-width: 680px; margin: 0 auto; line-height: 1.8; }
-  .potential-section > p strong { color: var(--text); }
+/* ─── OPPORTUNITY BAND ─── */
+.opportunity-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+}
+.opp-card {
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 28px 24px;
+  box-shadow: var(--shadow);
+  text-align: center;
+}
+.opp-number {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 44px;
+  font-weight: 700;
+  color: var(--navy);
+  line-height: 1;
+  margin-bottom: 6px;
+}
+.opp-number.gold { color: var(--gold); }
+.opp-number.green { color: var(--green); }
+.opp-number.red { color: var(--red); }
+.opp-label { font-size: 12px; color: var(--muted); line-height: 1.4; }
 
-  footer { background: var(--dark-2); border-top: 1px solid var(--border); padding: 24px 40px; text-align: center; }
-  footer p { font-family: 'DM Mono', monospace; font-size: 11px; color: var(--text-faint); letter-spacing: 1px; }
+/* ─── FOOTER ─── */
+footer {
+  background: var(--navy);
+  padding: 32px 72px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+footer .brand {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 18px;
+  color: rgba(255,255,255,0.8);
+}
+footer .meta {
+  font-family: 'Fira Code', monospace;
+  font-size: 9px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.3);
+}
 
-  @media (max-width: 768px) {
-    .scorecard-grid, .benchmark-grid, .day-grid { grid-template-columns: 1fr; }
-    .header h1 { font-size: 34px; }
-    .aggregate-bar { flex-direction: column; text-align: center; }
-    .potential-score-display { flex-direction: column; gap: 16px; }
-    .phase-header { flex-wrap: wrap; }
-    .main { padding: 32px 20px; }
-    .header { padding: 40px 20px; }
-  }
+/* ─── ANIMATIONS ─── */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+@keyframes dashDraw {
+  to { stroke-dashoffset: 0; }
+}
+.reveal {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+.reveal.visible {
+  opacity: 1;
+  transform: none;
+}
+
+/* ─── DIVIDER ─── */
+.divider {
+  height: 1px;
+  background: var(--border);
+  margin: 0;
+}
+
+/* responsive */
+@media (max-width: 900px) {
+  .hero-inner { grid-template-columns: 1fr; }
+  .charts-grid, .insights-grid, .roadmap-wrap, .ring-grid, .opportunity-grid { grid-template-columns: 1fr; }
+  .container { padding: 0 24px; }
+  .hero-inner, .quote-band { padding: 40px 24px; }
+  .stat-strip { grid-template-columns: 1fr 1fr; }
+}
 </style>
 </head>
 <body>
 
-<div class="header">
-  <div class="header-inner">
-    <div class="report-label">Confidential Brand Audit &nbsp;·&nbsp; March 2026</div>
-    <h1>Chad <span>Panton</span></h1>
-    <div class="header-sub">Tampa, FL &nbsp;·&nbsp; Marketplace Ministry Leader &nbsp;·&nbsp; Entrepreneur &nbsp;·&nbsp; Angel Investor &nbsp;·&nbsp; Kingdom Builder</div>
-    <div class="aggregate-bar">
-      <div class="aggregate-score-num">14<span>/100</span></div>
-      <div class="aggregate-right">
-        <div class="aggregate-grade">⚠ Aggregate Brand Score &mdash; Grade: F</div>
-        <div class="aggregate-title">Brand Virtually Invisible Online</div>
-        <div class="aggregate-desc">Despite a $3.2M business exit, 15+ active investments, international real estate holdings, and one of the most compelling personal stories in the faith-entrepreneur space — Chad Panton has almost zero discoverable brand presence online. The gap between his real-world accomplishment and his digital footprint is extraordinary. This is simultaneously the most alarming finding and the single greatest opportunity.</div>
+<!-- ═══════════════════════════════════════
+  HERO
+═══════════════════════════════════════ -->
+<div class="hero">
+  <div class="hero-bg-lines"></div>
+  <div class="hero-glow"></div>
+  <div class="hero-glow2"></div>
+  <div class="hero-inner">
+    <div class="hero-left">
+      <div class="hero-eyebrow">// Confidential Brand Audit · March 2026</div>
+      <div class="hero-title">Chad D.<br><em>Panton</em></div>
+      <div class="hero-subtitle">Personal Brand Scorecard — Full Digital Presence Audit</div>
+      <div class="hero-tags">
+        <span class="hero-tag">Marketplace Ministry</span>
+        <span class="hero-tag">Angel Investor</span>
+        <span class="hero-tag">$3.2M Exit</span>
+        <span class="hero-tag">Faith Executive</span>
+        <span class="hero-tag">Tampa, FL</span>
+        <span class="hero-tag">11 Platforms Scanned</span>
       </div>
+    </div>
+    <div class="hero-score-block">
+      <div class="score-ring-wrap">
+        <svg width="220" height="220" viewBox="0 0 220 220">
+          <circle cx="110" cy="110" r="94" fill="none" stroke="rgba(255,255,255,0.07)" stroke-width="14"/>
+          <circle id="heroRing" cx="110" cy="110" r="94" fill="none"
+            stroke="#d63a2a" stroke-width="14" stroke-linecap="round"
+            stroke-dasharray="590.6" stroke-dashoffset="590.6"/>
+        </svg>
+        <div class="score-ring-center">
+          <div class="score-grade">D–</div>
+          <div class="score-grade-sub">Overall Grade</div>
+        </div>
+      </div>
+      <div class="score-pts"><strong id="heroScore">11</strong><span>/100</span></div>
+      <div class="score-headline">World-class story. Near-zero digital presence.</div>
     </div>
   </div>
 </div>
 
-<div class="main">
-
-  <div class="section-label">Platform-by-Platform Scorecard</div>
-  <div class="scorecard-grid">
-
-    <div class="score-card grade-f">
-      <div class="score-badge">Critical Gap</div>
-      <div class="score-header">
-        <div class="score-platform">Personal Website</div>
-        <div class="score-number">0<span>/100</span></div>
-      </div>
-      <div class="score-progress"><div class="score-progress-fill" style="width:0%"></div></div>
-      <div class="score-finding">
-        <strong>What Was Found</strong>
-        No website found at any variation of chadpanton.com or any personal domain. The only footprints online are third-party corporate registry entries and background-check aggregators.
-        <strong>What 100 Looks Like</strong>
-        A flagship personal site that owns the #1 Google result for "Chad Panton." Hero section with story, ventures page, investment philosophy, media/speaking, and a "Work With Chad" CTA. Indexed and ranking within 60 days of launch.
-      </div>
-    </div>
-
-    <div class="score-card grade-f">
-      <div class="score-badge">Critical Gap</div>
-      <div class="score-header">
-        <div class="score-platform">Google Search Visibility</div>
-        <div class="score-number">5<span>/100</span></div>
-      </div>
-      <div class="score-progress"><div class="score-progress-fill" style="width:5%"></div></div>
-      <div class="score-finding">
-        <strong>What Was Found</strong>
-        Searching "Chad Panton" returns: a Techstars 2018 attendee page, JavaWorks corporate registry listings, and people-finder sites. Zero owned content. Zero press. Zero interviews. Zero thought leadership. His name is effectively unbranded on the internet.
-        <strong>What 100 Looks Like</strong>
-        First page dominated by: personal site, LinkedIn, podcast appearances, Forbes/Entrepreneur mentions, and YouTube. Searching "marketplace ministry entrepreneur Tampa" surfaces Chad unprompted.
-      </div>
-    </div>
-
-    <div class="score-card grade-f">
-      <div class="score-badge">Severely Underdeveloped</div>
-      <div class="score-header">
-        <div class="score-platform">Instagram (@chadpanton)</div>
-        <div class="score-number">8<span>/100</span></div>
-      </div>
-      <div class="score-progress"><div class="score-progress-fill" style="width:8%"></div></div>
-      <div class="score-finding">
-        <strong>What Was Found</strong>
-        Account exists. 1,114 followers · 2,209 following · 150 posts. The inverted follower-to-following ratio (following nearly 2x more accounts than follow back) signals no content strategy and no inbound audience pull. No optimized bio. No brand story in Highlights.
-        <strong>What 100 Looks Like</strong>
-        10,000+ followers (achievable in 90 days with correct strategy). Follower-to-following ratio flipped. Clear bio with tagline and link. Highlights: Faith, Ventures, Costa Rica, Health Journey, Investments. Consistent 4–5x/week with Reels driving organic reach.
-      </div>
-    </div>
-
-    <div class="score-card grade-d">
-      <div class="score-badge">Inactive / Incomplete</div>
-      <div class="score-header">
-        <div class="score-platform">LinkedIn</div>
-        <div class="score-number">18<span>/100</span></div>
-      </div>
-      <div class="score-progress"><div class="score-progress-fill" style="width:18%"></div></div>
-      <div class="score-finding">
-        <strong>What Was Found</strong>
-        A profile exists but ranks poorly. No activity, posts, or articles surfaced in search. Profile appears stale — still associated primarily with JavaWorks. No headline articulating marketplace ministry, no featured section, no content strategy deployed.
-        <strong>What 100 Looks Like</strong>
-        5,000+ connections. Headline: "Marketplace Ministry Leader | $3.2M Exit → Angel Investor | Kingdom Builder." Creator Mode on. Newsletter launched. Long-form articles ranking in Google. Appearing in searches for "faith entrepreneur" and "marketplace ministry."
-      </div>
-    </div>
-
-    <div class="score-card grade-d">
-      <div class="score-badge">Personal Only</div>
-      <div class="score-header">
-        <div class="score-platform">Facebook</div>
-        <div class="score-number">15<span>/100</span></div>
-      </div>
-      <div class="score-progress"><div class="score-progress-fill" style="width:15%"></div></div>
-      <div class="score-finding">
-        <strong>What Was Found</strong>
-        A personal Facebook profile exists (facebook.com/CDP3636) but no business page, no branded community group, and no visible content strategy. The profile is not functioning as a brand asset.
-        <strong>What 100 Looks Like</strong>
-        A verified Facebook Business Page + a private Group ("Kingdom Builders with Chad Panton") for faith-driven entrepreneurs. Repurposed Instagram and LinkedIn content feeding the page 3–4x/week. Meta ads retargeting warm audiences into the nonprofit waitlist.
-      </div>
-    </div>
-
-    <div class="score-card grade-f">
-      <div class="score-badge">Does Not Exist</div>
-      <div class="score-header">
-        <div class="score-platform">YouTube</div>
-        <div class="score-number">0<span>/100</span></div>
-      </div>
-      <div class="score-progress"><div class="score-progress-fill" style="width:0%"></div></div>
-      <div class="score-finding">
-        <strong>What Was Found</strong>
-        No YouTube channel found under any search variation of "Chad Panton." Zero video content indexed anywhere online.
-        <strong>What 100 Looks Like</strong>
-        A channel with 3 content pillars: (1) Faith & Marketplace — weekly 15–20 min deep dives. (2) Investment Transparency — honest breakdowns of the angel portfolio and node ownership. (3) Health Journey — the mold/Lyme/detox testimony connected to the nonprofit mission. 1,000+ subscribers in 90 days is achievable. 10K in 12 months.
-      </div>
-    </div>
-
-    <div class="score-card grade-f">
-      <div class="score-badge">Does Not Exist</div>
-      <div class="score-header">
-        <div class="score-platform">TikTok</div>
-        <div class="score-number">0<span>/100</span></div>
-      </div>
-      <div class="score-progress"><div class="score-progress-fill" style="width:0%"></div></div>
-      <div class="score-finding">
-        <strong>What Was Found</strong>
-        No TikTok account found. Zero short-form video presence on any platform.
-        <strong>What 100 Looks Like</strong>
-        @chadpanton posting 3–5 short-form videos per week. Chad's story — the mold diagnosis, the $3.2M exit, the Costa Rica reset, Pam's legacy — is built for short-form viral content. The health journey (biohacking, functional medicine) is one of TikTok's top-performing niches. Faith + entrepreneur content performs especially well for the 35+ demographic.
-      </div>
-    </div>
-
-    <div class="score-card grade-f">
-      <div class="score-badge">Not Found</div>
-      <div class="score-header">
-        <div class="score-platform">X / Twitter</div>
-        <div class="score-number">0<span>/100</span></div>
-      </div>
-      <div class="score-progress"><div class="score-progress-fill" style="width:0%"></div></div>
-      <div class="score-finding">
-        <strong>What Was Found</strong>
-        No X/Twitter account found for Chad Panton under any search variation. Zero presence in the business, faith, crypto, or investor conversations where his name should appear.
-        <strong>What 100 Looks Like</strong>
-        @chadpanton active daily: faith-business commentary, crypto/digital asset takes (the node portfolio is uniquely interesting content), real estate development transparency. X is the primary network for the angel/VC/crypto communities Chad already operates in. This is an entirely missed network-building channel.
-      </div>
-    </div>
-
-    <div class="score-card grade-f">
-      <div class="score-badge">Does Not Exist</div>
-      <div class="score-header">
-        <div class="score-platform">Podcast (Own + Guest)</div>
-        <div class="score-number">0<span>/100</span></div>
-      </div>
-      <div class="score-progress"><div class="score-progress-fill" style="width:0%"></div></div>
-      <div class="score-finding">
-        <strong>What Was Found</strong>
-        No podcast found — not as host, not as guest. Zero audio presence on Spotify, Apple Podcasts, or any podcast directory.
-        <strong>What 100 Looks Like</strong>
-        Chad's own podcast ("Purpose Over Profit" or "Kingdom Marketplace") distributed on Spotify, Apple, and YouTube. Guest appearances on faith-entrepreneur shows, real estate investor podcasts, health/biohacking programs, and crypto networks. Even 2–3 guest appearances in 90 days dramatically expands reach and improves Google rankings for Chad's name.
-      </div>
-    </div>
-
-    <div class="score-card grade-f">
-      <div class="score-badge">Zero Coverage Found</div>
-      <div class="score-header">
-        <div class="score-platform">Press &amp; Media Coverage</div>
-        <div class="score-number">3<span>/100</span></div>
-      </div>
-      <div class="score-progress"><div class="score-progress-fill" style="width:3%"></div></div>
-      <div class="score-finding">
-        <strong>What Was Found</strong>
-        No press coverage found anywhere. No Tampa Bay Business Journal features, no Forbes/Entrepreneur mentions, no podcast citations, no speaking write-ups. The $3.2M JavaWorks exit to a Fortune 50 company — a significant, verifiable business milestone — generated zero media coverage whatsoever.
-        <strong>What 100 Looks Like</strong>
-        3–5 strategic placements per year: Tampa Bay Business Journal, Forbes BrandVoice, faith-business publications, and health/functional medicine media. The Kenosha Hyatt Studio Hotel development is a newsworthy press angle available right now.
-      </div>
-    </div>
-
-    <div class="score-card grade-f score-card-full">
-      <div class="score-badge">No Content Strategy</div>
-      <div class="score-header">
-        <div class="score-platform">Content Strategy &amp; Brand Consistency</div>
-        <div class="score-number">5<span>/100</span></div>
-      </div>
-      <div class="score-progress"><div class="score-progress-fill" style="width:5%"></div></div>
-      <div class="score-finding">
-        <strong>What Was Found</strong>
-        No blog, newsletter, email list, or published articles exist. No consistent visual identity across any platform. No defined content pillars deployed anywhere online. The taglines documented in Chad's website brief ("Purpose Over Profit. Faith Over Fear.") do not appear anywhere in searchable digital content.
-        <strong>What 100 Looks Like</strong>
-        A unified brand voice deployed across all channels. Weekly email newsletter ("The Kingdom Builder Brief"). Blog/SEO articles targeting: "faith-led entrepreneur," "marketplace ministry," "functional medicine Christianity," "angel investing Christian." Consistent visual system — colors, fonts, photography style — so that every post on every platform is unmistakably Chad Panton.
-      </div>
-    </div>
-
+<!-- ═══════════════════════════════════════
+  STAT STRIP
+═══════════════════════════════════════ -->
+<div class="stat-strip">
+  <div class="stat-item danger">
+    <div class="stat-val red">0</div>
+    <div class="stat-label">Personal Website<br>Does Not Exist</div>
   </div>
-
-  <!-- PROFESSIONAL INSIGHTS -->
-  <div class="section-label">Professional Brand Assessment</div>
-  <div class="insight-box">
-    <h3>The Paradox of the Invisible Giant</h3>
-    <p>In 15+ years of brand consulting, a 14/100 score for someone of Chad Panton's caliber is almost never seen. This is not a reflection of his story, his track record, or his character — all of which are exceptional. This is a reflection of <strong>zero intentional brand infrastructure being built alongside the business portfolio.</strong></p>
-    <p>The irony is stark: Chad possesses the ingredients that brand consultancies charge $500K+ to manufacture for other clients — an authentic origin story, a dramatic pivot moment, a seven-figure verified exit, international real estate, angel investments, a faith framework that resonates with tens of millions of Americans, a deeply human grief narrative tied to a larger mission, and a health journey that connects to one of the fastest-growing content niches in the country (biohacking, functional medicine, alternative health).</p>
-    <p>The gap between <strong>what Chad has lived</strong> and <strong>what the internet knows about him</strong> is the entire opportunity. His website brief contains the raw material for a top 1% personal brand in the faith-entrepreneur space. Right now, that material exists in a document instead of in the world.</p>
-    <p><strong>Comparable figures who have built empires on similar stories:</strong> Ed Mylett (faith + business), Bianca Juárez Olthoff (faith + grief + purpose), Jordan Harbinger (entrepreneurship + personal reinvention), Ben Greenfield (biohacking + faith). Each built $10M+ personal brand businesses on stories no richer than Chad's.</p>
+  <div class="stat-item danger">
+    <div class="stat-val red">1,114</div>
+    <div class="stat-label">Instagram Followers<br>Follows 2,209 back ↓</div>
   </div>
-
-  <!-- WHAT 100 LOOKS LIKE -->
-  <div class="section-label">What A Perfect Score Looks Like — By Category</div>
-  <div class="benchmark-grid">
-    <div class="benchmark-card">
-      <h4>Search &amp; Website — 100</h4>
-      <ul>
-        <li>Ranks #1 for "Chad Panton" on Google</li>
-        <li>Ranks top 10 for "marketplace ministry entrepreneur"</li>
-        <li>Personal site with 3,000+ monthly organic visitors</li>
-        <li>Press page with 10+ media placements</li>
-        <li>Speaking inquiry page with social proof</li>
-        <li>SEO-optimized blog with 25+ indexed articles</li>
-        <li>Google Knowledge Panel populated and verified</li>
-      </ul>
-    </div>
-    <div class="benchmark-card">
-      <h4>Social Presence — 100</h4>
-      <ul>
-        <li>Instagram: 25,000+ followers, Reels hitting 50K+ views</li>
-        <li>LinkedIn: 10,000+ connections, Creator Mode, newsletter</li>
-        <li>YouTube: 5,000+ subscribers, 3 content pillars active</li>
-        <li>TikTok: 10,000+ followers, weekly viral moments</li>
-        <li>X/Twitter: 5,000+ followers, daily thought leadership</li>
-        <li>Facebook: Business Page + Community Group active</li>
-        <li>All platforms: consistent bio, photo, voice, and link</li>
-      </ul>
-    </div>
-    <div class="benchmark-card">
-      <h4>Authority &amp; Reach — 100</h4>
-      <ul>
-        <li>Own podcast with 1,000+ downloads per episode</li>
-        <li>Guest on 10+ target-niche podcasts per year</li>
-        <li>Forbes or Entrepreneur published feature</li>
-        <li>3+ keynote speaking engagements per year</li>
-        <li>Email list of 5,000+ engaged subscribers</li>
-        <li>Nonprofit announced with press coverage</li>
-        <li>JV and investment deals flowing inbound from brand</li>
-      </ul>
-    </div>
+  <div class="stat-item danger">
+    <div class="stat-val red">0</div>
+    <div class="stat-label">Press Features<br>Found Anywhere</div>
   </div>
-
-  <!-- 90-DAY ROADMAP -->
-  <div class="roadmap-section">
-    <div class="section-label">90-Day Brand Acceleration Roadmap</div>
-
-    <div class="phase">
-      <div class="phase-header">
-        <div class="phase-num">Phase 1</div>
-        <div class="phase-title">Foundation &amp; Infrastructure</div>
-        <div class="phase-date">Days 1–30</div>
-      </div>
-      <div class="day-grid">
-        <div class="day-card">
-          <div class="day-label">Days 1–3</div>
-          <div class="day-priority priority-critical">Critical</div>
-          <div class="day-task">Secure All Handles</div>
-          <div class="day-desc">Register @chadpanton on every platform immediately: TikTok, X, YouTube, Threads. Claim chadpanton.com and all variations (.co, .net). These are the most time-sensitive actions — names get taken once content starts circulating. Do this before anything else.</div>
-        </div>
-        <div class="day-card">
-          <div class="day-label">Days 3–10</div>
-          <div class="day-priority priority-critical">Critical</div>
-          <div class="day-task">Build the Personal Website</div>
-          <div class="day-desc">Launch chadpanton.com. Pages: Hero (tagline + photo), Story (JavaWorks → exit → Costa Rica → calling), Ventures, Investments (overview only), Nonprofit Coming Soon, and Connect. Mobile-first, SEO-optimized. This is your home base — everything else online points here.</div>
-        </div>
-        <div class="day-card">
-          <div class="day-label">Days 5–8</div>
-          <div class="day-priority priority-critical">Critical</div>
-          <div class="day-task">LinkedIn Full Optimization</div>
-          <div class="day-desc">Rewrite headline, About section, and experience. Enable Creator Mode. Upload a professional headshot and branded banner. Add Featured section with top 3 achievements. Connect with every faith-entrepreneur, real estate, and crypto contact you have. Target: 500+ connections in 30 days.</div>
-        </div>
-        <div class="day-card">
-          <div class="day-label">Days 7–12</div>
-          <div class="day-priority priority-high">High</div>
-          <div class="day-task">Instagram Optimization</div>
-          <div class="day-desc">Rewrite bio with tagline and link to website. Unfollow non-relevant accounts to correct the inverted ratio. Create 5 Highlight covers: Faith, Ventures, Costa Rica, Health Journey, Investments. Begin posting 4x/week: 2 Reels + 2 carousel posts. Launch "Purpose Over Profit" content series.</div>
-        </div>
-        <div class="day-card">
-          <div class="day-label">Days 10–14</div>
-          <div class="day-priority priority-high">High</div>
-          <div class="day-task">Launch YouTube Channel</div>
-          <div class="day-desc">Record and publish Episode 1: "Why I Sold My $3.2M Company and Flew to Costa Rica." This single story, told well on camera, can generate the first 500 subscribers organically. Set up channel art, description, and playlists. Commit to 1 video per week minimum.</div>
-        </div>
-        <div class="day-card">
-          <div class="day-label">Days 12–21</div>
-          <div class="day-priority priority-high">High</div>
-          <div class="day-task">Launch TikTok</div>
-          <div class="day-desc">Post daily for the first 21 days — TikTok's algorithm strongly rewards new accounts that post consistently at launch. Lead with the hook: "I sold my company for $3.2 million and this is what I did next." Health journey content (mold toxicity, functional medicine) is a top-performing TikTok category. Use #biohacking #faithentrepreneur #christianbusiness.</div>
-        </div>
-        <div class="day-card">
-          <div class="day-label">Days 15–20</div>
-          <div class="day-priority priority-high">High</div>
-          <div class="day-task">Launch X / Twitter</div>
-          <div class="day-desc">Post daily: 3–5 short observations in the faith-business, crypto/digital assets, and real estate spaces. X is where the angel investor and crypto community lives. Your node ownership story — "$32K invested, $150K already cashed out, nodes still paying daily" — is highly shareable content in this community.</div>
-        </div>
-        <div class="day-card">
-          <div class="day-label">Days 18–25</div>
-          <div class="day-priority priority-medium">Medium</div>
-          <div class="day-task">Email List &amp; Newsletter</div>
-          <div class="day-desc">Set up ConvertKit or Beehiiv. Create a lead magnet: "5 Principles of Kingdom Business" or "The Functional Medicine Protocol That Changed My Life." Drive sign-ups from every platform. Goal: 200 subscribers by Day 30. Begin the weekly "Kingdom Builder Brief" newsletter covering faith, deals, health, and investing.</div>
-        </div>
-        <div class="day-card">
-          <div class="day-label">Days 22–30</div>
-          <div class="day-priority priority-medium">Medium</div>
-          <div class="day-task">Facebook Page + Community</div>
-          <div class="day-desc">Launch a verified Facebook Business Page. Create private Facebook Group: "Kingdom Marketplace Builders." Invite your existing network — this becomes the engaged community around the future nonprofit and ventures. Repurpose top Instagram/LinkedIn posts to the Page 3–4x/week.</div>
-        </div>
-      </div>
-    </div>
-
-    <div class="phase">
-      <div class="phase-header">
-        <div class="phase-num">Phase 2</div>
-        <div class="phase-title">Content Engine &amp; Authority Building</div>
-        <div class="phase-date">Days 31–60</div>
-      </div>
-      <div class="day-grid">
-        <div class="day-card">
-          <div class="day-label">Days 31–35</div>
-          <div class="day-priority priority-critical">Critical</div>
-          <div class="day-task">The Origin Story Video</div>
-          <div class="day-desc">Record a professional 10–15 minute YouTube video: the full Chad Panton story. JavaWorks founding → 14 years → $3.2M exit → Costa Rica → mold diagnosis → Pam's legacy → the mission. This becomes the cornerstone piece that every other platform clips, references, and links to. This is the video that makes people call you.</div>
-        </div>
-        <div class="day-card">
-          <div class="day-label">Days 33–40</div>
-          <div class="day-priority priority-critical">Critical</div>
-          <div class="day-task">First Media Placement</div>
-          <div class="day-desc">Pitch Tampa Bay Business Journal and Tampa Bay Times: "Local entrepreneur exits $3.2M company to faith-led investment empire." Also pitch Kenosha News about the Hyatt Studio Hotel development — that's a local business story ready to publish now. One press hit creates a major SEO spike and adds legitimacy across every platform overnight.</div>
-        </div>
-        <div class="day-card">
-          <div class="day-label">Days 35–45</div>
-          <div class="day-priority priority-high">High</div>
-          <div class="day-task">Podcast Guest Blitz</div>
-          <div class="day-desc">Identify 20 podcasts in your target niches: faith-entrepreneur, marketplace ministry, angel investing, biohacking/functional medicine, real estate investor. Pitch 20 shows in Week 5. Goal: 5 confirmed bookings by Day 60. Guest appearances are the single highest-ROI brand activity — each one drives search volume for your name in a way nothing else can replicate.</div>
-        </div>
-        <div class="day-card">
-          <div class="day-label">Days 40–50</div>
-          <div class="day-priority priority-high">High</div>
-          <div class="day-task">Pam's Legacy — Dedicated Content</div>
-          <div class="day-desc">Create dedicated content honoring Pam Panton's story. This is the most emotionally resonant element of Chad's brand and the beating heart of the nonprofit. A YouTube video or deeply written piece — done with care and intention — will reach people who desperately need to hear it. This content will define Chad's purpose-driven brand more than any business post ever will.</div>
-        </div>
-        <div class="day-card">
-          <div class="day-label">Days 45–55</div>
-          <div class="day-priority priority-high">High</div>
-          <div class="day-task">LinkedIn Articles &amp; Newsletter</div>
-          <div class="day-desc">Publish 4 long-form LinkedIn articles (1,500+ words): (1) "What Selling My Business for $3.2M Taught Me About Kingdom Purpose" (2) "Why I Left Western Medicine and What I Found Instead" (3) "The Truth About Node Ownership in Crypto" (4) "What Equally Yoked Business Really Means." These rank in Google and are the foundation of thought leadership.</div>
-        </div>
-        <div class="day-card">
-          <div class="day-label">Days 50–60</div>
-          <div class="day-priority priority-medium">Medium</div>
-          <div class="day-task">Professional Photography</div>
-          <div class="day-desc">Hire a brand photographer for a half-day shoot: professional headshots, lifestyle shots in Tampa and Costa Rica settings, environmental portraits in your workspace. These go on the website, LinkedIn, press kit, and every platform header. Amateur photos are the silent brand killer — budget $1,000–$2,500. This investment pays for itself with the first credibility it generates.</div>
-        </div>
-      </div>
-    </div>
-
-    <div class="phase">
-      <div class="phase-header">
-        <div class="phase-num">Phase 3</div>
-        <div class="phase-title">Scale, Amplify &amp; Monetize the Brand</div>
-        <div class="phase-date">Days 61–90</div>
-      </div>
-      <div class="day-grid">
-        <div class="day-card">
-          <div class="day-label">Days 61–70</div>
-          <div class="day-priority priority-critical">Critical</div>
-          <div class="day-task">Launch the Podcast</div>
-          <div class="day-desc">"Purpose Over Profit with Chad Panton" — launch on Spotify, Apple Podcasts, and YouTube. Drop Episodes 1–4 simultaneously (a binge stack). First guests: partners from your existing network — ISI Legacy, R3, Ananda Science. Interview format + solo episodes. This positions Chad as a curator and connector, not just a participant, in the faith-entrepreneur space.</div>
-        </div>
-        <div class="day-card">
-          <div class="day-label">Days 65–75</div>
-          <div class="day-priority priority-critical">Critical</div>
-          <div class="day-task">Nonprofit Public Announcement</div>
-          <div class="day-desc">Begin publicly teasing the 501(c)(3): "Something is coming. Built on a mother's legacy, a healing journey, and the truth that most mental illness isn't mental." This kind of authentic teaser content performs extraordinarily well. Build an email waitlist. Draft a press release. The nonprofit launch becomes a brand moment that lifts every other platform simultaneously.</div>
-        </div>
-        <div class="day-card">
-          <div class="day-label">Days 70–80</div>
-          <div class="day-priority priority-high">High</div>
-          <div class="day-task">Speaking Engagements</div>
-          <div class="day-desc">Pitch 10 speaking opportunities: faith-business conferences, Tampa Bay entrepreneur events, church business ministries, real estate investor meetups, and functional medicine/wellness events. A one-page speaker one-sheet built from the website content is all you need. Your story sells itself. Target: 2 confirmed bookings by Day 90.</div>
-        </div>
-        <div class="day-card">
-          <div class="day-label">Days 75–85</div>
-          <div class="day-priority priority-high">High</div>
-          <div class="day-task">Forbes / Entrepreneur Pitch</div>
-          <div class="day-desc">By Day 75 you will have: an active website, 5+ podcast guest appearances, a published article, Instagram and LinkedIn running, and a nonprofit in formation. Now pitch Forbes BrandVoice or Entrepreneur.com with a contributed article: "Why I Walked Away From a $3.2M Exit to Chase Purpose." This is achievable and changes the brand permanently.</div>
-        </div>
-        <div class="day-card">
-          <div class="day-label">Days 80–88</div>
-          <div class="day-priority priority-high">High</div>
-          <div class="day-task">Carnivore Media Integration</div>
-          <div class="day-desc">Put the Carnivore Media marketing stack to work on your own brand. The AI intent-based marketing platform and pixel de-anonymization technology should be deployed on chadpanton.com immediately. You are in an equity partnership with this company — use the product on yourself as a live case study. This also creates powerful content: "I ran enterprise AI marketing on my own personal brand. Here's exactly what happened."</div>
-        </div>
-        <div class="day-card">
-          <div class="day-label">Days 88–90</div>
-          <div class="day-priority priority-medium">Medium</div>
-          <div class="day-task">90-Day Full Audit</div>
-          <div class="day-desc">Google your name. Count first-page owned results. Check follower counts across all platforms. Count podcast appearances confirmed and aired. Measure email list size. Review press coverage. At Day 90, realistic targets: 3+ owned Google first-page results, Instagram 3,000+ followers, LinkedIn 2,000+ connections, YouTube 500+ subscribers, email list 500+.</div>
-        </div>
-      </div>
-    </div>
+  <div class="stat-item danger">
+    <div class="stat-val red">0</div>
+    <div class="stat-label">YouTube / Podcast<br>Channels Found</div>
   </div>
-
-  <!-- POTENTIAL SCORE -->
-  <div class="potential-section">
-    <h3>The Brand That Already Exists — It Just Isn't Online Yet</h3>
-    <div class="potential-score-display">
-      <div class="pot-score">
-        <div class="pot-score-num" style="color: var(--red);">14</div>
-        <div class="pot-score-label">Current Score</div>
-      </div>
-      <div class="arrow-right">→</div>
-      <div class="pot-score">
-        <div class="pot-score-num" style="color: var(--yellow);">55</div>
-        <div class="pot-score-label">Day 90 Target</div>
-      </div>
-      <div class="arrow-right">→</div>
-      <div class="pot-score">
-        <div class="pot-score-num" style="color: var(--gold);">82</div>
-        <div class="pot-score-label">12-Month Potential</div>
-      </div>
-      <div class="arrow-right">→</div>
-      <div class="pot-score">
-        <div class="pot-score-num" style="color: #4CAF50;">95</div>
-        <div class="pot-score-label">24-Month Ceiling</div>
-      </div>
-    </div>
-    <p>Chad Panton has every raw ingredient for a top 1% personal brand in the faith-entrepreneur space. The $3.2M exit, the Costa Rica reset, Pam's legacy, the mold diagnosis, the angel portfolio, the Hyatt hotel development, the functional medicine mission — none of this is manufactured. It is lived. The only work left is to <strong>put it online, consistently, in the right order, on the right platforms.</strong> The 90-day roadmap above is not aspirational — it is executable. Every single action is within reach in the first 90 days with focused effort or the right team behind it.</p>
+  <div class="stat-item ok">
+    <div class="stat-val green">90+</div>
+    <div class="stat-label">Achievable Score<br>Within 12 Months</div>
   </div>
-
 </div>
 
+<div class="divider"></div>
+
+<!-- ═══════════════════════════════════════
+  SECTION 1: CHARTS
+═══════════════════════════════════════ -->
+<div class="container">
+<div class="section">
+  <div class="section-label reveal">
+    <span class="section-label-num">01</span>
+    <span class="section-label-text">Visual Brand Analysis</span>
+    <hr>
+  </div>
+  <div class="section-title reveal">The Numbers Don't Lie —<br>But They Tell a Hopeful Story</div>
+  <p class="section-desc reveal" style="margin-bottom:48px;">Every gap below is an open door. The platform-by-platform breakdown, radar analysis, and 12-month trajectory chart together reveal one of the widest gaps — and biggest opportunities — in the faith-entrepreneur space.</p>
+
+  <!-- RING METERS -->
+  <div class="ring-grid reveal">
+    <div class="ring-card">
+      <div class="ring-wrap">
+        <svg width="100" height="100" viewBox="0 0 100 100">
+          <circle cx="50" cy="50" r="40" fill="none" stroke="#f0ede8" stroke-width="8"/>
+          <circle class="ring-arc" cx="50" cy="50" r="40" fill="none" stroke="#d63a2a" stroke-width="8" stroke-linecap="round" stroke-dasharray="251.2" data-pct="0"/>
+        </svg>
+        <div class="ring-center">
+          <div class="ring-score" style="color:#d63a2a">0</div>
+          <div class="ring-denom">/100</div>
+        </div>
+      </div>
+      <div class="ring-platform">Personal Website</div>
+      <span class="ring-status critical">Critical</span>
+    </div>
+    <div class="ring-card">
+      <div class="ring-wrap">
+        <svg width="100" height="100" viewBox="0 0 100 100">
+          <circle cx="50" cy="50" r="40" fill="none" stroke="#f0ede8" stroke-width="8"/>
+          <circle class="ring-arc" cx="50" cy="50" r="40" fill="none" stroke="#d63a2a" stroke-width="8" stroke-linecap="round" stroke-dasharray="251.2" data-pct="8"/>
+        </svg>
+        <div class="ring-center">
+          <div class="ring-score" style="color:#d63a2a">8</div>
+          <div class="ring-denom">/100</div>
+        </div>
+      </div>
+      <div class="ring-platform">LinkedIn</div>
+      <span class="ring-status critical">Critical</span>
+    </div>
+    <div class="ring-card">
+      <div class="ring-wrap">
+        <svg width="100" height="100" viewBox="0 0 100 100">
+          <circle cx="50" cy="50" r="40" fill="none" stroke="#f0ede8" stroke-width="8"/>
+          <circle class="ring-arc" cx="50" cy="50" r="40" fill="none" stroke="#d4820a" stroke-width="8" stroke-linecap="round" stroke-dasharray="251.2" data-pct="22"/>
+        </svg>
+        <div class="ring-center">
+          <div class="ring-score" style="color:#d4820a">22</div>
+          <div class="ring-denom">/100</div>
+        </div>
+      </div>
+      <div class="ring-platform">Instagram</div>
+      <span class="ring-status poor">Poor</span>
+    </div>
+    <div class="ring-card">
+      <div class="ring-wrap">
+        <svg width="100" height="100" viewBox="0 0 100 100">
+          <circle cx="50" cy="50" r="40" fill="none" stroke="#f0ede8" stroke-width="8"/>
+          <circle class="ring-arc" cx="50" cy="50" r="40" fill="none" stroke="#d63a2a" stroke-width="8" stroke-linecap="round" stroke-dasharray="251.2" data-pct="12"/>
+        </svg>
+        <div class="ring-center">
+          <div class="ring-score" style="color:#d63a2a">12</div>
+          <div class="ring-denom">/100</div>
+        </div>
+      </div>
+      <div class="ring-platform">Facebook</div>
+      <span class="ring-status critical">Critical</span>
+    </div>
+  </div>
+
+  <div class="ring-grid-2 reveal" style="grid-template-columns: repeat(4,1fr); margin-top:20px; display:grid; gap:20px;">
+    <div class="ring-card">
+      <div class="ring-wrap">
+        <svg width="100" height="100" viewBox="0 0 100 100">
+          <circle cx="50" cy="50" r="40" fill="none" stroke="#f0ede8" stroke-width="8"/>
+          <circle class="ring-arc" cx="50" cy="50" r="40" fill="none" stroke="#d63a2a" stroke-width="8" stroke-linecap="round" stroke-dasharray="251.2" data-pct="0"/>
+        </svg>
+        <div class="ring-center">
+          <div class="ring-score" style="color:#d63a2a">0</div>
+          <div class="ring-denom">/100</div>
+        </div>
+      </div>
+      <div class="ring-platform">YouTube</div>
+      <span class="ring-status critical">Critical</span>
+    </div>
+    <div class="ring-card">
+      <div class="ring-wrap">
+        <svg width="100" height="100" viewBox="0 0 100 100">
+          <circle cx="50" cy="50" r="40" fill="none" stroke="#f0ede8" stroke-width="8"/>
+          <circle class="ring-arc" cx="50" cy="50" r="40" fill="none" stroke="#d63a2a" stroke-width="8" stroke-linecap="round" stroke-dasharray="251.2" data-pct="0"/>
+        </svg>
+        <div class="ring-center">
+          <div class="ring-score" style="color:#d63a2a">0</div>
+          <div class="ring-denom">/100</div>
+        </div>
+      </div>
+      <div class="ring-platform">X / Twitter</div>
+      <span class="ring-status critical">Critical</span>
+    </div>
+    <div class="ring-card">
+      <div class="ring-wrap">
+        <svg width="100" height="100" viewBox="0 0 100 100">
+          <circle cx="50" cy="50" r="40" fill="none" stroke="#f0ede8" stroke-width="8"/>
+          <circle class="ring-arc" cx="50" cy="50" r="40" fill="none" stroke="#d63a2a" stroke-width="8" stroke-linecap="round" stroke-dasharray="251.2" data-pct="0"/>
+        </svg>
+        <div class="ring-center">
+          <div class="ring-score" style="color:#d63a2a">0</div>
+          <div class="ring-denom">/100</div>
+        </div>
+      </div>
+      <div class="ring-platform">Podcast</div>
+      <span class="ring-status critical">Critical</span>
+    </div>
+    <div class="ring-card">
+      <div class="ring-wrap">
+        <svg width="100" height="100" viewBox="0 0 100 100">
+          <circle cx="50" cy="50" r="40" fill="none" stroke="#f0ede8" stroke-width="8"/>
+          <circle class="ring-arc" cx="50" cy="50" r="40" fill="none" stroke="#d63a2a" stroke-width="8" stroke-linecap="round" stroke-dasharray="251.2" data-pct="5"/>
+        </svg>
+        <div class="ring-center">
+          <div class="ring-score" style="color:#d63a2a">5</div>
+          <div class="ring-denom">/100</div>
+        </div>
+      </div>
+      <div class="ring-platform">Press & Media</div>
+      <span class="ring-status critical">Critical</span>
+    </div>
+  </div>
+
+  <!-- CHARTS ROW 1 -->
+  <div class="charts-grid reveal" style="margin-top:32px;">
+    <div class="chart-card">
+      <div class="chart-card-label">Spider Analysis</div>
+      <div class="chart-card-title">Brand Presence by Dimension</div>
+      <div class="chart-wrap" style="height:300px;">
+        <canvas id="radarChart"></canvas>
+      </div>
+    </div>
+    <div class="chart-card">
+      <div class="chart-card-label">Comparative Analysis</div>
+      <div class="chart-card-title">Current Score vs. Day-90 Target</div>
+      <div class="chart-wrap" style="height:300px;">
+        <canvas id="barChart"></canvas>
+      </div>
+    </div>
+  </div>
+
+  <!-- CHARTS ROW 2 -->
+  <div class="charts-grid reveal" style="margin-top:24px; grid-template-columns: 1fr 2fr;">
+    <div class="chart-card">
+      <div class="chart-card-label">Gap Visualization</div>
+      <div class="chart-card-title">Overall Brand Score</div>
+      <div class="chart-wrap" style="height:260px; display:flex; align-items:center; justify-content:center;">
+        <canvas id="doughnutChart" style="max-width:220px;"></canvas>
+      </div>
+      <div style="text-align:center; margin-top:12px;">
+        <span style="font-family:'Cormorant Garamond',serif; font-size:36px; font-weight:700; color:#d63a2a;">11</span>
+        <span style="font-size:13px; color:var(--muted);"> / 100 today</span>
+        <div style="font-size:12px; color:var(--green); margin-top:2px;">Target: 90+ by Month 12</div>
+      </div>
+    </div>
+    <div class="chart-card">
+      <div class="chart-card-label">12-Month Trajectory</div>
+      <div class="chart-card-title">Projected Brand Score Growth</div>
+      <div class="chart-wrap" style="height:310px;">
+        <canvas id="lineChart"></canvas>
+      </div>
+    </div>
+  </div>
+
+</div><!-- /section -->
+</div><!-- /container -->
+
+<!-- ═══════════════════════════════════════
+  SECTION 2: FULL BREAKDOWN TABLE
+═══════════════════════════════════════ -->
+<div style="background: var(--paper); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); padding: 64px 0;">
+<div class="container">
+  <div class="section-label reveal">
+    <span class="section-label-num">02</span>
+    <span class="section-label-text">Platform Scorecard</span>
+    <hr>
+  </div>
+  <div class="section-title reveal">Every Platform, Every Score,<br>Every Target</div>
+  <p class="section-desc reveal" style="margin-bottom:40px;">A full breakdown of where Chad stands today, what he needs to reach 100, and where Day 90 targets land.</p>
+
+  <div class="score-table reveal">
+    <table>
+      <thead>
+        <tr>
+          <th>Platform / Channel</th>
+          <th>Score Today</th>
+          <th>Day-90 Target</th>
+          <th>Progress to Target</th>
+          <th style="text-align:left; min-width:220px;">What 100/100 Looks Like</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong style="color:var(--navy)">Personal Website</strong><br><span style="font-size:11px;color:var(--muted)">Digital HQ — does not exist</span></td>
+          <td><span class="score-pill red">0</span></td>
+          <td><span class="score-pill green">70</span></td>
+          <td>
+            <div class="bar-mini">
+              <div class="bar-mini-track"><div class="bar-mini-fill" data-width="70" style="width:0; background:var(--green)"></div></div>
+              <span style="font-family:'Fira Code',monospace;font-size:10px;color:var(--muted);">70%</span>
+            </div>
+          </td>
+          <td style="font-size:12px;color:var(--ink2)">5-page site, email list, press kit, ranks #1 Google for "Chad Panton"</td>
+        </tr>
+        <tr>
+          <td><strong style="color:var(--navy)">LinkedIn</strong><br><span style="font-size:11px;color:var(--muted)">Stale — only in scrapers</span></td>
+          <td><span class="score-pill red">8</span></td>
+          <td><span class="score-pill green">65</span></td>
+          <td>
+            <div class="bar-mini">
+              <div class="bar-mini-track"><div class="bar-mini-fill" data-width="65" style="width:0; background:var(--green)"></div></div>
+              <span style="font-family:'Fira Code',monospace;font-size:10px;color:var(--muted);">65%</span>
+            </div>
+          </td>
+          <td style="font-size:12px;color:var(--ink2)">5K+ connections, posting 3×/wk, "Kingdom Ledger" newsletter, ranked for faith-entrepreneur Tampa</td>
+        </tr>
+        <tr>
+          <td><strong style="color:var(--navy)">Instagram</strong><br><span style="font-size:11px;color:var(--muted)">@chadpanton · 1,114 followers</span></td>
+          <td><span class="score-pill red">22</span></td>
+          <td><span class="score-pill green">48</span></td>
+          <td>
+            <div class="bar-mini">
+              <div class="bar-mini-track"><div class="bar-mini-fill" data-width="48" style="width:0; background:var(--green)"></div></div>
+              <span style="font-family:'Fira Code',monospace;font-size:10px;color:var(--muted);">48%</span>
+            </div>
+          </td>
+          <td style="font-size:12px;color:var(--ink2)">3,500 followers, clean ratio 10:1, daily Stories, Reels, link-in-bio to site</td>
+        </tr>
+        <tr>
+          <td><strong style="color:var(--navy)">Facebook</strong><br><span style="font-size:11px;color:var(--muted)">Personal profile only</span></td>
+          <td><span class="score-pill red">12</span></td>
+          <td><span class="score-pill green">38</span></td>
+          <td>
+            <div class="bar-mini">
+              <div class="bar-mini-track"><div class="bar-mini-fill" data-width="38" style="width:0; background:var(--green)"></div></div>
+              <span style="font-family:'Fira Code',monospace;font-size:10px;color:var(--muted);">38%</span>
+            </div>
+          </td>
+          <td style="font-size:12px;color:var(--ink2)">Business page, Meta Pixel live, "Kingdom Builders" community group, 10K+ followers</td>
+        </tr>
+        <tr>
+          <td><strong style="color:var(--navy)">YouTube</strong><br><span style="font-size:11px;color:var(--muted)">No channel found</span></td>
+          <td><span class="score-pill red">0</span></td>
+          <td><span class="score-pill green">30</span></td>
+          <td>
+            <div class="bar-mini">
+              <div class="bar-mini-track"><div class="bar-mini-fill" data-width="30" style="width:0; background:var(--green)"></div></div>
+              <span style="font-family:'Fira Code',monospace;font-size:10px;color:var(--muted);">30%</span>
+            </div>
+          </td>
+          <td style="font-size:12px;color:var(--ink2)">5K+ subscribers, 2 vids/mo, Shorts repurposed, 3 evergreen "pillar" videos optimized for search</td>
+        </tr>
+        <tr>
+          <td><strong style="color:var(--navy)">X / Twitter</strong><br><span style="font-size:11px;color:var(--muted)">No account found</span></td>
+          <td><span class="score-pill red">0</span></td>
+          <td><span class="score-pill green">28</span></td>
+          <td>
+            <div class="bar-mini">
+              <div class="bar-mini-track"><div class="bar-mini-fill" data-width="28" style="width:0; background:var(--green)"></div></div>
+              <span style="font-family:'Fira Code',monospace;font-size:10px;color:var(--muted);">28%</span>
+            </div>
+          </td>
+          <td style="font-size:12px;color:var(--ink2)">5K+ followers, daily posts, viral thread on the JavaWorks exit, engaged with R3/Ion/Gala communities</td>
+        </tr>
+        <tr>
+          <td><strong style="color:var(--navy)">Podcast</strong><br><span style="font-size:11px;color:var(--muted)">No show found</span></td>
+          <td><span class="score-pill red">0</span></td>
+          <td><span class="score-pill green">35</span></td>
+          <td>
+            <div class="bar-mini">
+              <div class="bar-mini-track"><div class="bar-mini-fill" data-width="35" style="width:0; background:var(--green)"></div></div>
+              <span style="font-family:'Fira Code',monospace;font-size:10px;color:var(--muted);">35%</span>
+            </div>
+          </td>
+          <td style="font-size:12px;color:var(--ink2)">"The Kingdom Ledger" — Top 10 Christian Business Apple Podcasts; sponsor-ready by Month 4</td>
+        </tr>
+        <tr>
+          <td><strong style="color:var(--navy)">Press & Media</strong><br><span style="font-size:11px;color:var(--muted)">Zero articles found</span></td>
+          <td><span class="score-pill red">5</span></td>
+          <td><span class="score-pill green">42</span></td>
+          <td>
+            <div class="bar-mini">
+              <div class="bar-mini-track"><div class="bar-mini-fill" data-width="42" style="width:0; background:var(--green)"></div></div>
+              <span style="font-family:'Fira Code',monospace;font-size:10px;color:var(--muted);">42%</span>
+            </div>
+          </td>
+          <td style="font-size:12px;color:var(--ink2)">Tampa Bay BJ feature, Forbes Councils, 3 podcast appearances, BiggerPockets RE guest post</td>
+        </tr>
+        <tr>
+          <td><strong style="color:var(--navy)">Google Search (SEO)</strong><br><span style="font-size:11px;color:var(--muted)">Only public records</span></td>
+          <td><span class="score-pill red">6</span></td>
+          <td><span class="score-pill green">55</span></td>
+          <td>
+            <div class="bar-mini">
+              <div class="bar-mini-track"><div class="bar-mini-fill" data-width="55" style="width:0; background:var(--green)"></div></div>
+              <span style="font-family:'Fira Code',monospace;font-size:10px;color:var(--muted);">55%</span>
+            </div>
+          </td>
+          <td style="font-size:12px;color:var(--ink2)">Page 1: website + LinkedIn + press + YouTube. Knowledge Panel triggered. Ranks for 5+ brand terms</td>
+        </tr>
+        <tr>
+          <td><strong style="color:var(--navy)">Email List / Newsletter</strong><br><span style="font-size:11px;color:var(--muted)">None — zero subscribers</span></td>
+          <td><span class="score-pill red">0</span></td>
+          <td><span class="score-pill green">50</span></td>
+          <td>
+            <div class="bar-mini">
+              <div class="bar-mini-track"><div class="bar-mini-fill" data-width="50" style="width:0; background:var(--green)"></div></div>
+              <span style="font-family:'Fira Code',monospace;font-size:10px;color:var(--muted);">50%</span>
+            </div>
+          </td>
+          <td style="font-size:12px;color:var(--ink2)">1,500 subscribers, 35%+ open rate, bi-weekly "Kingdom Ledger" — monetizable within 6 months</td>
+        </tr>
+        <tr>
+          <td><strong style="color:var(--gold); font-size:16px; font-family:'Cormorant Garamond',serif;">AGGREGATE SCORE</strong></td>
+          <td><span class="score-pill red bold-row">11 / 100</span></td>
+          <td><span class="score-pill green bold-row">52 / 100</span></td>
+          <td>
+            <div class="bar-mini">
+              <div class="bar-mini-track" style="height:8px;"><div class="bar-mini-fill" data-width="52" style="width:0; background: linear-gradient(90deg, var(--green), var(--gold));"></div></div>
+            </div>
+          </td>
+          <td style="font-size:12px;color:var(--gold); font-weight:700;">+4.7× improvement possible in 90 days</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+</div>
+
+<!-- ═══════════════════════════════════════
+  QUOTE BAND
+═══════════════════════════════════════ -->
+<div class="quote-band">
+  <div class="quote-inner">
+    <div class="quote-text">"The gap between Chad's real-world stature and his digital presence is among the widest this audit has measured — and that makes the upside extraordinary."</div>
+    <div class="quote-attr">— Brand Audit Finding · March 2026</div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════
+  SECTION 3: INSIGHTS
+═══════════════════════════════════════ -->
+<div class="container">
+<div class="section">
+  <div class="section-label reveal">
+    <span class="section-label-num">03</span>
+    <span class="section-label-text">Professional Brand Insights</span>
+    <hr>
+  </div>
+  <div class="section-title reveal">Six Things a Brand Strategist<br>Sees Immediately</div>
+  <p class="section-desc reveal" style="margin-bottom:48px;">These are not general observations. Each insight is specific to Chad's portfolio, story, and positioning — and each one points to a concrete action.</p>
+
+  <div class="insights-grid">
+    <div class="insight-card navy reveal">
+      <div class="insight-icon-wrap navy-bg">🔥</div>
+      <div class="insight-title">A World-Class Story With No Stage</div>
+      <div class="insight-body">The JavaWorks exit, the $600K deal Chad walked away from because the partner wasn't "equally yoked," the Costa Rica reset — these are <strong>viral-ready stories</strong> in the entrepreneur community. The raw material for a top-50 faith-business brand exists. It just needs to be built and published.</div>
+    </div>
+    <div class="insight-card red reveal" style="transition-delay:0.1s">
+      <div class="insight-icon-wrap red-bg">⚠️</div>
+      <div class="insight-title">The Inverted Follow Ratio Is a Red Flag</div>
+      <div class="insight-body">Following <strong>2,209 accounts while only 1,114 follow back</strong> signals to every algorithm — and every human — that growth has been chased, not earned. Switch to Creator account, stop mass-following, let content pull people in. Clean this up in Week 1.</div>
+    </div>
+    <div class="insight-card green reveal" style="transition-delay:0.2s">
+      <div class="insight-icon-wrap green-bg">📡</div>
+      <div class="insight-title">The Nonprofit Is a Media Empire</div>
+      <div class="insight-body">The forthcoming 501(c)(3) combining <strong>Pam's story, functional medicine, and biblical truth</strong> sits at the intersection of the fastest-growing content categories in America. It could build 100K+ followers independently of Chad's personal brand — while driving donors and creating a legacy platform.</div>
+    </div>
+    <div class="insight-card gold reveal" style="transition-delay:0.1s">
+      <div class="insight-icon-wrap gold-bg">💰</div>
+      <div class="insight-title">Brand = Capital Formation Tool</div>
+      <div class="insight-body">Every JV deal ISI Legacy closes, every R3 enterprise sales conversation, every angel syndication starts with a Google search. Right now those searches return 2008 corporate records. <strong>A strong personal brand is not vanity — it is a capital formation engine.</strong> Build it. Watch deal quality rise.</div>
+    </div>
+    <div class="insight-card blue reveal" style="transition-delay:0.2s">
+      <div class="insight-icon-wrap blue-bg">✝️</div>
+      <div class="insight-title">The Faith-Market Is Hungry</div>
+      <div class="insight-body">The "equally yoked" business philosophy is not a niche quirk — it is <strong>a category-defining positioning statement</strong>. Dave Ramsey built a $600M empire on Christian financial principles. Chad's intersection of kingdom investment + marketplace ministry + whole-body healing has never been told with this specific voice.</div>
+    </div>
+    <div class="insight-card amber reveal" style="transition-delay:0.3s">
+      <div class="insight-icon-wrap amber-bg">🎯</div>
+      <div class="insight-title">Carnivore Media: Be Your Own Case Study</div>
+      <div class="insight-body">Chad is seeking equity in a digital marketing company selling AI-intent marketing and pixel de-anonymization. He should <strong>be his own first case study</strong>. Build his personal brand using the exact tools Carnivore sells — visitor pixel, Meta retargeting, AI audience targeting. Show, don't just sell.</div>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- ═══════════════════════════════════════
+  OPPORTUNITY METRICS
+═══════════════════════════════════════ -->
+<div style="background: var(--navy); padding: 56px 0;">
+<div class="container">
+  <div style="text-align:center; margin-bottom:40px;">
+    <div style="font-family:'Fira Code',monospace; font-size:10px; letter-spacing:3px; text-transform:uppercase; color:var(--gold-lt); margin-bottom:10px;">The Opportunity Scale</div>
+    <div style="font-family:'Cormorant Garamond',serif; font-size:36px; font-weight:700; color:#fff;">What Building This Brand Unlocks</div>
+  </div>
+  <div class="opportunity-grid">
+    <div class="opp-card" style="background:rgba(255,255,255,0.06); border-color:rgba(255,255,255,0.1);">
+      <div class="opp-number gold" style="color:var(--gold-lt)">4.7×</div>
+      <div class="opp-label" style="color:rgba(255,255,255,0.5)">Score improvement achievable<br>in just 90 days</div>
+    </div>
+    <div class="opp-card" style="background:rgba(255,255,255,0.06); border-color:rgba(255,255,255,0.1);">
+      <div class="opp-number" style="color:#fff">$3.2M</div>
+      <div class="opp-label" style="color:rgba(255,255,255,0.5)">Validated exit story that generates<br>zero Google results today</div>
+    </div>
+    <div class="opp-card" style="background:rgba(255,255,255,0.06); border-color:rgba(255,255,255,0.1);">
+      <div class="opp-number green" style="color:#3ecf8e">15+</div>
+      <div class="opp-label" style="color:rgba(255,255,255,0.5)">Active investments — none<br>discoverable by potential partners</div>
+    </div>
+    <div class="opp-card" style="background:rgba(255,255,255,0.06); border-color:rgba(255,255,255,0.1);">
+      <div class="opp-number" style="color:rgba(255,255,255,0.9)">90+</div>
+      <div class="opp-label" style="color:rgba(255,255,255,0.5)">Achievable aggregate brand score<br>within 12 months</div>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- ═══════════════════════════════════════
+  SECTION 4: 90-DAY ROADMAP
+═══════════════════════════════════════ -->
+<div class="container">
+<div class="section">
+  <div class="section-label reveal">
+    <span class="section-label-num">04</span>
+    <span class="section-label-text">90-Day Brand Activation Roadmap</span>
+    <hr>
+  </div>
+  <div class="section-title reveal">Three Phases. One Direction:<br>Unavoidable.</div>
+  <p class="section-desc reveal" style="margin-bottom:48px;">Every action below is sequenced for maximum leverage. Phase 1 builds the foundation before amplifying anything. Phase 2 earns third-party credibility. Phase 3 launches the platform that compounds for years.</p>
+
+  <div class="roadmap-wrap">
+
+    <!-- PHASE 1 -->
+    <div class="phase-card reveal">
+      <div class="phase-head p1">
+        <div class="phase-badge">Phase 1 · Days 1–30</div>
+        <div class="phase-title">Build the<br>Foundation</div>
+        <div class="phase-sub">Owned infrastructure before amplifying anything</div>
+      </div>
+      <div class="phase-body">
+        <div class="task-item">
+          <div class="task-day p1-day">Day 1</div>
+          <div class="task-text">
+            <div class="task-name">Secure chadpanton.com today</div>
+            <div class="task-desc">Register domain immediately. Also grab chadpanton.co, kingdomledger.com, and purposeoverprofit.com as brand protection plays.</div>
+          </div>
+        </div>
+        <div class="task-item">
+          <div class="task-day p1-day">D1–5</div>
+          <div class="task-text">
+            <div class="task-name">Rebuild LinkedIn from scratch</div>
+            <div class="task-desc">New headline: "Marketplace Ministry Leader · Angel Investor · $3.2M Exit." Professional headshot. All 13+ current roles listed. Send 50 targeted connections/day to faith-entrepreneur community.</div>
+          </div>
+        </div>
+        <div class="task-item">
+          <div class="task-day p1-day">D5–21</div>
+          <div class="task-text">
+            <div class="task-name">Launch chadpanton.com</div>
+            <div class="task-desc">5-page site: Hero + Story, Ventures, Invest With Chad, Speaking, Contact. Email capture offering "The Kingdom Investor's Framework" PDF. Site live before any social push.</div>
+          </div>
+        </div>
+        <div class="task-item">
+          <div class="task-day p1-day">Day 7</div>
+          <div class="task-text">
+            <div class="task-name">Instagram account surgery</div>
+            <div class="task-desc">Switch to Creator account. Unfollow non-aligned accounts (target: under 500 following). First Reel: "Why I walked away from a $600K deal." First carousel: the JavaWorks exit story.</div>
+          </div>
+        </div>
+        <div class="task-item">
+          <div class="task-day p1-day">Day 10</div>
+          <div class="task-text">
+            <div class="task-name">Create @ChadPanton on X</div>
+            <div class="task-desc">First tweet: thread on "I sold my company for $3.2M to a Fortune 50. Here's what I learned that nobody talks about." Pin it. Post 1× daily thereafter.</div>
+          </div>
+        </div>
+        <div class="task-item">
+          <div class="task-day p1-day">Day 14</div>
+          <div class="task-text">
+            <div class="task-name">Launch "The Kingdom Ledger" email newsletter</div>
+            <div class="task-desc">ConvertKit or Beehiiv. Import all personal/professional contacts. First issue: Chad's story in 500 words. Goal: 500 subscribers by Day 30.</div>
+          </div>
+        </div>
+        <div class="task-item">
+          <div class="task-day p1-day">D25–30</div>
+          <div class="task-text">
+            <div class="task-name">Record the origin story YouTube video</div>
+            <div class="task-desc">"How I Built JavaWorks from Zero to a $3.2M Exit — and What God Showed Me After." 10–15 min. Anchor asset for the entire brand. Upload to new YouTube channel.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- PHASE 2 -->
+    <div class="phase-card reveal" style="transition-delay:0.1s">
+      <div class="phase-head p2">
+        <div class="phase-badge">Phase 2 · Days 31–60</div>
+        <div class="phase-title">Generate<br>Credibility</div>
+        <div class="phase-sub">Earn third-party validation and grow owned audience</div>
+      </div>
+      <div class="phase-body">
+        <div class="task-item">
+          <div class="task-day p2-day">Day 31</div>
+          <div class="task-text">
+            <div class="task-name">Pitch the JavaWorks story to Tampa Bay BJ</div>
+            <div class="task-desc">The $3.2M exit to a Fortune 50 is newsworthy. One TBBJ feature instantly transforms Google search results. Also pitch to bizjournals.com for national pickup.</div>
+          </div>
+        </div>
+        <div class="task-item">
+          <div class="task-day p2-day">D31–40</div>
+          <div class="task-text">
+            <div class="task-name">Guest on 3 faith-business podcasts</div>
+            <div class="task-desc">Target: Faith Driven Entrepreneur Podcast, The Christian Entrepreneur, Multiply Business. Each appearance builds SEO backlinks and introduces Chad to warm, pre-qualified audiences.</div>
+          </div>
+        </div>
+        <div class="task-item">
+          <div class="task-day p2-day">Day 40</div>
+          <div class="task-text">
+            <div class="task-name">Publish the Pam Panton tribute piece</div>
+            <div class="task-desc">Long-form article honoring Pam's legacy and introducing the forthcoming nonprofit. This single piece will attract the nonprofit's future donor base and media attention simultaneously.</div>
+          </div>
+        </div>
+        <div class="task-item">
+          <div class="task-day p2-day">D40–50</div>
+          <div class="task-text">
+            <div class="task-name">Apply to Forbes Councils</div>
+            <div class="task-desc">Forbes Business Council accepts entrepreneurs with verified exits. Once approved, Chad self-publishes under the Forbes banner — massive SEO value. Topic: "Why I Only Do Business With the Equally Yoked."</div>
+          </div>
+        </div>
+        <div class="task-item">
+          <div class="task-day p2-day">Day 45</div>
+          <div class="task-text">
+            <div class="task-name">Claim all business directory listings</div>
+            <div class="task-desc">Claim Manta, CorporationWiki, ZoomInfo, Crunchbase, AngelList. Update with current identity, link to website. These pages rank on Google and shape first impressions of every new contact.</div>
+          </div>
+        </div>
+        <div class="task-item">
+          <div class="task-day p2-day">Day 50</div>
+          <div class="task-text">
+            <div class="task-name">Launch the health testimony series</div>
+            <div class="task-desc">"The Body I Didn't Know Was Broken" — 5-part Instagram/YouTube series. Mold discovery → Western medicine failure → root cause breakthrough → gut healing → nonprofit vision. Builds future nonprofit audience now.</div>
+          </div>
+        </div>
+        <div class="task-item">
+          <div class="task-day p2-day">D55–60</div>
+          <div class="task-text">
+            <div class="task-name">Apply to speak at C12 Group & FDE Conference</div>
+            <div class="task-desc">Both serve Chad's exact audience. Chad will have his speaker reel by Day 30 and press coverage by Day 45. Submit both applications by Day 60 for fall 2026 bookings.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- PHASE 3 -->
+    <div class="phase-card reveal" style="transition-delay:0.2s">
+      <div class="phase-head p3">
+        <div class="phase-badge">Phase 3 · Days 61–90</div>
+        <div class="phase-title">Launch the<br>Platform</div>
+        <div class="phase-sub">Podcast, compound reach, category leadership</div>
+      </div>
+      <div class="phase-body">
+        <div class="task-item">
+          <div class="task-day p3-day">Day 61</div>
+          <div class="task-text">
+            <div class="task-name">Launch "The Kingdom Ledger" Podcast</div>
+            <div class="task-desc">4-episode launch batch: Ep1 Chad's full story. Ep2 "What Equally Yoked Really Means." Ep3 Interview with Noah Grimes. Ep4 Pam Panton tribute. All 4 dropped Day 1 for algorithm momentum.</div>
+          </div>
+        </div>
+        <div class="task-item">
+          <div class="task-day p3-day">Day 65</div>
+          <div class="task-text">
+            <div class="task-name">Carnivore integration — be your own case study</div>
+            <div class="task-desc">Install pixel on chadpanton.com. Run $500/mo test Meta campaign targeting "Christian entrepreneurs." Document results as enterprise sales proof-of-concept for Carnivore and R3 pitches.</div>
+          </div>
+        </div>
+        <div class="task-item">
+          <div class="task-day p3-day">Day 70</div>
+          <div class="task-text">
+            <div class="task-name">File 501(c)(3) and launch nonprofit landing page</div>
+            <div class="task-desc">Name options: "The Pam Panton Foundation" or "Whole Truth Wellness." Email capture: "Notify me at launch." Target 300 donor waitlist signups from existing network by Day 90.</div>
+          </div>
+        </div>
+        <div class="task-item">
+          <div class="task-day p3-day">Day 75</div>
+          <div class="task-text">
+            <div class="task-name">Pursue a Dr. Daniel Amen collaboration</div>
+            <div class="task-desc">Dr. Amen actively partners with advocates sharing his message. A co-appearance or interview would instantly validate Chad's health story and the nonprofit's scientific foundation. A category-making moment.</div>
+          </div>
+        </div>
+        <div class="task-item">
+          <div class="task-day p3-day">Day 80</div>
+          <div class="task-text">
+            <div class="task-name">LinkedIn newsletter launch</div>
+            <div class="task-desc">LinkedIn notifies all connections on publish. First issue: "Why I Walked Away from $600,000." This piece can generate 5,000+ impressions and 200+ new subscribers from connections alone.</div>
+          </div>
+        </div>
+        <div class="task-item">
+          <div class="task-day p3-day">Day 85</div>
+          <div class="task-text">
+            <div class="task-name">Launch "Behind the Deal" content series</div>
+            <div class="task-desc">Monthly video/post series documenting Kenosha Hyatt development and Casa Jesus build in real time. Attracts RE investors, JV partners, development capital. Document the LOI, groundbreaking, design phase live.</div>
+          </div>
+        </div>
+        <div class="task-item">
+          <div class="task-day p3-day">Day 90</div>
+          <div class="task-text">
+            <div class="task-name">90-Day Scorecard Audit & Reset</div>
+            <div class="task-desc">Targets: 5K LinkedIn connections, 3K IG followers (clean ratio), 1,500 email subs, 500 podcast downloads/ep, 1 press feature, 1 speaking booking. Target aggregate: 52/100. Path to 80+ by Month 12.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div><!-- /roadmap -->
+</div>
+</div><!-- /container -->
+
+<!-- ═══════════════════════════════════════
+  CLOSING QUOTE
+═══════════════════════════════════════ -->
+<div style="background: var(--gold-bg); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); padding: 56px 0; text-align:center;">
+  <div style="font-family:'Cormorant Garamond',serif; font-size:clamp(24px,3vw,44px); font-weight:700; font-style:italic; color:var(--navy); max-width:800px; margin:0 auto 16px; padding:0 48px; line-height:1.3;">"God didn't give me these things to own.<br>He gave them to me to steward."</div>
+  <div style="font-family:'Fira Code',monospace; font-size:10px; letter-spacing:3px; text-transform:uppercase; color:var(--gold);">— Chad D. Panton</div>
+  <div style="margin-top:24px; font-size:14px; color:var(--muted); max-width:560px; margin-left:auto; margin-right:auto; padding:0 24px; line-height:1.8;">The brand work ahead is stewardship. Chad's story, portfolio, philosophy, and calling deserve to reach the JV partner, the donor for Pam's foundation, the person dying in silence from a toxic body — all searching for exactly what Chad carries.</div>
+</div>
+
+<!-- FOOTER -->
 <footer>
-  <p>Chad Panton Personal Brand Scorecard &nbsp;·&nbsp; Prepared March 2026 &nbsp;·&nbsp; Confidential</p>
+  <div class="brand">Chad D. Panton — Brand Audit 2026</div>
+  <div class="meta">Confidential · For Internal Use Only · Prepared March 2026</div>
 </footer>
 
+<script>
+// ── HERO RING ANIMATION ──────────────────
+window.addEventListener('load', () => {
+  const ring = document.getElementById('heroRing');
+  const circumference = 590.6;
+  const pct = 11 / 100;
+  const offset = circumference * (1 - pct);
+  setTimeout(() => {
+    ring.style.transition = 'stroke-dashoffset 1.8s cubic-bezier(0.4,0,0.2,1)';
+    ring.style.strokeDashoffset = offset;
+  }, 400);
+});
+
+// ── RING ARC ANIMATIONS ─────────────────
+function animateRings() {
+  document.querySelectorAll('.ring-arc').forEach(arc => {
+    const pct = parseFloat(arc.dataset.pct) / 100;
+    const circumference = 251.2;
+    const offset = circumference * (1 - pct);
+    arc.style.strokeDashoffset = circumference;
+    setTimeout(() => {
+      arc.style.transition = 'stroke-dashoffset 1.2s cubic-bezier(0.4,0,0.2,1)';
+      arc.style.strokeDashoffset = offset;
+    }, 200);
+  });
+}
+
+// ── MINI BAR ANIMATIONS ─────────────────
+function animateBars() {
+  document.querySelectorAll('.bar-mini-fill').forEach(bar => {
+    const w = bar.dataset.width;
+    bar.style.width = w + '%';
+  });
+}
+
+// ── SCROLL REVEAL ───────────────────────
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('visible');
+      // Trigger ring animations when rings come into view
+      if (entry.target.querySelector && entry.target.querySelector('.ring-arc')) {
+        animateRings();
+      }
+    }
+  });
+}, { threshold: 0.1 });
+document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+// Trigger on load too
+setTimeout(animateRings, 600);
+setTimeout(animateBars, 800);
+
+// ── CHART.JS CHARTS ─────────────────────
+const fontFamily = "'Syne', sans-serif";
+Chart.defaults.font.family = fontFamily;
+
+// RADAR CHART
+const radarCtx = document.getElementById('radarChart').getContext('2d');
+new Chart(radarCtx, {
+  type: 'radar',
+  data: {
+    labels: ['Website', 'LinkedIn', 'Instagram', 'YouTube', 'Press', 'Email List', 'Podcast', 'Google SEO'],
+    datasets: [
+      {
+        label: 'Current Score',
+        data: [0, 8, 22, 0, 5, 0, 0, 6],
+        backgroundColor: 'rgba(214,58,42,0.12)',
+        borderColor: '#d63a2a',
+        borderWidth: 2,
+        pointBackgroundColor: '#d63a2a',
+        pointRadius: 5,
+      },
+      {
+        label: 'Day-90 Target',
+        data: [70, 65, 48, 30, 42, 50, 35, 55],
+        backgroundColor: 'rgba(21,140,90,0.1)',
+        borderColor: '#158c5a',
+        borderWidth: 2,
+        pointBackgroundColor: '#158c5a',
+        pointRadius: 5,
+      }
+    ]
+  },
+  options: {
+    responsive: true,
+    maintainAspectRatio: true,
+    scales: {
+      r: {
+        min: 0, max: 100,
+        ticks: {
+          stepSize: 25,
+          color: '#7c8aa0',
+          font: { size: 10, family: fontFamily },
+          backdropColor: 'transparent',
+        },
+        grid: { color: 'rgba(0,0,0,0.07)' },
+        angleLines: { color: 'rgba(0,0,0,0.07)' },
+        pointLabels: {
+          color: '#0f172a',
+          font: { size: 11, weight: '600', family: fontFamily }
+        }
+      }
+    },
+    plugins: {
+      legend: {
+        labels: { color: '#334155', font: { size: 11, family: fontFamily }, padding: 16 }
+      }
+    }
+  }
+});
+
+// BAR CHART
+const barCtx = document.getElementById('barChart').getContext('2d');
+new Chart(barCtx, {
+  type: 'bar',
+  data: {
+    labels: ['Website', 'LinkedIn', 'Instagram', 'Facebook', 'YouTube', 'Twitter/X', 'Podcast', 'Press', 'SEO', 'Email'],
+    datasets: [
+      {
+        label: 'Current',
+        data: [0, 8, 22, 12, 0, 0, 0, 5, 6, 0],
+        backgroundColor: '#fdecea',
+        borderColor: '#d63a2a',
+        borderWidth: 2,
+        borderRadius: 6,
+      },
+      {
+        label: 'Day-90 Target',
+        data: [70, 65, 48, 38, 30, 28, 35, 42, 55, 50],
+        backgroundColor: 'rgba(21,140,90,0.15)',
+        borderColor: '#158c5a',
+        borderWidth: 2,
+        borderRadius: 6,
+      }
+    ]
+  },
+  options: {
+    responsive: true,
+    maintainAspectRatio: false,
+    indexAxis: 'y',
+    scales: {
+      x: {
+        min: 0, max: 100,
+        grid: { color: 'rgba(0,0,0,0.05)' },
+        ticks: { color: '#7c8aa0', font: { size: 10, family: fontFamily } },
+        border: { color: 'rgba(0,0,0,0.1)' }
+      },
+      y: {
+        grid: { display: false },
+        ticks: { color: '#334155', font: { size: 11, weight: '600', family: fontFamily } },
+        border: { display: false }
+      }
+    },
+    plugins: {
+      legend: {
+        labels: { color: '#334155', font: { size: 11, family: fontFamily }, padding: 16 }
+      }
+    }
+  }
+});
+
+// DOUGHNUT CHART
+const doughCtx = document.getElementById('doughnutChart').getContext('2d');
+new Chart(doughCtx, {
+  type: 'doughnut',
+  data: {
+    labels: ['Current Score', 'Gap to Fill'],
+    datasets: [{
+      data: [11, 89],
+      backgroundColor: ['#d63a2a', '#f0ede8'],
+      borderColor: ['#d63a2a', '#e8e2d8'],
+      borderWidth: 2,
+      hoverOffset: 6,
+    }]
+  },
+  options: {
+    responsive: true,
+    maintainAspectRatio: true,
+    cutout: '72%',
+    plugins: {
+      legend: { display: false },
+      tooltip: {
+        callbacks: {
+          label: ctx => ` ${ctx.label}: ${ctx.parsed}`
+        }
+      }
+    }
+  }
+});
+
+// LINE CHART — 12-month trajectory
+const lineCtx = document.getElementById('lineChart').getContext('2d');
+new Chart(lineCtx, {
+  type: 'line',
+  data: {
+    labels: ['Now', 'Month 1', 'Month 2', 'Month 3', 'Month 4', 'Month 5', 'Month 6', 'Month 7', 'Month 8', 'Month 9', 'Month 10', 'Month 11', 'Month 12'],
+    datasets: [
+      {
+        label: 'Projected Brand Score',
+        data: [11, 22, 34, 52, 58, 63, 68, 72, 76, 80, 84, 87, 91],
+        borderColor: '#b8790f',
+        backgroundColor: 'rgba(184,121,15,0.08)',
+        borderWidth: 2.5,
+        pointBackgroundColor: '#b8790f',
+        pointRadius: 5,
+        pointHoverRadius: 7,
+        fill: true,
+        tension: 0.4,
+      },
+      {
+        label: 'If No Action Taken',
+        data: [11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11],
+        borderColor: '#d63a2a',
+        borderDash: [6, 4],
+        borderWidth: 1.5,
+        pointRadius: 0,
+        fill: false,
+      }
+    ]
+  },
+  options: {
+    responsive: true,
+    maintainAspectRatio: false,
+    scales: {
+      x: {
+        grid: { color: 'rgba(0,0,0,0.05)' },
+        ticks: { color: '#7c8aa0', font: { size: 10, family: fontFamily } },
+        border: { color: 'rgba(0,0,0,0.1)' }
+      },
+      y: {
+        min: 0, max: 100,
+        grid: { color: 'rgba(0,0,0,0.05)' },
+        ticks: {
+          color: '#7c8aa0',
+          font: { size: 10, family: fontFamily },
+          callback: val => val + '/100'
+        },
+        border: { display: false }
+      }
+    },
+    plugins: {
+      legend: {
+        labels: { color: '#334155', font: { size: 11, family: fontFamily }, padding: 16 }
+      },
+      annotation: {}
+    }
+  }
+});
+</script>
 </body>
 </html>
