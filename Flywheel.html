@@ -1,0 +1,1093 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Flywheel Effect — Business Framework</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=DM+Sans:wght@300;400;500&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #0d0d0d;
+    --paper: #f5f0e8;
+    --cream: #ede8dc;
+    --gold: #c8922a;
+    --gold-light: #e8b84b;
+    --rust: #b34c2a;
+    --teal: #1d6b6b;
+    --teal-light: #2a9090;
+    --charcoal: #2a2a2a;
+    --mid: #888070;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--paper);
+    color: var(--ink);
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 300;
+    line-height: 1.7;
+    overflow-x: hidden;
+  }
+
+  /* ─── NOISE TEXTURE OVERLAY ─── */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 9999;
+    opacity: 0.6;
+  }
+
+  /* ─── HERO ─── */
+  .hero {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 80px 40px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero-bg {
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse 80% 60% at 50% 40%, rgba(200,146,42,0.12) 0%, transparent 70%),
+                radial-gradient(ellipse 40% 40% at 20% 80%, rgba(29,107,107,0.08) 0%, transparent 60%);
+  }
+
+  .hero-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 24px;
+    opacity: 0;
+    animation: fadeUp 0.8s 0.2s forwards;
+  }
+
+  .hero h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(52px, 9vw, 110px);
+    font-weight: 900;
+    line-height: 0.95;
+    letter-spacing: -0.02em;
+    color: var(--ink);
+    opacity: 0;
+    animation: fadeUp 0.8s 0.4s forwards;
+  }
+
+  .hero h1 em {
+    font-style: italic;
+    color: var(--gold);
+  }
+
+  .hero-sub {
+    max-width: 560px;
+    margin: 32px auto 0;
+    font-size: 17px;
+    color: var(--mid);
+    opacity: 0;
+    animation: fadeUp 0.8s 0.6s forwards;
+  }
+
+  .scroll-hint {
+    position: absolute;
+    bottom: 36px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--mid);
+    opacity: 0;
+    animation: fadeUp 0.8s 1.2s forwards;
+  }
+
+  .scroll-arrow {
+    width: 1px;
+    height: 48px;
+    background: linear-gradient(to bottom, var(--gold), transparent);
+    animation: scrollPulse 2s ease-in-out infinite;
+  }
+
+  @keyframes scrollPulse {
+    0%, 100% { transform: scaleY(1); opacity: 0.6; }
+    50% { transform: scaleY(1.3); opacity: 1; }
+  }
+
+  /* ─── SECTIONS ─── */
+  section {
+    padding: 100px 40px;
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+
+  .section-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--gold);
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 20px;
+  }
+
+  .section-label::after {
+    content: '';
+    flex: 1;
+    max-width: 60px;
+    height: 1px;
+    background: var(--gold);
+    opacity: 0.4;
+  }
+
+  h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(32px, 5vw, 54px);
+    font-weight: 700;
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+    margin-bottom: 24px;
+  }
+
+  h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 22px;
+    font-weight: 700;
+    margin-bottom: 10px;
+  }
+
+  p { margin-bottom: 16px; font-size: 16px; color: #444; }
+
+  /* ─── DIVIDER ─── */
+  .divider {
+    width: 100%;
+    height: 1px;
+    background: linear-gradient(to right, transparent, var(--gold), transparent);
+    opacity: 0.25;
+    margin: 0 auto;
+    max-width: 1100px;
+  }
+
+  /* ─── WHAT IS A FLYWHEEL ─── */
+  .what-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    align-items: center;
+    margin-top: 60px;
+  }
+
+  .what-visual {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  /* ─── SINGLE FLYWHEEL SVG ─── */
+  .flywheel-single {
+    width: 320px;
+    height: 320px;
+    position: relative;
+  }
+
+  .flywheel-single svg {
+    width: 100%;
+    height: 100%;
+    filter: drop-shadow(0 8px 32px rgba(200,146,42,0.2));
+  }
+
+  .spin-ring {
+    transform-origin: 50% 50%;
+    animation: spinSlow 18s linear infinite;
+  }
+
+  .spin-ring-rev {
+    transform-origin: 50% 50%;
+    animation: spinSlow 12s linear infinite reverse;
+  }
+
+  @keyframes spinSlow {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+  }
+
+  /* ─── PRINCIPLE CARDS ─── */
+  .principles {
+    margin-top: 80px;
+  }
+
+  .cards-row {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2px;
+    margin-top: 48px;
+    background: rgba(200,146,42,0.12);
+    border: 1px solid rgba(200,146,42,0.2);
+  }
+
+  .card {
+    background: var(--paper);
+    padding: 36px 28px;
+    position: relative;
+    overflow: hidden;
+    transition: background 0.3s;
+  }
+
+  .card:hover { background: var(--cream); }
+
+  .card-num {
+    font-family: 'Playfair Display', serif;
+    font-size: 72px;
+    font-weight: 900;
+    color: rgba(200,146,42,0.12);
+    line-height: 1;
+    position: absolute;
+    top: 8px;
+    right: 16px;
+    user-select: none;
+  }
+
+  .card-icon {
+    width: 36px;
+    height: 36px;
+    margin-bottom: 16px;
+    color: var(--gold);
+  }
+
+  /* ─── ANATOMY SECTION ─── */
+  .anatomy-wrap {
+    display: grid;
+    grid-template-columns: 1.2fr 1fr;
+    gap: 80px;
+    align-items: center;
+    margin-top: 60px;
+  }
+
+  .anatomy-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+  }
+
+  .anatomy-item {
+    display: flex;
+    gap: 20px;
+    padding: 24px 0;
+    border-bottom: 1px solid rgba(200,146,42,0.15);
+    cursor: default;
+  }
+
+  .anatomy-item:last-child { border-bottom: none; }
+
+  .anatomy-dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: var(--gold);
+    flex-shrink: 0;
+    margin-top: 6px;
+    position: relative;
+  }
+
+  .anatomy-dot::after {
+    content: '';
+    position: absolute;
+    inset: -4px;
+    border-radius: 50%;
+    border: 1px solid var(--gold);
+    opacity: 0.3;
+  }
+
+  .anatomy-item h4 {
+    font-family: 'Playfair Display', serif;
+    font-size: 16px;
+    font-weight: 700;
+    margin-bottom: 4px;
+    color: var(--ink);
+  }
+
+  .anatomy-item p { margin: 0; font-size: 14px; }
+
+  /* ─── SPINNING FLYWHEEL DIAGRAM ─── */
+  .flywheel-diagram {
+    position: relative;
+    width: 340px;
+    height: 340px;
+    flex-shrink: 0;
+  }
+
+  .flywheel-diagram svg {
+    width: 100%;
+    height: 100%;
+    filter: drop-shadow(0 8px 40px rgba(200,146,42,0.18));
+  }
+
+  /* ─── MULTIPLE FLYWHEELS ─── */
+  .multi-section {
+    background: var(--ink);
+    color: var(--paper);
+    padding: 100px 40px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .multi-section::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse 60% 50% at 30% 50%, rgba(200,146,42,0.08) 0%, transparent 60%),
+                radial-gradient(ellipse 50% 50% at 80% 50%, rgba(29,107,107,0.08) 0%, transparent 60%);
+  }
+
+  .multi-inner {
+    max-width: 1100px;
+    margin: 0 auto;
+    position: relative;
+  }
+
+  .multi-section h2 { color: var(--paper); }
+  .multi-section p { color: rgba(245,240,232,0.65); }
+
+  .multi-section .section-label { color: var(--gold-light); }
+  .multi-section .section-label::after { background: var(--gold-light); }
+
+  .multi-flywheels-svg {
+    width: 100%;
+    max-width: 800px;
+    margin: 60px auto 0;
+    display: block;
+    filter: drop-shadow(0 12px 50px rgba(0,0,0,0.4));
+  }
+
+  /* ─── INTERACTION TYPES ─── */
+  .interactions {
+    margin-top: 60px;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2px;
+    background: rgba(245,240,232,0.05);
+  }
+
+  .interaction-card {
+    padding: 32px 24px;
+    background: rgba(245,240,232,0.03);
+    border: 1px solid rgba(245,240,232,0.07);
+    transition: background 0.3s;
+  }
+
+  .interaction-card:hover { background: rgba(245,240,232,0.06); }
+
+  .interaction-card h3 {
+    font-size: 18px;
+    color: var(--paper);
+    margin-bottom: 8px;
+  }
+
+  .interaction-card p { font-size: 14px; }
+
+  .tag {
+    display: inline-block;
+    font-family: 'DM Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    padding: 4px 10px;
+    border-radius: 2px;
+    margin-bottom: 14px;
+  }
+
+  .tag-gold { background: rgba(200,146,42,0.2); color: var(--gold-light); }
+  .tag-teal { background: rgba(29,107,107,0.3); color: #5ecece; }
+  .tag-rust { background: rgba(179,76,42,0.3); color: #e8845a; }
+
+  /* ─── AMAZON EXAMPLE ─── */
+  .example-section {
+    padding-top: 100px;
+    padding-bottom: 60px;
+  }
+
+  .amazon-visual {
+    margin-top: 60px;
+    display: flex;
+    justify-content: center;
+  }
+
+  /* ─── BUILDING YOUR OWN ─── */
+  .build-section {
+    padding: 60px 40px 100px;
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+
+  .steps-timeline {
+    margin-top: 60px;
+    position: relative;
+    padding-left: 60px;
+  }
+
+  .steps-timeline::before {
+    content: '';
+    position: absolute;
+    left: 20px;
+    top: 0;
+    bottom: 0;
+    width: 1px;
+    background: linear-gradient(to bottom, var(--gold), transparent);
+    opacity: 0.3;
+  }
+
+  .step-item {
+    position: relative;
+    margin-bottom: 48px;
+  }
+
+  .step-item::before {
+    content: attr(data-step);
+    position: absolute;
+    left: -60px;
+    top: 0;
+    width: 40px;
+    height: 40px;
+    background: var(--ink);
+    border: 1px solid var(--gold);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'DM Mono', monospace;
+    font-size: 12px;
+    color: var(--gold);
+    display: grid;
+    place-items: center;
+  }
+
+  .step-item h3 { color: var(--ink); margin-bottom: 8px; font-size: 20px; }
+
+  /* ─── CALLOUT BOX ─── */
+  .callout {
+    background: var(--ink);
+    color: var(--paper);
+    padding: 48px 48px 48px 64px;
+    position: relative;
+    margin-top: 80px;
+  }
+
+  .callout::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 4px;
+    background: linear-gradient(to bottom, var(--gold), var(--rust));
+  }
+
+  .callout h3 { font-family: 'Playfair Display', serif; font-size: 24px; color: var(--paper); margin-bottom: 16px; }
+  .callout p { color: rgba(245,240,232,0.7); font-size: 16px; margin: 0; }
+
+  /* ─── FOOTER ─── */
+  footer {
+    background: var(--ink);
+    padding: 40px;
+    text-align: center;
+  }
+
+  footer p {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.15em;
+    color: rgba(245,240,232,0.25);
+    text-transform: uppercase;
+    margin: 0;
+  }
+
+  /* ─── ANIMATIONS ─── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(24px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .reveal {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+  }
+
+  .reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* ─── RESPONSIVE ─── */
+  @media (max-width: 768px) {
+    .what-grid, .anatomy-wrap { grid-template-columns: 1fr; gap: 40px; }
+    .cards-row, .interactions { grid-template-columns: 1fr; }
+    section { padding: 60px 24px; }
+    .multi-section { padding: 60px 24px; }
+    .build-section { padding: 40px 24px 80px; }
+    .callout { padding: 36px 28px 36px 48px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ═══════════════════════════════════════════
+     HERO
+═══════════════════════════════════════════ -->
+<div class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-label">Business Framework</div>
+  <h1>The<br><em>Flywheel</em><br>Effect</h1>
+  <p class="hero-sub">How momentum compounds, loops reinforce themselves, and great companies build self-sustaining engines of growth.</p>
+  <div class="scroll-hint">
+    <span>Scroll to explore</span>
+    <div class="scroll-arrow"></div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════
+     WHAT IS A FLYWHEEL
+═══════════════════════════════════════════ -->
+<section class="reveal">
+  <div class="section-label">01 — Foundation</div>
+  <h2>What is a<br>Flywheel?</h2>
+
+  <div class="what-grid">
+    <div>
+      <p>A <strong>flywheel</strong> is a massive, heavy wheel that requires enormous effort to start spinning — but once it gains momentum, it becomes nearly impossible to stop. Each push builds on the last.</p>
+      <p>Jim Collins introduced this concept in <em>Good to Great</em> to describe how the most successful companies grow. There's no single defining action, no miracle moment — just consistent force applied to a self-reinforcing loop.</p>
+      <p>The critical insight: <strong>the flywheel doesn't care about isolated wins</strong>. It cares about the loop. Every element feeds the next, and the whole system accelerates together.</p>
+    </div>
+    <div class="what-visual">
+      <!-- Single flywheel SVG -->
+      <div class="flywheel-single">
+        <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+          <!-- Outer decorative ring -->
+          <circle cx="100" cy="100" r="90" fill="none" stroke="rgba(200,146,42,0.08)" stroke-width="18"/>
+          <!-- Spinning dashed ring -->
+          <g class="spin-ring">
+            <circle cx="100" cy="100" r="90" fill="none" stroke="rgba(200,146,42,0.3)" stroke-width="1" stroke-dasharray="8 6"/>
+          </g>
+          <!-- Main wheel body -->
+          <circle cx="100" cy="100" r="76" fill="rgba(200,146,42,0.06)" stroke="rgba(200,146,42,0.4)" stroke-width="2"/>
+          <!-- Spoke group spinning -->
+          <g class="spin-ring">
+            <line x1="100" y1="24" x2="100" y2="176" stroke="rgba(200,146,42,0.15)" stroke-width="1.5"/>
+            <line x1="24" y1="100" x2="176" y2="100" stroke="rgba(200,146,42,0.15)" stroke-width="1.5"/>
+            <line x1="46" y1="46" x2="154" y2="154" stroke="rgba(200,146,42,0.15)" stroke-width="1.5"/>
+            <line x1="154" y1="46" x2="46" y2="154" stroke="rgba(200,146,42,0.15)" stroke-width="1.5"/>
+          </g>
+          <!-- Inner ring counter-spin -->
+          <g class="spin-ring-rev">
+            <circle cx="100" cy="100" r="48" fill="rgba(200,146,42,0.04)" stroke="rgba(200,146,42,0.5)" stroke-width="1.5" stroke-dasharray="4 4"/>
+          </g>
+          <!-- Hub -->
+          <circle cx="100" cy="100" r="14" fill="rgba(200,146,42,0.15)" stroke="var(--gold)" stroke-width="2"/>
+          <circle cx="100" cy="100" r="5" fill="var(--gold)"/>
+          <!-- Arrow indicator spinning slowly -->
+          <g class="spin-ring">
+            <path d="M100 30 L95 42 L100 38 L105 42 Z" fill="var(--gold)" opacity="0.8"/>
+          </g>
+        </svg>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════
+     THREE PRINCIPLES
+═══════════════════════════════════════════ -->
+<section class="principles reveal">
+  <div class="section-label">02 — Core Principles</div>
+  <h2>The Three Laws<br>of Flywheel Motion</h2>
+
+  <div class="cards-row">
+    <div class="card">
+      <span class="card-num">1</span>
+      <svg class="card-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+        <path d="M12 3v3m6.366-.366-2.12 2.12M21 12h-3m.366 6.366-2.12-2.12M12 21v-3m-6.366.366 2.12-2.12M3 12h3m-.366-6.366 2.12 2.12" stroke-linecap="round"/>
+      </svg>
+      <h3>Momentum is earned,<br>not given</h3>
+      <p>The first push is always the hardest. Expect the wheel to resist. Startups and new initiatives feel this acutely — the loop must be primed before it self-sustains.</p>
+    </div>
+    <div class="card">
+      <span class="card-num">2</span>
+      <svg class="card-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+        <path d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+      <h3>Every element feeds<br>the next</h3>
+      <p>A flywheel is a <em>closed loop</em>. Each output becomes an input. When one step weakens, the whole loop slows. When all steps are strong, the system accelerates beyond what any single effort could achieve.</p>
+    </div>
+    <div class="card">
+      <span class="card-num">3</span>
+      <svg class="card-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+        <path d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+      <h3>Compounding is<br>the endgame</h3>
+      <p>The longer the flywheel spins, the harder it becomes to stop. Competitors can't replicate ten years of accumulated momentum overnight. This is the deepest moat of all.</p>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ═══════════════════════════════════════════
+     ANATOMY OF A FLYWHEEL
+═══════════════════════════════════════════ -->
+<section class="anatomy reveal">
+  <div class="section-label">03 — Anatomy</div>
+  <h2>Anatomy of a<br>Business Flywheel</h2>
+
+  <div class="anatomy-wrap">
+    <ul class="anatomy-list">
+      <li class="anatomy-item">
+        <div class="anatomy-dot"></div>
+        <div>
+          <h4>The Catalyst</h4>
+          <p>The starting action or value proposition that initiates the loop. Often this is an exceptional product, a low price, a unique insight, or a breakthrough customer experience. Without a clear catalyst, the flywheel never starts.</p>
+        </div>
+      </li>
+      <li class="anatomy-item">
+        <div class="anatomy-dot"></div>
+        <div>
+          <h4>The Nodes</h4>
+          <p>Individual stages in the loop — typically 4 to 8 interconnected steps. Each node receives energy from the previous and passes it to the next. Nodes must be causally linked, not just thematically related.</p>
+        </div>
+      </li>
+      <li class="anatomy-item">
+        <div class="anatomy-dot"></div>
+        <div>
+          <h4>The Amplifier</h4>
+          <p>The point in the loop where growth compounds most. Often a network effect, a data advantage, or a cost structure benefit. This is where small inputs produce outsized outputs.</p>
+        </div>
+      </li>
+      <li class="anatomy-item">
+        <div class="anatomy-dot"></div>
+        <div>
+          <h4>The Reinvestment Loop</h4>
+          <p>Profits or gains from the flywheel are fed back in — lowering costs, improving the product, or expanding reach. This re-injection of resources is what keeps the wheel accelerating rather than merely sustaining.</p>
+        </div>
+      </li>
+      <li class="anatomy-item">
+        <div class="anatomy-dot"></div>
+        <div>
+          <h4>The Constraint</h4>
+          <p>The bottleneck or friction point that limits speed. Every flywheel has one. Identifying and reducing it is how you accelerate. Ignore it, and you've capped your ceiling.</p>
+        </div>
+      </li>
+    </ul>
+
+    <!-- Circular flywheel diagram -->
+    <div style="display:flex; justify-content:center;">
+      <div class="flywheel-diagram">
+        <svg viewBox="0 0 340 340" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <marker id="arrow" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
+              <path d="M0,0 L0,6 L8,3 z" fill="var(--gold)" opacity="0.8"/>
+            </marker>
+          </defs>
+
+          <!-- Background circle -->
+          <circle cx="170" cy="170" r="148" fill="rgba(200,146,42,0.03)" stroke="rgba(200,146,42,0.1)" stroke-width="1"/>
+
+          <!-- Outer spinning ring -->
+          <g style="transform-origin:170px 170px; animation: spinSlow 25s linear infinite;">
+            <circle cx="170" cy="170" r="148" fill="none" stroke="rgba(200,146,42,0.2)" stroke-width="1" stroke-dasharray="6 8"/>
+          </g>
+
+          <!-- Curved arrows as arcs between nodes -->
+          <!-- These are approximate arc paths between 5 nodes at 72deg intervals -->
+          <!-- Node positions: top(170,40), right(299,139), bot-right(256,284), bot-left(84,284), left(41,139) -->
+
+          <path d="M185,47 A148,148 0 0,1 295,148" fill="none" stroke="rgba(200,146,42,0.5)" stroke-width="2" marker-end="url(#arrow)" stroke-linecap="round"/>
+          <path d="M295,162 A148,148 0 0,1 254,276" fill="none" stroke="rgba(200,146,42,0.5)" stroke-width="2" marker-end="url(#arrow)" stroke-linecap="round"/>
+          <path d="M243,285 A148,148 0 0,1 97,285" fill="none" stroke="rgba(200,146,42,0.5)" stroke-width="2" marker-end="url(#arrow)" stroke-linecap="round"/>
+          <path d="M86,276 A148,148 0 0,1 45,162" fill="none" stroke="rgba(200,146,42,0.5)" stroke-width="2" marker-end="url(#arrow)" stroke-linecap="round"/>
+          <path d="M45,148 A148,148 0 0,1 155,47" fill="none" stroke="rgba(200,146,42,0.5)" stroke-width="2" marker-end="url(#arrow)" stroke-linecap="round"/>
+
+          <!-- Node circles & labels -->
+          <!-- Node 1: top -->
+          <circle cx="170" cy="40" r="28" fill="#0d0d0d" stroke="var(--gold)" stroke-width="2"/>
+          <text x="170" y="36" text-anchor="middle" font-family="DM Sans" font-size="8" fill="rgba(245,240,232,0.5)" letter-spacing="0.5">CATALYST</text>
+          <text x="170" y="47" text-anchor="middle" font-family="Playfair Display" font-size="10" fill="#f5f0e8" font-weight="bold">Start</text>
+
+          <!-- Node 2: right -->
+          <circle cx="299" cy="140" r="28" fill="#0d0d0d" stroke="var(--gold)" stroke-width="2"/>
+          <text x="299" y="136" text-anchor="middle" font-family="DM Sans" font-size="8" fill="rgba(245,240,232,0.5)" letter-spacing="0.5">NODE 2</text>
+          <text x="299" y="147" text-anchor="middle" font-family="Playfair Display" font-size="10" fill="#f5f0e8" font-weight="bold">Grow</text>
+
+          <!-- Node 3: bottom-right -->
+          <circle cx="258" cy="279" r="28" fill="#0d0d0d" stroke="var(--gold)" stroke-width="2"/>
+          <text x="258" y="275" text-anchor="middle" font-family="DM Sans" font-size="8" fill="rgba(245,240,232,0.5)" letter-spacing="0.5">AMPLIFY</text>
+          <text x="258" y="286" text-anchor="middle" font-family="Playfair Display" font-size="10" fill="#f5f0e8" font-weight="bold">Scale</text>
+
+          <!-- Node 4: bottom-left -->
+          <circle cx="82" cy="279" r="28" fill="#0d0d0d" stroke="var(--gold)" stroke-width="2"/>
+          <text x="82" y="275" text-anchor="middle" font-family="DM Sans" font-size="8" fill="rgba(245,240,232,0.5)" letter-spacing="0.5">REINVEST</text>
+          <text x="82" y="286" text-anchor="middle" font-family="Playfair Display" font-size="10" fill="#f5f0e8" font-weight="bold">Fuel</text>
+
+          <!-- Node 5: left -->
+          <circle cx="41" cy="140" r="28" fill="#0d0d0d" stroke="var(--gold)" stroke-width="2"/>
+          <text x="41" y="136" text-anchor="middle" font-family="DM Sans" font-size="8" fill="rgba(245,240,232,0.5)" letter-spacing="0.5">NODE 5</text>
+          <text x="41" y="147" text-anchor="middle" font-family="Playfair Display" font-size="10" fill="#f5f0e8" font-weight="bold">Loop</text>
+
+          <!-- Center hub -->
+          <circle cx="170" cy="170" r="32" fill="rgba(200,146,42,0.08)" stroke="rgba(200,146,42,0.4)" stroke-width="1.5"/>
+          <circle cx="170" cy="170" r="8" fill="var(--gold)"/>
+          <text x="170" y="190" text-anchor="middle" font-family="DM Mono" font-size="8" fill="rgba(200,146,42,0.7)" letter-spacing="1">MOMENTUM</text>
+        </svg>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════
+     MULTIPLE FLYWHEELS (DARK SECTION)
+═══════════════════════════════════════════ -->
+<div class="multi-section reveal">
+  <div class="multi-inner">
+    <div class="section-label">04 — Advanced Architecture</div>
+    <h2>Multiple Flywheels &<br>How They Interact</h2>
+    <p style="max-width:580px; margin-top:16px;">Most companies don't run just one flywheel. Mature organizations build <strong style="color:var(--paper);">ecosystems of interconnected loops</strong> — each one spinning independently, yet feeding energy into the others.</p>
+
+    <!-- Multi-flywheel SVG -->
+    <svg class="multi-flywheels-svg" viewBox="0 0 800 420" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <marker id="arr-gold" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
+          <path d="M0,0 L0,6 L8,3 z" fill="#c8922a" opacity="0.9"/>
+        </marker>
+        <marker id="arr-teal" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
+          <path d="M0,0 L0,6 L8,3 z" fill="#2a9090" opacity="0.9"/>
+        </marker>
+        <marker id="arr-rust" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
+          <path d="M0,0 L0,6 L8,3 z" fill="#b34c2a" opacity="0.9"/>
+        </marker>
+      </defs>
+
+      <!-- ── FLYWHEEL A (left, gold) ── -->
+      <g style="transform-origin:180px 210px; animation: spinSlow 20s linear infinite;">
+        <circle cx="180" cy="210" r="130" fill="none" stroke="rgba(200,146,42,0.15)" stroke-width="1" stroke-dasharray="6 8"/>
+      </g>
+      <circle cx="180" cy="210" r="130" fill="rgba(200,146,42,0.04)" stroke="rgba(200,146,42,0.2)" stroke-width="1.5"/>
+
+      <!-- Flywheel A nodes (4 nodes: top, right, bottom, left of circle) -->
+      <circle cx="180" cy="80" r="22" fill="#111" stroke="#c8922a" stroke-width="1.5"/>
+      <text x="180" y="76" text-anchor="middle" font-family="DM Mono" font-size="7" fill="rgba(200,146,42,0.6)" letter-spacing="0.5">ACQUIRE</text>
+      <text x="180" y="87" text-anchor="middle" font-family="Playfair Display" font-size="9" fill="#f5f0e8" font-weight="bold">Leads</text>
+
+      <circle cx="310" cy="210" r="22" fill="#111" stroke="#c8922a" stroke-width="1.5"/>
+      <text x="310" y="206" text-anchor="middle" font-family="DM Mono" font-size="7" fill="rgba(200,146,42,0.6)" letter-spacing="0.5">CONVERT</text>
+      <text x="310" y="217" text-anchor="middle" font-family="Playfair Display" font-size="9" fill="#f5f0e8" font-weight="bold">Sales</text>
+
+      <circle cx="180" cy="340" r="22" fill="#111" stroke="#c8922a" stroke-width="1.5"/>
+      <text x="180" y="336" text-anchor="middle" font-family="DM Mono" font-size="7" fill="rgba(200,146,42,0.6)" letter-spacing="0.5">DELIVER</text>
+      <text x="180" y="347" text-anchor="middle" font-family="Playfair Display" font-size="9" fill="#f5f0e8" font-weight="bold">Value</text>
+
+      <circle cx="50" cy="210" r="22" fill="#111" stroke="#c8922a" stroke-width="1.5"/>
+      <text x="50" y="206" text-anchor="middle" font-family="DM Mono" font-size="7" fill="rgba(200,146,42,0.6)" letter-spacing="0.5">RETAIN</text>
+      <text x="50" y="217" text-anchor="middle" font-family="Playfair Display" font-size="9" fill="#f5f0e8" font-weight="bold">Loyal</text>
+
+      <!-- A arrows -->
+      <path d="M194,84 A130,130 0 0,1 305,196" fill="none" stroke="rgba(200,146,42,0.5)" stroke-width="1.5" marker-end="url(#arr-gold)"/>
+      <path d="M305,224 A130,130 0 0,1 194,336" fill="none" stroke="rgba(200,146,42,0.5)" stroke-width="1.5" marker-end="url(#arr-gold)"/>
+      <path d="M165,340 A130,130 0 0,1 60,225" fill="none" stroke="rgba(200,146,42,0.5)" stroke-width="1.5" marker-end="url(#arr-gold)"/>
+      <path d="M60,196 A130,130 0 0,1 165,84" fill="none" stroke="rgba(200,146,42,0.5)" stroke-width="1.5" marker-end="url(#arr-gold)"/>
+
+      <!-- A center -->
+      <circle cx="180" cy="210" r="24" fill="rgba(200,146,42,0.08)" stroke="rgba(200,146,42,0.4)" stroke-width="1"/>
+      <circle cx="180" cy="210" r="6" fill="#c8922a"/>
+      <text x="180" y="235" text-anchor="middle" font-family="DM Sans" font-size="9" fill="rgba(200,146,42,0.5)" font-weight="500">FLYWHEEL A</text>
+      <text x="180" y="248" text-anchor="middle" font-family="Playfair Display" font-size="11" fill="#c8922a" font-style="italic">Growth</text>
+
+      <!-- ── FLYWHEEL B (center, teal) ── -->
+      <g style="transform-origin:400px 210px; animation: spinSlow 16s linear infinite reverse;">
+        <circle cx="400" cy="210" r="110" fill="none" stroke="rgba(42,144,144,0.15)" stroke-width="1" stroke-dasharray="5 7"/>
+      </g>
+      <circle cx="400" cy="210" r="110" fill="rgba(29,107,107,0.05)" stroke="rgba(42,144,144,0.3)" stroke-width="1.5"/>
+
+      <!-- B nodes -->
+      <circle cx="400" cy="100" r="22" fill="#111" stroke="#2a9090" stroke-width="1.5"/>
+      <text x="400" y="96" text-anchor="middle" font-family="DM Mono" font-size="7" fill="rgba(42,144,144,0.7)" letter-spacing="0.5">PRODUCT</text>
+      <text x="400" y="107" text-anchor="middle" font-family="Playfair Display" font-size="9" fill="#f5f0e8" font-weight="bold">Build</text>
+
+      <circle cx="510" cy="210" r="22" fill="#111" stroke="#2a9090" stroke-width="1.5"/>
+      <text x="510" y="206" text-anchor="middle" font-family="DM Mono" font-size="7" fill="rgba(42,144,144,0.7)" letter-spacing="0.5">REVIEW</text>
+      <text x="510" y="217" text-anchor="middle" font-family="Playfair Display" font-size="9" fill="#f5f0e8" font-weight="bold">Proof</text>
+
+      <circle cx="400" cy="320" r="22" fill="#111" stroke="#2a9090" stroke-width="1.5"/>
+      <text x="400" y="316" text-anchor="middle" font-family="DM Mono" font-size="7" fill="rgba(42,144,144,0.7)" letter-spacing="0.5">ITERATE</text>
+      <text x="400" y="327" text-anchor="middle" font-family="Playfair Display" font-size="9" fill="#f5f0e8" font-weight="bold">Improve</text>
+
+      <circle cx="290" cy="210" r="22" fill="#111" stroke="#2a9090" stroke-width="1.5"/>
+      <text x="290" y="206" text-anchor="middle" font-family="DM Mono" font-size="7" fill="rgba(42,144,144,0.7)" letter-spacing="0.5">DATA</text>
+      <text x="290" y="217" text-anchor="middle" font-family="Playfair Display" font-size="9" fill="#f5f0e8" font-weight="bold">Learn</text>
+
+      <!-- B arrows -->
+      <path d="M414,104 A110,110 0 0,1 504,196" fill="none" stroke="rgba(42,144,144,0.5)" stroke-width="1.5" marker-end="url(#arr-teal)"/>
+      <path d="M504,224 A110,110 0 0,1 414,316" fill="none" stroke="rgba(42,144,144,0.5)" stroke-width="1.5" marker-end="url(#arr-teal)"/>
+      <path d="M386,320 A110,110 0 0,1 296,224" fill="none" stroke="rgba(42,144,144,0.5)" stroke-width="1.5" marker-end="url(#arr-teal)"/>
+      <path d="M296,196 A110,110 0 0,1 386,104" fill="none" stroke="rgba(42,144,144,0.5)" stroke-width="1.5" marker-end="url(#arr-teal)"/>
+
+      <!-- B center -->
+      <circle cx="400" cy="210" r="24" fill="rgba(29,107,107,0.1)" stroke="rgba(42,144,144,0.4)" stroke-width="1"/>
+      <circle cx="400" cy="210" r="6" fill="#2a9090"/>
+      <text x="400" y="235" text-anchor="middle" font-family="DM Sans" font-size="9" fill="rgba(42,144,144,0.6)" font-weight="500">FLYWHEEL B</text>
+      <text x="400" y="248" text-anchor="middle" font-family="Playfair Display" font-size="11" fill="#2a9090" font-style="italic">Product</text>
+
+      <!-- ── FLYWHEEL C (right, rust) ── -->
+      <g style="transform-origin:620px 210px; animation: spinSlow 22s linear infinite;">
+        <circle cx="620" cy="210" r="120" fill="none" stroke="rgba(179,76,42,0.15)" stroke-width="1" stroke-dasharray="6 8"/>
+      </g>
+      <circle cx="620" cy="210" r="120" fill="rgba(179,76,42,0.04)" stroke="rgba(179,76,42,0.2)" stroke-width="1.5"/>
+
+      <!-- C nodes -->
+      <circle cx="620" cy="90" r="22" fill="#111" stroke="#b34c2a" stroke-width="1.5"/>
+      <text x="620" y="86" text-anchor="middle" font-family="DM Mono" font-size="7" fill="rgba(179,76,42,0.7)" letter-spacing="0.5">BRAND</text>
+      <text x="620" y="97" text-anchor="middle" font-family="Playfair Display" font-size="9" fill="#f5f0e8" font-weight="bold">Trust</text>
+
+      <circle cx="740" cy="210" r="22" fill="#111" stroke="#b34c2a" stroke-width="1.5"/>
+      <text x="740" y="206" text-anchor="middle" font-family="DM Mono" font-size="7" fill="rgba(179,76,42,0.7)" letter-spacing="0.5">REFERRAL</text>
+      <text x="740" y="217" text-anchor="middle" font-family="Playfair Display" font-size="9" fill="#f5f0e8" font-weight="bold">Spread</text>
+
+      <circle cx="620" cy="330" r="22" fill="#111" stroke="#b34c2a" stroke-width="1.5"/>
+      <text x="620" y="326" text-anchor="middle" font-family="DM Mono" font-size="7" fill="rgba(179,76,42,0.7)" letter-spacing="0.5">CONTENT</text>
+      <text x="620" y="337" text-anchor="middle" font-family="Playfair Display" font-size="9" fill="#f5f0e8" font-weight="bold">Educate</text>
+
+      <circle cx="500" cy="210" r="22" fill="#111" stroke="#b34c2a" stroke-width="1.5"/>
+      <text x="500" y="206" text-anchor="middle" font-family="DM Mono" font-size="7" fill="rgba(179,76,42,0.7)" letter-spacing="0.5">AUTHORITY</text>
+      <text x="500" y="217" text-anchor="middle" font-family="Playfair Display" font-size="9" fill="#f5f0e8" font-weight="bold">Position</text>
+
+      <!-- C arrows -->
+      <path d="M634,94 A120,120 0 0,1 734,196" fill="none" stroke="rgba(179,76,42,0.5)" stroke-width="1.5" marker-end="url(#arr-rust)"/>
+      <path d="M734,224 A120,120 0 0,1 634,326" fill="none" stroke="rgba(179,76,42,0.5)" stroke-width="1.5" marker-end="url(#arr-rust)"/>
+      <path d="M605,330 A120,120 0 0,1 506,224" fill="none" stroke="rgba(179,76,42,0.5)" stroke-width="1.5" marker-end="url(#arr-rust)"/>
+      <path d="M506,196 A120,120 0 0,1 605,94" fill="none" stroke="rgba(179,76,42,0.5)" stroke-width="1.5" marker-end="url(#arr-rust)"/>
+
+      <!-- C center -->
+      <circle cx="620" cy="210" r="24" fill="rgba(179,76,42,0.08)" stroke="rgba(179,76,42,0.4)" stroke-width="1"/>
+      <circle cx="620" cy="210" r="6" fill="#b34c2a"/>
+      <text x="620" y="235" text-anchor="middle" font-family="DM Sans" font-size="9" fill="rgba(179,76,42,0.5)" font-weight="500">FLYWHEEL C</text>
+      <text x="620" y="248" text-anchor="middle" font-family="Playfair Display" font-size="11" fill="#b34c2a" font-style="italic">Brand</text>
+
+      <!-- ── CONNECTION BRIDGES ── -->
+      <!-- A → B bridge (shared node region) -->
+      <path d="M316,200 C330,200 344,210 360,210" fill="none" stroke="url(#bridge-ab)" stroke-width="2.5" stroke-dasharray="4 3" opacity="0.7"/>
+      <!-- B → C bridge -->
+      <path d="M440,210 C456,210 470,210 486,210" fill="none" stroke="url(#bridge-bc)" stroke-width="2.5" stroke-dasharray="4 3" opacity="0.7"/>
+
+      <!-- Bridge labels -->
+      <rect x="327" y="192" width="28" height="14" rx="2" fill="rgba(200,146,42,0.15)"/>
+      <text x="341" y="202" text-anchor="middle" font-family="DM Mono" font-size="7" fill="rgba(200,146,42,0.9)" letter-spacing="0.3">SYNC</text>
+
+      <rect x="447" y="192" width="28" height="14" rx="2" fill="rgba(42,144,144,0.15)"/>
+      <text x="461" y="202" text-anchor="middle" font-family="DM Mono" font-size="7" fill="rgba(42,144,144,0.9)" letter-spacing="0.3">FEED</text>
+
+      <defs>
+        <linearGradient id="bridge-ab" x1="0%" y1="0%" x2="100%" y2="0%">
+          <stop offset="0%" stop-color="#c8922a"/>
+          <stop offset="100%" stop-color="#2a9090"/>
+        </linearGradient>
+        <linearGradient id="bridge-bc" x1="0%" y1="0%" x2="100%" y2="0%">
+          <stop offset="0%" stop-color="#2a9090"/>
+          <stop offset="100%" stop-color="#b34c2a"/>
+        </linearGradient>
+      </defs>
+    </svg>
+
+    <!-- Interaction type cards -->
+    <div class="interactions">
+      <div class="interaction-card">
+        <span class="tag tag-gold">Sequential</span>
+        <h3>Wheel feeds Wheel</h3>
+        <p>The output of one flywheel becomes the input of another. Growth brings customers → customers generate data → data improves product. Each loop powers the next in a chain.</p>
+      </div>
+      <div class="interaction-card">
+        <span class="tag tag-teal">Parallel</span>
+        <h3>Wheels run independently</h3>
+        <p>Multiple flywheels operate simultaneously on different dimensions — sales, product, brand — all spinning without depending on each other, but all serving the same company.</p>
+      </div>
+      <div class="interaction-card">
+        <span class="tag tag-rust">Nested</span>
+        <h3>Wheel within a Wheel</h3>
+        <p>A micro-flywheel lives inside a step of the macro-flywheel. A sub-loop accelerates one node dramatically, supercharging the parent loop without changing its structure.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════
+     REAL EXAMPLE: AMAZON
+═══════════════════════════════════════════ -->
+<section class="example-section reveal">
+  <div class="section-label">05 — Case Study</div>
+  <h2>The Most Famous Flywheel:<br>Amazon's Virtuous Cycle</h2>
+  <p style="max-width:600px;">Jeff Bezos sketched this on a napkin in 2001. It became the operating system of the world's most valuable retailer. Study it — the logic is universal.</p>
+
+  <div class="amazon-visual">
+    <svg viewBox="0 0 520 520" width="460" height="460" xmlns="http://www.w3.org/2000/svg" style="filter:drop-shadow(0 8px 40px rgba(200,146,42,0.15))">
+      <defs>
+        <marker id="arr2" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
+          <path d="M0,0 L0,6 L8,3 z" fill="var(--gold)"/>
+        </marker>
+      </defs>
+
+      <!-- Background rings -->
+      <circle cx="260" cy="260" r="210" fill="rgba(200,146,42,0.03)" stroke="rgba(200,146,42,0.08)" stroke-width="1"/>
+      <g style="transform-origin:260px 260px; animation: spinSlow 30s linear infinite;">
+        <circle cx="260" cy="260" r="210" fill="none" stroke="rgba(200,146,42,0.15)" stroke-width="1" stroke-dasharray="8 10"/>
+      </g>
+      <circle cx="260" cy="260" r="160" fill="none" stroke="rgba(200,146,42,0.06)" stroke-width="1"/>
+
+      <!-- 6 Nodes positioned around a circle, r=170 from center -->
+      <!-- Angles: 270(top), 330, 30, 90(bottom), 150, 210 -->
+      <!-- Top: 260+170*cos270 = 260, 260+170*sin270 = 90 -->
+
+      <!-- Node positions calculated at r=170:
+        N1(top):       260, 90    → 270°
+        N2(top-right): 407, 175   → 330°
+        N3(bot-right): 407, 345   → 30°
+        N4(bottom):    260, 430   → 90°
+        N5(bot-left):  113, 345   → 150°
+        N6(top-left):  113, 175   → 210°
+      -->
+
+      <!-- Arrows between nodes -->
+      <path d="M275,97 A170,170 0 0,1 400,167" fill="none" stroke="rgba(200,146,42,0.45)" stroke-width="2" marker-end="url(#arr2)"/>
+      <path d="M407,190 A170,170 0 0,1 407,330" fill="none" stroke="rgba(200,146,42,0.45)" stroke-width="2" marker-end="url(#arr2)"/>
+      <path d="M396,350 A170,170 0 0,1 275,422" fill="none" stroke="rgba(200,146,42,0.45)" stroke-width="2" marker-end="url(#arr2)"/>
+      <path d="M245,422 A170,170 0 0,1 124,350" fill="none" stroke="rgba(200,146,42,0.45)" stroke-width="2" marker-end="url(#arr2)"/>
+      <path d="M113,330 A170,170 0 0,1 113,190" fill="none" stroke="rgba(200,146,42,0.45)" stroke-width="2" marker-end="url(#arr2)"/>
+      <path d="M124,168 A170,170 0 0,1 245,97" fill="none" stroke="rgba(200,146,42,0.45)" stroke-width="2" marker-end="url(#arr2)"/>
+
+      <!-- N1: Customer Experience -->
+      <circle cx="260" cy="90" r="46" fill="#0d0d0d" stroke="#c8922a" stroke-width="2"/>
+      <text x="260" y="82" text-anchor="middle" font-family="DM Mono" font-size="7.5" fill="rgba(200,146,42,0.6)" letter-spacing="0.5">CUSTOMER</text>
+      <text x="260" y="95" text-anchor="middle" font-family="Playfair Display" font-size="12" fill="#f5f0e8" font-weight="bold">Experience</text>
+      <text x="260" y="107" text-anchor="middle" font-family="DM Sans" font-size="8" fill="rgba(245,240,232,0.4)">Better &amp; better</text>
+
+      <!-- N2: Traffic -->
+      <circle cx="407" cy="175" r="46" fill="#0d0d0d" stroke="#c8922a" stroke-width="2"/>
+      <text x="407" y="167" text-anchor="middle" font-family="DM Mono" font-size="7.5" fill="rgba(200,146,42,0.6)" letter-spacing="0.5">DRIVES</text>
+      <text x="407" y="180" text-anchor="middle" font-family="Playfair Display" font-size="12" fill="#f5f0e8" font-weight="bold">Traffic</text>
+      <text x="407" y="192" text-anchor="middle" font-family="DM Sans" font-size="8" fill="rgba(245,240,232,0.4)">More visitors</text>
+
+      <!-- N3: Sellers -->
+      <circle cx="407" cy="345" r="46" fill="#0d0d0d" stroke="#c8922a" stroke-width="2"/>
+      <text x="407" y="337" text-anchor="middle" font-family="DM Mono" font-size="7.5" fill="rgba(200,146,42,0.6)" letter-spacing="0.5">ATTRACTS</text>
+      <text x="407" y="350" text-anchor="middle" font-family="Playfair Display" font-size="12" fill="#f5f0e8" font-weight="bold">Sellers</text>
+      <text x="407" y="362" text-anchor="middle" font-family="DM Sans" font-size="8" fill="rgba(245,240,232,0.4)">3P marketplace</text>
+
+      <!-- N4: Selection -->
+      <circle cx="260" cy="430" r="46" fill="#0d0d0d" stroke="#c8922a" stroke-width="2"/>
+      <text x="260" y="422" text-anchor="middle" font-family="DM Mono" font-size="7.5" fill="rgba(200,146,42,0.6)" letter-spacing="0.5">WIDER</text>
+      <text x="260" y="435" text-anchor="middle" font-family="Playfair Display" font-size="12" fill="#f5f0e8" font-weight="bold">Selection</text>
+      <text x="260" y="447" text-anchor="middle" font-family="DM Sans" font-size="8" fill="rgba(245,240,232,0.4)">More products</text>
+
+      <!-- N5: Lower Cost -->
+      <circle cx="113" cy="345" r="46" fill="#0d0d0d" stroke="#c8922a" stroke-width="2"/>
+      <text x="113" y="337" text-anchor="middle" font-family="DM Mono" font-size="7.5" fill="rgba(200,146,42,0.6)" letter-spacing="0.5">LOWER</text>
+      <text x="113" y="350" text-anchor="middle" font-family="Playfair Display" font-size="12" fill="#f5f0e8" font-weight="bold">Cost</text>
+      <text x="113" y="362" text-anchor="middle" font-family="DM Sans" font-size="8" fill="rgba(245,240,232,0.4)">Passed on</text>
+
+      <!-- N6: Lower Prices -->
+      <circle cx="113" cy="175" r="46" fill="#0d0d0d" stroke="#c8922a" stroke-width="2"/>
+      <text x="113" y="167" text-anchor="middle" font-family="DM Mono" font-size="7.5" fill="rgba(200,146,42,0.6)" letter-spacing="0.5">LOWER</text>
+      <text x="113" y="180" text-anchor="middle" font-family="Playfair Display" font-size="12" fill="#f5f0e8" font-weight="bold">Prices</text>
+      <text x="113" y="192" text-anchor="middle" font-family="DM Sans" font-size="8" fill="rgba(245,240,232,0.4)">Attract buyers</text>
+
+      <!-- Center hub -->
+      <circle cx="260" cy="260" r="52" fill="rgba(200,146,42,0.06)" stroke="rgba(200,146,42,0.3)" stroke-width="2"/>
+      <g style="transform-origin:260px 260px; animation: spinSlow 8s linear infinite reverse;">
+        <circle cx="260" cy="260" r="36" fill="none" stroke="rgba(200,146,42,0.2)" stroke-width="1" stroke-dasharray="3 4"/>
+      </g>
+      <circle cx="260" cy="260" r="10" fill="#c8922a"/>
+      <text x="260" y="280" text-anchor="middle" font-family="DM Mono" font-size="7" fill="rgba(200,146,42,0.5)" letter-spacing="0.8">GROWTH</text>
+    </svg>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ═══════════════════════════════════════════
+     BUILDING YOUR FLYWHEEL
+═══════════════════════════════════════════ -->
+<div class="build-section reveal">
+  <div class="section-label">06 — Your Turn</div>
+  <h2>Building Your Own<br>Flywheel</h2>
+  <p style="max-width:580px; margin-top:12px;">Designing a flywheel is not a brainstorm exercise — it's a rigorous test of causality. Each step must genuinely cause the next.</p>
+
+  <div class="steps-timeline">
+    <div class="step-item" data-step="01">
+      <h3>Identify your core value creation</h3>
+      <p>What do you do that genuinely makes customers' lives better? This is your catalyst. Be ruthless about specificity — "great service" is not a catalyst. "Same-day delivery on essentials" is.</p>
+    </div>
+    <div class="step-item" data-step="02">
+      <h3>Map the downstream consequences</h3>
+      <p>If you deliver that value consistently, what logically happens next? More customers? Better reviews? Lower unit costs? Lower CAC? Trace the actual chain of causation — not what you hope happens, but what has to happen if the model is working.</p>
+    </div>
+    <div class="step-item" data-step="03">
+      <h3>Find the loop-back</h3>
+      <p>Where does the chain reconnect to your catalyst and strengthen it? This is the moment of flywheel design. If you can't find the loop, you have a pipeline, not a flywheel. Keep tracing until you find it.</p>
+    </div>
+    <div class="step-item" data-step="04">
+      <h3>Locate the amplifier & constraint</h3>
+      <p>Which node, if doubled, would most accelerate the entire loop? That's your amplifier. Which node, if it broke, would stop the whole system? That's your constraint. Double down on the amplifier; protect and fix the constraint.</p>
+    </div>
+    <div class="step-item" data-step="05">
+      <h3>Design your second flywheel</h3>
+      <p>Once your core flywheel is spinning reliably, ask: what's the natural adjacent loop? Where does one of your strongest outputs become the foundation for a whole new loop? Amazon used retail to build logistics; logistics became AWS infrastructure; AWS became a separate flywheel entirely.</p>
+    </div>
+    <div class="step-item" data-step="06">
+      <h3>Push — consistently, without drama</h3>
+      <p>Collins was emphatic: there is no single defining push. The magic is in the consistency. Boring discipline applied to every rotation, every quarter, every year. The flywheel has no interest in your launch events.</p>
+    </div>
+  </div>
+
+  <div class="callout">
+    <h3>"No matter how dramatic the end result, good-to-great transformations never happened in one fell swoop."</h3>
+    <p>— Jim Collins, <em>Good to Great</em>. The flywheel is not a strategy. It is a discipline — the patient, relentless accumulation of momentum from a thousand ordinary turns.</p>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════
+     FOOTER
+═══════════════════════════════════════════ -->
+<footer>
+  <p>Flywheel Framework — Foundation Reference · Ready for your company context</p>
+</footer>
+
+<script>
+  // Intersection observer for reveal animations
+  const reveals = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.1 });
+
+  reveals.forEach(el => observer.observe(el));
+</script>
+
+</body>
+</html>
