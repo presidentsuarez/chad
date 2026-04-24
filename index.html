@@ -149,7 +149,7 @@
 
     /* ── INVESTING — walking.JPG banner ── */
     #investing{background:var(--black)}
-    .inv-banner{width:100%;aspect-ratio:21/7;object-fit:cover;object-position:center 35%;border-radius:var(--r);border:1px solid var(--border);margin-bottom:4rem}
+    .inv-banner{display:block;max-width:420px;width:100%;height:auto;margin:0 auto 4rem;border-radius:var(--r);border:1px solid var(--border)}
     .igrid{display:grid;grid-template-columns:1fr 1fr;gap:1.5rem}
     .icard{padding:2rem;background:var(--black-c);border:1px solid var(--border-s);border-radius:var(--r)}
     .icard-head{display:flex;align-items:center;gap:.9rem;margin-bottom:1.4rem;padding-bottom:1.2rem;border-bottom:1px solid var(--border-s)}
@@ -266,7 +266,6 @@
       .pam-grid{grid-template-columns:1fr;gap:3rem}.pam-show{max-width:380px;aspect-ratio:4/3}
       .hgrid{grid-template-columns:1fr;gap:3rem}
       .cgrid{grid-template-columns:1fr;gap:3rem}
-      .inv-banner{aspect-ratio:4/2}
     }
     @media(max-width:768px){
       nav{padding:1.2rem 1.5rem}nav.scrolled{padding:.9rem 1.5rem}
@@ -277,7 +276,7 @@
       .prow{grid-template-columns:repeat(2,1fr)}
       .frow{grid-template-columns:1fr}
       footer{padding:2rem 1.5rem}.ftr{flex-direction:column;text-align:center}.fverse{max-width:100%}
-      .inv-banner{aspect-ratio:4/3;object-position:center 20%}
+      .inv-banner{max-width:320px}
       .about-badge{bottom:-.8rem;right:-.5rem}
     }
     @media(max-width:480px){
@@ -440,7 +439,7 @@
     <div class="lbl reveal">The Investment Portfolio</div>
     <h2 class="sh reveal d1">Deployed with <em>Conviction.</em><br>Built for the Long Game.</h2>
     <p class="slead reveal d2" style="margin-bottom:2.5rem;">From angel investments and private equity to blockchain node ownership and digital assets — Chad's portfolio is as diverse as it is deliberate, always positioned where emerging technology meets long-term purpose.</p>
-    <img src="https://raw.githubusercontent.com/presidentsuarez/chad/main/walking.JPG" alt="Chad Panton" class="inv-banner reveal d1" loading="lazy" />
+    <img src="https://raw.githubusercontent.com/presidentsuarez/chad/main/chad-plaid.jpg" alt="Chad Panton" class="inv-banner reveal d1" loading="lazy" />
     <div class="igrid">
       <div class="icard reveal">
         <div class="icard-head"><div class="icard-ico">&#x1F4BC;</div><div><div class="icard-title">Angel &amp; Private Equity</div><div class="icard-sub">~10 active positions</div></div></div>
